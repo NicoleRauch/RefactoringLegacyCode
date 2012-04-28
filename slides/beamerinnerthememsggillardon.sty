@@ -1,0 +1,29 @@
+\mode<presentation>
+
+\defbeamertemplate*{title page}{msggillardon}
+{
+    \vskip+4cm%
+    \usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle%\par
+    \usebeamercolor[fg]{subtitle}%\usebeamerfont{subtitle}\insertsubtitle%
+    \\[.5em]
+    \usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor%\par
+    \usebeamercolor[fg]{institute}\usebeamerfont{institute}%\insertinstitute%
+    \\[1em]
+    \usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate\par
+}
+
+\defbeamertemplate*{part page}{msggillardon}
+{
+\vskip+1cm
+  \begin{centering}
+\hfill
+    \begin{beamercolorbox}[wd=.5\textwidth,sep=5pt,center,rounded=true]{part title}
+      \usebeamerfont{part title}\insertpart\par
+    \end{beamercolorbox}
+\hfill
+  \end{centering}
+}
+
+
+\mode
+<all>
