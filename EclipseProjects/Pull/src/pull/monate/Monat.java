@@ -55,7 +55,7 @@ public class Monat implements IMonat
 		return result;
 	}
 
-	protected double ermittleAnteil(Umsatz umsatz)
+	private double ermittleAnteil(Umsatz umsatz)
 	{
 		int gueltigeTage = anzahlTageImMonat() - umsatz.getDate().getDayOfMonth() + 1;
 		double anteil = (double) gueltigeTage / anzahlTageImMonat();
