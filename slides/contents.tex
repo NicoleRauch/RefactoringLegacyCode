@@ -27,67 +27,96 @@ $\Rightarrow$ Wir mussten einen Umbau vornehmen
 \end{frame}
 
 
-\begin{frame}[t,fragile]{Vorgehensweise}
-\begin{itemize}
-\item Beibehalten der externen API
-\item Feature-Toggle zum Vergleichen der alten und der neuen Version
-\item Umbau:
-\begin{itemize}
-\item Rein strukturell
-\item Fachlich motiviert
-\end{itemize}
-
-\item Ziel:
-\begin{itemize}
-\item On-Demand-Ermittlung aller Werte (\glqq Pull\grqq{})
-\item Werte-Caching mittels Lazy-Pattern
-\end{itemize}
-\end{itemize}
-\end{frame}
 
 \begin{frame}[t,fragile]{Unser Ansatz}
 \begin{itemize}
-\item Unser größter Fehler: Aufbau der Zielstruktur und Neuimplementierung der Logik anhand einer vom Code unabhängigen Spezifikation
+\item Annahmen:
+\begin{itemize}
+\item Der alte Code ist großteils inkorrekt und lückenhaft
+\item Es existiert umfassendes Wissen über die gewünschte Fachlogik
 \end{itemize}
-$\Rightarrow$ Viele Abweichungen in den Ergebnissen, lange Phase der fachlichen Klärung
+
+\item Entschluss:
+\begin{itemize}
+\item Neuimplementierung auf der grünen Wiese (mit Feature-Toggle)
+\item Erstellung neuer Tests anhand der parallel zu definierenden Fachlichkeit
+\item Kontinuierliche Anpassung der vorhandenen Tests
+\end{itemize}
+\end{itemize}
+
 \end{frame}
 
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
 
-\begin{frame}[t,fragile]{Ein besserer / ... Ansatz}
+\begin{frame}[t,fragile]{Unsere Erfahrungen}
 \begin{itemize}
-\item Codeveränderungen betreffen lediglich die Struktur, NICHT die Logik
-\item Wenn gleichzeitig Umbauten der Logik erforderlich sind:
+\item Probleme:
 \begin{itemize}
-\item Vorsichtig herangehen
-\item Kleine Schritte gehen
-\item Veränderungen der Logik entweder komplett vorher oder nachher durchführen, NICHT während des strukturellen Umbaus
+\item Die Ausarbeitung der fachlichen Spezifikation ist viel komplizierter und aufwändiger als gedacht
+\item Abweichungen zum alten Code sind schwer zu analysieren
+\item Die Testabdeckung ist zu gering $\Rightarrow$ Wir übersehen relevante Fälle 
+\end{itemize}
 \end{itemize}
 
-\item Vorhandene Regressionstests auf Vollständigkeit prüfen (Code Coverage untersuchen)
-\item Bei geringer Coverage Regressionstests ergänzen oder komplett neu erstellen
+\begin{itemize}
+\item Ursachen:
+\begin{itemize}
+\item Falsche Annahmen
+\item Vermischung von Umbau und Änderung
+\item Arroganz (\glqq Wir wissen es besser als unsere Vorgänger\grqq{})
+\end{itemize}
+\end{itemize}
+
+$\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
+
+\end{frame}
+
+
+%\begin{frame}[t,fragile]{}
+%\begin{itemize}
+%\item
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}[t,fragile]{}
+%\begin{itemize}
+%\item
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}[t,fragile]{}
+%\begin{itemize}
+%\item
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}[t,fragile]{}
+%\begin{itemize}
+%\item
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}[t,fragile]{Wie geht es besser?}
+\begin{itemize}
+\item Vor dem Umbau Fakten sammeln, Annahmen allein genügen nicht
+\begin{itemize}
+\item Wie hoch ist die Testabdeckung? (Coverage)
+\item Welche Fälle werden fachlich durch vorhandene Tests abgedeckt?
+\item Existiert eine Spezifikation?
+\item Ist diese synchron mit dem vorhandenen Code?
+\end{itemize}
+
+\item Grundsätzlich gilt: Im Zweifel hat der vorhandene Code Recht!
+
+\item Keine Änderungen an der Logik während des strukturellen Umbaus!
+
+\item Explizite Abnahme des Umbaus
+\begin{itemize}
+\item Alle automatisierten Tests laufen
+\item Alle manuellen Tests laufen
+\item Alle bekannten Bugs werden geprüft
+\item Jede Verhaltensabweichung muss begründet werden
+\end{itemize}
+
 \end{itemize}
 \end{frame}
 
@@ -106,6 +135,32 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}[t,fragile]{Ideale Vorgehensweise}
+\begin{itemize}
+\item Feature-Toggle zum Vergleichen der alten und der neuen Version
+\item Identifikation bzw. Schaffen eines minimalen Eingriffspunkts
+\item Beibehalten der externen API an diesem Eingriffspunkt
+
+\item Umbau:
+\begin{itemize}
+\item Fachlich motiviert
+\item Rein strukturell
+\end{itemize}
+
+\item Ziel:
+\begin{itemize}
+\item Separation of Concerns
+\item On-Demand-Ermittlung aller Werte (\glqq Pull\grqq{})
+\item Werte-Caching mittels Lazy-Initialization
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+
 
 \begin{frame}[t,fragile]{Umbau: Vorbereitung}
 \begin{itemize}
