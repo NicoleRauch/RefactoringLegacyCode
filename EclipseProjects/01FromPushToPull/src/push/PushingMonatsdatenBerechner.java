@@ -23,16 +23,19 @@ public class PushingMonatsdatenBerechner implements MonatsdatenBerechner
 	@Override
 	public void fillData(List<Monatsdaten> monatsdatenliste)
 	{
-		int bestand = 0;
+		BestandUndDurchschnitt bestandUndDurchschnitt = new BestandUndDurchschnitt();
 
-		int letzterBestand = 0;
 		for (Monatsdaten monatsdaten : monatsdatenliste)
 		{
-			int ultimo = monatsdaten.getDate().getDayOfMonth();
+			LocalDate monatsDatum = monatsdaten.getDate();
+			List<Umsatz> umsaetzeFuerMonat = umsaetzeFuerMonat(monatsDatum);
+
+			int bestand = bestandUndDurchschnitt.getBestand();
+			int letzterBestand = bestand;
+			int ultimo = monatsDatum.getDayOfMonth();
 
 			double durchschnittsBestand = 0;
 			int tagDesLetztenBestands = 1;
-			List<Umsatz> umsaetzeFuerMonat = umsaetzeFuerMonat(monatsdaten.getDate());
 			for (Umsatz umsatz : umsaetzeFuerMonat)
 			{
 				bestand += umsatz.getUmsatz();
@@ -47,8 +50,10 @@ public class PushingMonatsdatenBerechner implements MonatsdatenBerechner
 				durchschnittsBestand += ermittleAnteiligenBestand(tagDesLetztenBestands, bestand, ultimo + 1, ultimo);
 			}
 
-			monatsdaten.setBestand(bestand);
-			monatsdaten.setDurchschnittsBestand((int) durchschnittsBestand);
+			bestandUndDurchschnitt.setBestandUndDurchschnitt(bestand, durchschnittsBestand);
+
+			monatsdaten.setBestand(bestandUndDurchschnitt.getBestand());
+			monatsdaten.setDurchschnittsBestand(bestandUndDurchschnitt.getDurchschnittsBestand());
 		}
 	}
 
