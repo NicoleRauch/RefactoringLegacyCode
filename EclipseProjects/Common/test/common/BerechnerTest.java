@@ -8,6 +8,14 @@ import java.util.List;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
+/**
+ * <p>
+ * This abstract class contains the integration tests for the demo code.
+ * </p>
+ * <p>
+ * This is done to avoid code duplication as well as to insure that all the tests are testing the same.
+ * </p>
+ */
 public abstract class BerechnerTest
 {
 	private static final LocalDate APRIL_ULTIMO = new LocalDate(2010, 4, 30);

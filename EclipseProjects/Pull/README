@@ -1,1 +1,0 @@
-This directory is an Eclipse Java project. To make it compile successfully you will have to add a folder "lib" and copy the Jodatime libraries into it. They can be obtained from http://joda-time.sourceforge.net/ Please note that the project is configured to find also the sources and the javadoc as well. So just add them, too.
