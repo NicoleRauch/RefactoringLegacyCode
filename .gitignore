@@ -1,2 +1,6 @@
 .DS_Store
+<<<<<<< HEAD
 *.gz
+=======
+EclipseProjects/.metadata/*
+>>>>>>> Eclipse Metadata ausgeschlossen
