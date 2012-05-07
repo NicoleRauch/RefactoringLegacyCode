@@ -1,8 +1,9 @@
-\begin{frame}[t,fragile]{Ausgangspunkt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ausgangspunkt}
 \begin{itemize}
 \item Betriebswirtschaftliche Software
 \item Extrem schlechte Codequalität (sowohl messbar als auch erfahrbar)
-\item Funktionalität eines Moduls musste verändert werden
+\item Anstehende Veränderungen für ein Modul:
 \begin{itemize}
 \item Bugfixing
 \item neue Features
@@ -10,14 +11,16 @@
 \end{itemize}
 \end{itemize}
 
-$\Rightarrow$ Wir mussten einen Umbau vornehmen
+$\Rightarrow$ Ein Umbau war notwendig
 \end{frame}
 
-\begin{frame}[t,fragile]{Vorhandene Codestruktur}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Vorhandene Codestruktur}
 \includegraphics[width=.8 \paperwidth]{Codestruktur.png}
 \end{frame}
 
-\begin{frame}[t,fragile]{Probleme der vorhandenen Codestruktur}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Probleme der vorhandenen Codestruktur}
 \begin{itemize}
 \item Code schreibt Werte in separate Datenobjekte (\glqq Push\grqq{})
 \item Mehrfache Schreibzugriffe auf denselben Wert
@@ -28,7 +31,8 @@ $\Rightarrow$ Wir mussten einen Umbau vornehmen
 
 
 
-\begin{frame}[t,fragile]{Unser Ansatz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Unser Ansatz}
 \begin{itemize}
 \item Annahmen:
 \begin{itemize}
@@ -47,7 +51,8 @@ $\Rightarrow$ Wir mussten einen Umbau vornehmen
 \end{frame}
 
 
-\begin{frame}[t,fragile]{Unsere Erfahrungen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Unsere Erfahrungen}
 \begin{itemize}
 \item Probleme:
 \begin{itemize}
@@ -71,50 +76,27 @@ $\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 \end{frame}
 
 
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-
-\begin{frame}[t,fragile]{Wie geht es besser?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Wie geht es besser?}
 \begin{itemize}
 \item Vor dem Umbau Fakten sammeln, Annahmen allein genügen nicht
 \begin{itemize}
 \item Wie hoch ist die Testabdeckung? (Coverage)
 \item Welche Fälle werden fachlich durch vorhandene Tests abgedeckt?
 \item Existiert eine Spezifikation?
-\item Ist diese synchron mit dem vorhandenen Code?
+\item Ist diese synchron zum vorhandenen Code?
 \end{itemize}
 
 \item Grundsätzlich gilt: Im Zweifel hat der vorhandene Code Recht!
 
 \item Keine Änderungen an der Logik während des strukturellen Umbaus!
 
-\item Explizite Abnahme des Umbaus
+\item Explizite Abnahme des Umbaus:
 \begin{itemize}
-\item Alle automatisierten Tests laufen
-\item Alle manuellen Tests laufen
-\item Alle bekannten Bugs werden geprüft
-\item Jede Verhaltensabweichung muss begründet werden
+\item Alle automatisierten Tests sind grün
+\item Alle manuellen Tests liefern dasselbe wie vorher
+\item Alle bekannten Bugs sind weiterhin vorhanden (!)
+\item Es gibt keine Verhaltensabweichungen
 \end{itemize}
 
 \end{itemize}
@@ -122,34 +104,36 @@ $\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 
 
 
-\begin{frame}[t,fragile]{Wozu das Ganze?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Wozu das Ganze?}
 \begin{itemize}
-\item Umbau der Struktur: damit die vorhandene Implementierung der Sachlichkeit besser sichtbar wird und isoliert vorliegt
+\item Umbau der Struktur: damit die vorhandene Implementierung der Fachlichkeit besser sichtbar wird und isoliert vorliegt \newline
 $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachlichkeit
 \item Trennung der Aspekte: damit die Regressionstests bei den Strukturveränderungen gültig bleiben und alle Veränderungen im Verhalten anzeigen
 \item Fachlich motiviert, Blick von außen aus Sicht der Ergebnisse:
 \begin{itemize}
 \item Welche Werte will ich haben?
 \item Wie berechnet sich welcher Wert?
-\item Welche Arten von Ergebniswerten gibt es? Gemeinsamkeiten, Unterschiede?
+\item Welche Kategorien von Ergebniswerten gibt es? Gemeinsamkeiten, Unterschiede?
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[t,fragile]{Ideale Vorgehensweise}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Ideale Vorgehensweise}
 \begin{itemize}
-\item Feature-Toggle zum Vergleichen der alten und der neuen Version
 \item Identifikation bzw. Schaffen eines minimalen Eingriffspunkts
 \item Beibehalten der externen API an diesem Eingriffspunkt
+\item Feature-Toggle zum Vergleichen der alten und der neuen Version
 
-\item Umbau:
+\item Wichtige Aspekte des Umbaus:
 \begin{itemize}
 \item Fachlich motiviert
 \item Rein strukturell
 \end{itemize}
 
-\item Ziel:
+\item Technisches Ziel:
 \begin{itemize}
 \item Separation of Concerns
 \item On-Demand-Ermittlung aller Werte (\glqq Pull\grqq{})
@@ -162,14 +146,16 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 
 
 
-\begin{frame}[t,fragile]{Umbau: Vorbereitung}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Umbau: Vorbereitung}
 \begin{itemize}
 \item Existierenden Code duplizieren
 \item Feature Toggle an den Aufrufstellen einbauen
 \end{itemize}
 \end{frame}
  
-\begin{frame}[t,fragile]{Vorarbeiten}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Vorarbeiten}
 \begin{itemize}
 \item Java-Datumsarithmetik kapseln, z.~B.
 \begin{itemize}
@@ -180,71 +166,73 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Strukturellen Code isolieren}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Strukturellen Code isolieren}
 \begin{itemize}
-\item Inline method: Nur noch eine Methode
 \item Schleifen über Ergebnisstruktur nach außen bringen
 \item Schleifen vereinheitlichen
+\item Dazu bei Bedarf Methoden inlinen
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Aspekte isolieren}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Aspekte isolieren}
 \begin{itemize}
-\item Schleifenrumpf in eigene Klasse mit einer Methode extrahieren
+\item Werteobjekt einführen, das alle relevanten Ergebnisse des Schleifenrumpfs zusammenfasst
+\item Schleifenrumpf in Methode extrahieren
+\item Methode in das Werteobjekt verschieben
 \item Pro Ergebniswert ein Duplikat dieser Methode
 \item Jeweils Irrelevantes aus den Methoden entfernen
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Zielstruktur aufbauen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Push in Pull umwandeln}
 \begin{itemize}
-\item Zuerst nur als Gerüst mit Befüllung von außen
-\item Berechnung \textbf{eines} Werts in die Zielstruktur übertragen
-\item Prüfen der Tragfähigkeit der Zielstruktur
+\item Die Methoden zum Berechnen der Ergebniswerte in Getter umwandeln
+\item Parallel dazu Unit-Tests aufbauen
+\item In der äußeren Struktur statt des Werteobjekts diese Getter-Methoden verwenden
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t,fragile]{Vervollständigung}
-\begin{itemize}
-\item Wert für Wert in die Zielstruktur übertragen
-\item Parallel dazu Unit-Tests aufbauen
-\item Refactoring: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Vervollständigung}
+
+Refactoring: 
 \begin{itemize}
 \item Extrahieren von Methoden
 \item Zusammenfassen gleicher Funktionalität
 \item Generelle Aufräumarbeiten
 \end{itemize}
-\item Klärung fachlicher Unklarheiten, Korrektur der Logik
+
+\vspace{1em}
+Danach: 
+\begin{itemize}
+\item Technische Bereinigung von Algorithmen, fachliche Korrektur der Berechnungslogik
 \end{itemize}
+
 \end{frame}
 
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}[t,fragile]{}
-%\begin{itemize}
-%\item
-%\end{itemize}
-%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-slide.png}}
+\begin{frame}{Vielen Dank!}
 
+        Code \& Folien auf GitHub:
+        \begin{center}
+                \url{https://github.com/NicoleRauch/RefactoringLegacyCode}
+        \end{center}
+
+        \begin{block}{Andreas Leidig}
+        \begin{description}[Twitterxx]
+                \item[E-Mail]  \href{mailto:andreas.leidig@msg-gillardon.de}{\texttt{andreas.leidig@msg-gillardon.de}}
+                \item[Twitter] \href{http://twitter.com/leiderleider}{\texttt{@leiderleider}}
+        \end{description}
+        \end{block}
+
+        \begin{block}{Nicole Rauch}
+        \begin{description}[Twitterxx]
+                \item[E-Mail]  \href{mailto:nicole.rauch@msg-gillardon.de}{\texttt{nicole.rauch@msg-gillardon.de}}
+                \item[Twitter] \href{http://twitter.com/NicoleRauch}{\texttt{@NicoleRauch}}
+        \end{description}
+        \end{block}
+\end{frame}
