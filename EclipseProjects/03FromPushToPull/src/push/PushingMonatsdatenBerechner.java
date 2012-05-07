@@ -28,12 +28,10 @@ public class PushingMonatsdatenBerechner implements MonatsdatenBerechner
 		for (Monatsdaten monatsdaten : monatsdatenliste)
 		{
 			LocalDate monatsDatum = monatsdaten.getDate();
-			List<Umsatz> umsaetzeFuerMonat = umsaetzeFuerMonat(monatsDatum);
+			List<Umsatz> umsaetzeFuerMonat = umsaetzeFuerMonat(monatsDatum); // this method works on all items and stays in
+																																				// this place
 
-			int vorgaengerBestand = bestandUndDurchschnitt.getBestand();
-
-			bestandUndDurchschnitt = new BestandUndDurchschnitt();
-			bestandUndDurchschnitt.berechneWerte(monatsDatum, umsaetzeFuerMonat, vorgaengerBestand);
+			bestandUndDurchschnitt.berechneWerte(monatsDatum, umsaetzeFuerMonat);
 
 			monatsdaten.setBestand(bestandUndDurchschnitt.getBestand());
 			monatsdaten.setDurchschnittsBestand(bestandUndDurchschnitt.getDurchschnittsBestand());

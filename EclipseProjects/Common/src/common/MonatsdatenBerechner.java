@@ -2,7 +2,9 @@ package common;
 
 import java.util.List;
 
-
+/**
+ * we need this interface to simplify testing. @see{BerechnerTest}
+ */
 public interface MonatsdatenBerechner
 {
 
