@@ -2,7 +2,7 @@
 \begin{frame}[fragile]{Ausgangspunkt}
 \begin{itemize}
 \item Betriebswirtschaftliche Software
-\item Extrem schlechte Codequalität (sowohl messbar als auch erfahrbar)
+\item Extrem schlechte Codequalität
 \item Anstehende Veränderungen für ein Modul:
 \begin{itemize}
 \item Bugfixing
@@ -58,7 +58,7 @@ $\Rightarrow$ Ein Umbau war notwendig
 \begin{itemize}
 \item Die Ausarbeitung der fachlichen Spezifikation ist viel komplizierter und aufwändiger als gedacht
 \item Abweichungen zum alten Code sind schwer zu analysieren
-\item Die Testabdeckung ist zu gering $\Rightarrow$ Wir übersehen relevante Fälle 
+\item Die Testabdeckung ist zu gering \newline $\Rightarrow$ Wir übersehen relevante Fälle 
 \end{itemize}
 \end{itemize}
 
@@ -82,21 +82,17 @@ $\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 \item Vor dem Umbau Fakten sammeln, Annahmen allein genügen nicht
 \begin{itemize}
 \item Wie hoch ist die Testabdeckung? (Coverage)
-\item Welche Fälle werden fachlich durch vorhandene Tests abgedeckt?
-\item Existiert eine Spezifikation?
-\item Ist diese synchron zum vorhandenen Code?
+\item Welche fachlichen Fälle sind abgedeckt?
+\item Existiert eine zum Code passende Spezifikation?
 \end{itemize}
 
 \item Grundsätzlich gilt: Im Zweifel hat der vorhandene Code Recht!
 
 \item Keine Änderungen an der Logik während des strukturellen Umbaus!
 
-\item Explizite Abnahme des Umbaus:
+\item Explizite Abnahme des Umbaus
 \begin{itemize}
-\item Alle automatisierten Tests sind grün
-\item Alle manuellen Tests liefern dasselbe wie vorher
-\item Alle bekannten Bugs sind weiterhin vorhanden (!)
-\item Es gibt keine Verhaltensabweichungen
+\item Das Verhalten muss exakt gleich sein (Tests, Bugs, Features)
 \end{itemize}
 
 \end{itemize}
@@ -107,10 +103,11 @@ $\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Wozu das Ganze?}
 \begin{itemize}
-\item Umbau der Struktur: damit die vorhandene Implementierung der Fachlichkeit besser sichtbar wird und isoliert vorliegt \newline
-$\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachlichkeit
-\item Trennung der Aspekte: damit die Regressionstests bei den Strukturveränderungen gültig bleiben und alle Veränderungen im Verhalten anzeigen
-\item Fachlich motiviert, Blick von außen aus Sicht der Ergebnisse:
+\item Struktur:
+\begin{itemize}
+\item Spiegelbild der Fachlichkeit
+\end{itemize}
+\item Blick von außen aus Sicht der Ergebnisse:
 \begin{itemize}
 \item Welche Werte will ich haben?
 \item Wie berechnet sich welcher Wert?
@@ -123,9 +120,11 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Ideale Vorgehensweise}
 \begin{itemize}
+\item Feature-Toggle zum Vergleichen von alter und neuer Version
+\begin{itemize}
 \item Identifikation bzw. Schaffen eines minimalen Eingriffspunkts
 \item Beibehalten der externen API an diesem Eingriffspunkt
-\item Feature-Toggle zum Vergleichen der alten und der neuen Version
+\end{itemize}
 
 \item Wichtige Aspekte des Umbaus:
 \begin{itemize}
@@ -142,7 +141,6 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 
 \end{itemize}
 \end{frame}
-
 
 
 
@@ -169,8 +167,7 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Strukturellen Code isolieren}
 \begin{itemize}
-\item Schleifen über Ergebnisstruktur nach außen bringen
-\item Schleifen vereinheitlichen
+\item Schleifen aufräumen, vereinheitlichen und zusammenfassen
 \item Dazu bei Bedarf Methoden inlinen
 \end{itemize}
 \end{frame}
@@ -181,34 +178,34 @@ $\Rightarrow$ ermöglicht später gezielte Änderung einzelner Aspekte der Fachl
 \item Werteobjekt einführen, das alle relevanten Ergebnisse des Schleifenrumpfs zusammenfasst
 \item Schleifenrumpf in Methode extrahieren
 \item Methode in das Werteobjekt verschieben
-\item Pro Ergebniswert ein Duplikat dieser Methode
-\item Jeweils Irrelevantes aus den Methoden entfernen
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Push in Pull umwandeln}
 \begin{itemize}
+\item Pro Ergebniswert ein Duplikat dieser Methode
+\item Jeweils Irrelevantes aus den Methoden entfernen
 \item Die Methoden zum Berechnen der Ergebniswerte in Getter umwandeln
 \item Parallel dazu Unit-Tests aufbauen
-\item In der äußeren Struktur statt des Werteobjekts diese Getter-Methoden verwenden
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Vervollständigung}
 
-Refactoring: 
+\begin{itemize}
+\item Refactoring: 
 \begin{itemize}
 \item Extrahieren von Methoden
 \item Zusammenfassen gleicher Funktionalität
 \item Generelle Aufräumarbeiten
 \end{itemize}
 
-\vspace{1em}
-Danach: 
+\item Danach: 
 \begin{itemize}
 \item Technische Bereinigung von Algorithmen, fachliche Korrektur der Berechnungslogik
+\end{itemize}
 \end{itemize}
 
 \end{frame}
