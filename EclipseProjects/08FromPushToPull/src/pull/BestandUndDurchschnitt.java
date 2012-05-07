@@ -39,9 +39,9 @@ public class BestandUndDurchschnitt
 	public int getDurchschnittsBestand()
 	{
 		double durchschnittsBestand = vorgaengerBestand;
-		for (Umsatz inputData : umsaetzeFuerMonat)
+		for (Umsatz umsatz : umsaetzeFuerMonat)
 		{
-			durchschnittsBestand += anteilFuer(inputData);
+			durchschnittsBestand += anteilFuer(umsatz);
 		}
 		return (int) durchschnittsBestand;
 	}

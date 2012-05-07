@@ -1,6 +1,6 @@
 EclipseProjects
 ===============
-This is the accompanying code to the talk. Some of the code is in German.
+This is the accompanying code to the talk. Most of the code is in German.
 
 Structure
 ---------
@@ -8,7 +8,9 @@ The project "Common" is a neccessary prerequisite for all other projects. It con
 
 Third party libraries
 ---------------------
-The code is using [Joda Time](http://joda-time.sourceforge.net/index.html). The library files are inside the lib folder of the "Common" project
+The code is using [Joda Time](http://joda-time.sourceforge.net/index.html). The library files are inside the lib folder of the "Common" project.
+
+We are using these classes to not have to hassle with java.util.Date.
 
 What is it about?
 -----------------

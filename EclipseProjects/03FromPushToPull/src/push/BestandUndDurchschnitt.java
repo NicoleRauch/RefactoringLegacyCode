@@ -32,12 +32,9 @@ public class BestandUndDurchschnitt
 		this.durchschnittsBestand = durchschnittsBestand;
 	}
 
-	/**
-	 * moved method
-	 */
-	void berechneWerte(LocalDate monatsDatum, List<Umsatz> umsaetzeFuerMonat, int vorgaengerBestand)
+	void berechneWerte(LocalDate monatsDatum, List<Umsatz> umsaetzeFuerMonat)
 	{
-		int bestand = vorgaengerBestand;
+		int bestand = getBestand();
 		int letzterBestand = bestand;
 		int ultimo = monatsDatum.getDayOfMonth();
 
