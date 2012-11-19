@@ -1,0 +1,82 @@
+Push
+====
+
+Initialprojekt:
+- Nur eine Klasse
+- Berechnung der Daten pro Monat, darin Aufsummieren der Umsaetze jedes Monats
+  => zwei ineinander geschachtelte Schleifen
+
+
+01FromPushToPull
+================
+
+Herausziehen von BestandUndDurchschnitt:
+- 1 Setter für beide Werte gleichzeitig
+- 2 Getter
+- keine Logik
+
+Einbauen dieser Hilfsklasse:
+- Wiederverwenden desselben Objekts für alle Schleifendurchläufe
+- Wichtig: Am Ende der Schleife zuerst die Werte in BestandUndDurchschnitt setzen
+- Danach erst die Monatsdaten aus BestandUndDurchschnitt befüllen
+
+02FromPushToPull
+================
+
+- Der innere Teil (zum Berechnen der Werte eines Monats) wurde in eine eigene Methode ausgelagert
+- BestandUndDurchschnitt dient als In-Out-Parameter für diese Methode
+
+03FromPushToPull
+================
+
+- Die extrahierte Methode wurde in BestandUndDurchschnitt verschoben
+
+
+04FromPushToPull
+================
+
+- Jeder Monat bekommt sein eigenes BestandUndDurchschnitt Objekt
+- Zyklische Verwendung ein und desselben BestandUndDurchschnitt Objekts wird vor der Berechnung
+  durchtrennt, nur der vorgaengerBestand wird uebernommen fuer die neue Berechnung
+- Methodensignatur der verschobenen Methode wird um den vorgaengerBestand erweitert
+
+05FromPushToPull
+================
+
+- Argumente von BestandUndDurchschnitt.berechneWerte() wandern in den Konstruktor.
+
+06FromPushToPull
+================
+
+- berechneWerte() wird kopiert zu berechneBestand() und berechneDurchschnitt()
+- Die Originalmethode berechneWerte() ruft diese beiden Methoden auf
+- Die jeweils irrelevanten Teile werden aus den beiden Methoden entfernt.
+- Der Setter, der beide Werte gleichzeitig schreibt, wird nicht mehr benötigt.
+
+07FromPushToPull
+================
+
+- die beiden berechne-Methoden ersetzen die Rümpfe der Getter, die Zuweisungen werden zu Returns
+- die Attribute für die beiden Werte werden nicht mehr benötigt
+- die berechneWerte-Methode fällt weg, ihr Aufruf wird entfernt
+
+
+08FromPushToPull
+================
+
+- Vereinfachung der Berechnung für den Durchschnittsbestand
+
+
+Pull
+====
+
+- Umwandeln der dummen Monatsdaten-Records in Monat-Objekte
+- BestandUndDurchschnitt geht ebenfalls in dem Monat-Objekt auf
+- Umwandeln der Liste von Monatsdaten in ein Monate-Objekt
+- Verkettung der Monate statt Übertragen des Vormonatsbestands
+- Bei Bedarf Caching der berechneten Werte in einem Wrapper-Objekt
+
+Zielzustand:
+
+- Berechnungslogik und Ergebnisstruktur sind ein und dasselbe geworden
+- Intelligente Objekte statt stupider Datenhaltung
