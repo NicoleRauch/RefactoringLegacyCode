@@ -24,11 +24,11 @@ public class MonatMitCaching extends Monat
 	}
 
 	@Override
-	public int getDurschschnittsBestand()
+	public int getDurchschnittsBestand()
 	{
 		if (durchschnittsBestandLazy == null)
 		{
-			durchschnittsBestandLazy = Integer.valueOf(super.getDurschschnittsBestand());
+			durchschnittsBestandLazy = Integer.valueOf(super.getDurchschnittsBestand());
 		}
 		return durchschnittsBestandLazy.intValue();
 	}

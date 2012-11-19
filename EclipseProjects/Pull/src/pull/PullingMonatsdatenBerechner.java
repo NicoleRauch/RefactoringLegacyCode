@@ -29,7 +29,7 @@ public class PullingMonatsdatenBerechner implements MonatsdatenBerechner
 		{
 			Monat passenderMonat = monate.forDate(monatsdaten.getDate());
 			monatsdaten.setBestand(passenderMonat.getBestand());
-			monatsdaten.setDurchschnittsBestand(passenderMonat.getDurschschnittsBestand());
+			monatsdaten.setDurchschnittsBestand(passenderMonat.getDurchschnittsBestand());
 		}
 	}
 }

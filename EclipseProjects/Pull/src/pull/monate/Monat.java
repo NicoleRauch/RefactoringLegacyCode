@@ -44,7 +44,7 @@ public class Monat implements IMonat
 		return result;
 	}
 
-	public int getDurschschnittsBestand()
+	public int getDurchschnittsBestand()
 	{
 		int result = vorgaengerMonat.getBestand();
 		for (Umsatz umsatz : umsaetze)
