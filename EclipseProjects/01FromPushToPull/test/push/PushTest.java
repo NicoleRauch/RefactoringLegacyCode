@@ -2,15 +2,15 @@ package push;
 
 import org.junit.Before;
 
-import common.BerechnerTest;
+import common.CalculatorTest;
 
-public class PushTest extends BerechnerTest
+public class PushTest extends CalculatorTest
 {
 
 	@Before
 	public void setup()
 	{
-		berechner = new PushingMonatsdatenBerechner(umsaetze);
+		calculator = new PushingBalancesCalculator(transactions);
 	}
 
 }
