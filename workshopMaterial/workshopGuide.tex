@@ -1,0 +1,169 @@
+\documentclass[a4paper,fleqn,titlepage,11pt]{article}
+\usepackage{t1enc} 
+\usepackage{german}
+
+\selectlanguage{german}
+
+
+\pagestyle{myheadings}
+\pagenumbering{arabic}
+\setlength{\parindent}{0mm}		% Einzug f�r die erste Zeile im Absatz
+
+%% Seitenformat:
+\setlength{\oddsidemargin}{0cm}		% li. Randabstand auf re. Seiten
+\setlength{\textwidth}{16cm}		% Breite des Textes
+\setlength{\topmargin}{-0.75cm}		% Abst. Oberkante Blatt - Oberk. Header
+\setlength{\headheight}{30pt}		% H�he des Headers
+\setlength{\headsep}{5mm}		% Abst. Header - Text
+\setlength{\topskip}{5mm}		% Oberkante Text - Grundlinie 1. Z.
+\setlength{\textheight}{23.5cm}		% H�he des Textes
+%%\setlength{\footheight}{0cm}		% H�he des Footers
+\setlength{\footskip}{1cm}		% Abst. Unterk. Text - Unterk. Footer
+
+
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+\LARGE
+Workshop Guide
+
+\vspace{1cm}
+
+Restructuring Code: From ``Push''  To ``Pull''
+\end{center}
+
+\normalsize
+
+\vspace{0.6cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{The Initial Situation}
+
+This describes the general situation in which the restructuring pattern is applicable.
+
+\subsubsection*{Aim of the Code}
+
+The code produces a sequence of data objects, each of which may hold several data (e.g.~several numbers).
+
+\subsubsection*{Initial Shape of the Code}
+
+\begin{itemize}
+\item one class that holds one input data (here: the class \texttt{Umsatz})
+\item a sequence of these input data elements (here: \texttt{List<Umsatz>})
+\item very few classes with logic (here: the class \texttt{PushingMonatsdatenBerechner})
+\item one class that holds one of the output data entries in the sequence (here: the class \texttt{Monatsdaten})
+\item a sequence of these output data elements (here: \texttt{List<Monatsdaten>}) which is constructed early in the program run
+\item in the logic class(es), there are two interlaced loops: 
+\begin{itemize}
+\item initially, the sequence of output data is not filled
+\item the outer loop iterates over the sequence of data objects (here: the months for which the output data is to be determined)
+\item the inner loop calculates the data for each data object (here: the sum of the transactions for each month)
+\item at the end of the inner loop, the calculated data is written to the data object (``push'')
+\item finally, the sequence of output data is filled
+\end{itemize}
+\item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has written to the sequence of output data
+\end{itemize}
+
+\section{Pre-Arrangements}
+
+Tidy up the code, rename local variables to make their names more descriptive.
+Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
+
+We do this by:
+\begin{itemize}
+	\item Defining one interaction point with outside objects (Step 1)
+	\item Separating value calculation from iteration (Steps 2-3)
+	\item Encapsulating the calculation object (Steps 4-5)
+	\item Separating calculation for each value (Step 6)
+	\item Eliminating unwanted state (Step 7)
+	\item Tidying up (Step 8)
+\end{itemize}
+
+\section{Step 1: Decoupling from the outside world (From Local Variables To A Data Object)}
+
+The loops described above calculate the output data for each element of the sequence on the fly and put them into the output data structures. 
+
+We want to leave the output data structures untouched. That is because they are often provided from the outside, and we do not want to change any outside code.
+
+So we want to use an intermediate output object to hold the calculated values. In this step, the intermediate object will only hold the values, it will not contain any logic. The intermediate object will have one setter that sets all calculated values simultaneously. It will also have getters, one for each of the calculated values.
+
+In the logic class, we will create an intermediate data object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read it again from the intermediate object and write it to the output data structure. We reuse the same intermediate object for each run through the loop.
+
+\section{Step 2: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
+
+In this step, we move the calculation of the values for the intermediate object into a separate method. This method uses the intermediate data object as in-out-parameter, so it can read values from the previous iteration (if required) and write the calculation results into the data object.
+
+\section{Step 3: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
+
+The calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring, the invocation site of the method needs to be adapted as well.)
+
+\section{Step 4: Use one Intermediate Object for Each Execution of the Inner Loop Body}
+
+So far, we reused the intermediate object for each execution of the inner loop body. In this step, we want to change this, such that each execution of the loop body creates its own intermediate object. If the value calculation uses values from a previous calculation, we need to take care of this and pass on the required values from the previous intermediate object to the calculation method, possibly widening its signature.
+
+\section{Step 5: Move the Value Calculation to the Constructor of the Intermediate Object}
+
+So far, we still need to explicitly invoke the value calculation on the intermediate object. We can already invoke the value calculation in the constructor of the intermediate object, thus removing the method invocation from the logic class.
+
+\section{Step 6: Split up the Value Calculation}
+
+So far, we still calculate all values at once, in the same method. This method invokes a setter that writes all values into the intermediate object's attributes in one go (we introduced this setter in Step 1).
+
+In this step, we want to split up the value calculation and value setting. In order to do so, we duplicate the calculation method such that we get one method for each of the values that we want to calculate. We name these methods accordingly, e.g.~\texttt{calculateValue1}, \texttt{calculateValue2} and so on.
+
+In the constructor we replace the invocation of the original calculation method by the invocations of the individual value calculation methods.
+
+Now we can remove all code from each of the methods that is not related to calculating the value for which the method is responsible. We also remove the setter call that sets all values at once. In fact, each of these methods only sets the value it is responsible for.
+
+When we are done, we can remove the setter that sets all values simultaneously.
+
+\section{Step 7: Turn the Value Calculation Methods into Getters}
+
+In the value calculation methods, we do not write to fields any more. Instead, we just return the calculated values.
+
+In the getters of the intermediate object, we do not return the field values but instead the results of the value calculation methods.
+
+Now we can remove the fields (they are no longer needed) and the value calculation method invocations in the constructor (they no longer have any side-effects, so it makes no difference whether we invoke them or not).
+
+Finally, we can inline the value calculation methods into the getter methods. This way, we have getters for the individual values of the intermediate object which describe exactly how each value is being calculated.
+
+\section{Step 8: Simplification}
+
+Now that we can see each value calculation in isolation, we often notice that we can perform simplifications of the algorithms. 
+
+\section{Final Step: Achieving the ``Pull'' Structure}
+
+
+
+Pull
+====
+
+- Umwandeln der dummen Monatsdaten-Records in Monat-Objekte
+- BestandUndDurchschnitt geht ebenfalls in dem Monat-Objekt auf
+- Umwandeln der Liste von Monatsdaten in ein Monate-Objekt
+- Verkettung der Monate statt Übertragen des Vormonatsbestands
+- Bei Bedarf Caching der berechneten Werte in einem Wrapper-Objekt
+
+\begin{itemize}
+\item x
+\end{itemize}
+
+\section{The Final Situation}
+
+Zielzustand:
+
+- Berechnungslogik und Ergebnisstruktur sind ein und dasselbe geworden
+- Intelligente Objekte statt stupider Datenhaltung
+
+\begin{itemize}
+\item x
+\end{itemize}
+
+
+
+\end{document}
