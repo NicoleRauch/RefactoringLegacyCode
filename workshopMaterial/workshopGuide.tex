@@ -53,11 +53,11 @@ The code produces a sequence of data objects, each of which may hold several dat
 \subsubsection*{Initial Shape of the Code}
 
 \begin{itemize}
-\item one class that holds one input data (here: the class \texttt{Umsatz})
-\item a sequence of these input data elements (here: \texttt{List<Umsatz>})
-\item very few classes with logic (here: the class \texttt{PushingMonatsdatenBerechner})
-\item one class that holds one of the output data entries in the sequence (here: the class \texttt{Monatsdaten})
-\item a sequence of these output data elements (here: \texttt{List<Monatsdaten>}) which is constructed early in the program run
+\item one class that holds one input data (here: the class \texttt{Transaction})
+\item a sequence of these input data elements (here: \texttt{List<Transaction>})
+\item very few classes with logic (here: the class \texttt{PushingBalancesCalculator})
+\item one class that holds one of the output data entries in the sequence (here: \texttt{BalancesOfMonth})
+\item a sequence of these output data elements (here: \texttt{List<BalancesOfMonth>}) which is constructed early in the program run
 \item in the logic class(es), there are two interlaced loops: 
 \begin{itemize}
 \item initially, the sequence of output data is not filled
@@ -68,6 +68,21 @@ The code produces a sequence of data objects, each of which may hold several dat
 \end{itemize}
 \item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has written to the sequence of output data
 \end{itemize}
+
+\section{The Overall Goal}
+
+The overall goal is to extract the calculations of the individual values into separate methods.
+
+This can be broken up into two major parts:
+
+\begin{enumerate}
+\item Disentangle the for loops, isolate the loop body and extract it
+\item Move the extracted loop body to its own class, isolate the calculations of the distinct values into separate methods
+\end{enumerate}
+
+In the following, we will split up these two parts into fine-grained steps that can be applied to the code.
+
+\section{Part 1: Disentangle the For Loops and Extract the Loop Body}
 
 \section{Pre-Arrangements}
 
@@ -105,6 +120,9 @@ The calculation method can be moved to the class of the intermediate object. (If
 \section{Step 4: Use one Intermediate Object for Each Execution of the Inner Loop Body}
 
 So far, we reused the intermediate object for each execution of the inner loop body. In this step, we want to change this, such that each execution of the loop body creates its own intermediate object. If the value calculation uses values from a previous calculation, we need to take care of this and pass on the required values from the previous intermediate object to the calculation method, possibly widening its signature.
+
+\section{Part 2: Separate the calculations}
+
 
 \section{Step 5: Move the Value Calculation to the Constructor of the Intermediate Object}
 
