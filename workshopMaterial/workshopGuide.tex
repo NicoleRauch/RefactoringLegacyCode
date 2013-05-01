@@ -82,13 +82,6 @@ This can be broken up into two major parts:
 
 In the following, we will split up these two parts into fine-grained steps that can be applied to the code.
 
-\section{Part 1: Disentangle the For Loops and Extract the Loop Body}
-
-\section{Pre-Arrangements}
-
-Tidy up the code, rename local variables to make their names more descriptive.
-Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
-
 We do this by:
 \begin{itemize}
 	\item Defining one interaction point with outside objects (Step 1)
@@ -99,15 +92,46 @@ We do this by:
 	\item Tidying up (Step 8)
 \end{itemize}
 
-\section{Step 1: Decoupling from the outside world (From Local Variables To A Data Object)}
+Restrictions / Rules:
 
-The loops described above calculate the output data for each element of the sequence on the fly and put them into the output data structures. 
+Change one thing at a time.
 
-We want to leave the output data structures untouched. That is because they are often provided from the outside, and we do not want to change any outside code.
+\begin{itemize}
+\item Right now, we neither want to change the outside world nor our calculator class API, only the internals of our calculator class. The result objects (\texttt{BalancesOfMonth}) represent the outside world in our example. Therefore, we will leave the result objects and the \texttt{fillData} method signature untouched. 
+\end{itemize}
 
-So we want to use an intermediate output object to hold the calculated values. In this step, the intermediate object will only hold the values, it will not contain any logic. The intermediate object will have one setter that sets all calculated values simultaneously. It will also have getters, one for each of the calculated values.
+
+\section{Part 1: Disentangle the For Loops and Extract the Loop Body}
+
+Overall Goal:
+
+Extract most of the outer for loop body into a separate method.
+
+\section{Pre-Arrangements}
+
+Tidy up the code, rename local variables to make their names more descriptive.
+Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
+
+\section{Step 0: Decoupling from the outside world (From Local Variables To A Data Object)}
+
+Observations:
+\begin{itemize}
+\item The outer loop iterates over the list of result objects that need to be filled with the calculated data by the method.
+\item The method calculates two values for each result object: balance and averageBalance. 
+\item These two values cannot both be returned from a single method.
+\end{itemize}
+
+Solution:
+
+Create an object that will transport the calculated values. 
+
+In this step, the intermediate object will only hold the values, it will not contain any logic. The intermediate object will have one setter that sets all calculated values simultaneously. It will also have getters, one for each of the calculated values.
 
 In the logic class, we will create an intermediate data object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read it again from the intermediate object and write it to the output data structure. We reuse the same intermediate object for each run through the loop.
+
+\section{Step 1: }
+
+
 
 \section{Step 2: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
 
