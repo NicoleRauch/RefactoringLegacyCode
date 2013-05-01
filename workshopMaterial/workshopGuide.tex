@@ -77,6 +77,8 @@ This can be broken up into two major parts:
 
 \begin{enumerate}
 \item Disentangle the for loops, isolate the loop body and extract it
+\item Build one data object for each loop iteration (instead of reusing the same object over and over again)
+
 \item Move the extracted loop body to its own class, isolate the calculations of the distinct values into separate methods
 \end{enumerate}
 
@@ -179,15 +181,25 @@ Solution:
 
 Let's do it!
 
+\section{Part 2: One object for each loop iteration}
+
+Overall goal:
+
+Build one data object for each loop iteration (instead of reusing the same object over and over again).
+
+
 \section{Step 3: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
 
 Observations:
 \begin{itemize}
 \item The extracted method uses the intermediate data object as in-out-parameter, so it can read values from the previous iteration (if required) and write the calculation results into the data object.
+\item The extracted method only operates on this parameter but not on the state of the class it is in. (Code smell: Feature Envy)
 \end{itemize}
 
+Solution:
 
-The calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring, the invocation site of the method needs to be adapted as well.)
+The extracted calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring, the invocation site of the method needs to be adapted as well.)
+
 
 \section{Step 4: Use one Intermediate Object for Each Execution of the Inner Loop Body}
 
