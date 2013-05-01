@@ -101,18 +101,20 @@ Change one thing at a time.
 \end{itemize}
 
 
+\textbf{Note:} The workspace with the step number contains the \textbf{solution} to the step!
+
 \section{Part 1: Disentangle the For Loops and Extract the Loop Body}
 
 Overall Goal:
 
 Extract most of the outer for loop body into a separate method.
 
-\section{Pre-Arrangements}
+\section{Pre-Arrangements (Workspace: Push)}
 
 Tidy up the code, rename local variables to make their names more descriptive.
 Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
 
-\section{Step 0: Decoupling from the outside world (From Local Variables To A Data Object)}
+\section{Step 00: Decoupling from the outside world (From Local Variables To A Data Object)}
 
 Observations:
 \begin{itemize}
@@ -129,15 +131,61 @@ In this step, the intermediate object will only hold the values, it will not con
 
 In the logic class, we will create an intermediate data object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read it again from the intermediate object and write it to the output data structure. We reuse the same intermediate object for each run through the loop.
 
-\section{Step 1: }
+\section{Step 00a: Prepare for method extraction Part I: Resolving ambiguous return values}
+
+Observations:
+\begin{itemize}
+\item If we try to extract the body of the outer loop into a method, we are told that this method manipulates two variables which cannot both be returned, namely balance and latestBalance.
+\end{itemize}
+
+Solution:
+
+Move the two local variables into the loop body.
+
+Regarding balance:
+
+If we write balance to balanceAndAverage at the end of the loop, it is no problem if we read balance from balanceAndAverage at the beginning of the loop.
+
+Regarding lastBalance:
+
+At the end of the loop, lastBalance equals balance, so it is no problem if we set lastBalance to balance at the beginning of the loop.
+
+\section{Step 01: Prepare for method extraction Part II: Purifying the dependencies}
+
+Observations:
+\begin{itemize}
+\item If we extract the body of the outer loop into a method, this method will depend on our outer world, i.e. \texttt{BalancesOfMonth}.
+\item We only need the date from the \texttt{BalancesOfMonth} object, namely for calculating the current ultimo.
+\item If we extract the body of the outer loop into a method, this method will depend on state of our object, namely \texttt{transactions} (inside \texttt{transactionsOfMonth}).
+\end{itemize}
+
+Both is undesirable.
+
+Solution:
+
+Move the transaction filtering to the top of the loop.
+
+Extract the date from the \texttt{BalancesOfMonth} object, move it to the top of the loop and use it in the rest of the method body.
 
 
+\section{Step 02: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
 
-\section{Step 2: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
+Observations:
+\begin{itemize}
+\item We can now extract the major part of the method body into a separate method.
+\end{itemize}
 
-In this step, we move the calculation of the values for the intermediate object into a separate method. This method uses the intermediate data object as in-out-parameter, so it can read values from the previous iteration (if required) and write the calculation results into the data object.
+Solution:
+
+Let's do it!
 
 \section{Step 3: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
+
+Observations:
+\begin{itemize}
+\item The extracted method uses the intermediate data object as in-out-parameter, so it can read values from the previous iteration (if required) and write the calculation results into the data object.
+\end{itemize}
+
 
 The calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring, the invocation site of the method needs to be adapted as well.)
 
