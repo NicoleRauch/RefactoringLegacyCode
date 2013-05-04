@@ -25,8 +25,8 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	{
 		BalanceAndAverage balanceAndAverage = new BalanceAndAverage();
 		int balance = balanceAndAverage.getBalance();
-
 		int latestBalance = 0;
+
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
 			int ultimo = balancesOfMonth.getDate().getDayOfMonth();
