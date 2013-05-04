@@ -1,8 +1,8 @@
 \documentclass[a4paper,fleqn,titlepage,11pt]{article}
 \usepackage{t1enc} 
-\usepackage{german}
+%%\usepackage{german}
 
-\selectlanguage{german}
+%%\selectlanguage{german}
 
 
 \pagestyle{myheadings}
@@ -46,11 +46,11 @@ Restructuring Code: From ``Push''  To ``Pull''
 
 This describes the general situation in which the restructuring pattern is applicable.
 
-\subsubsection*{Aim of the Code}
+\subsection{Aim of the Code}
 
 The code produces a sequence of data objects, each of which may hold several data (e.g.~several numbers).
 
-\subsubsection*{Initial Shape of the Code}
+\subsection{Initial Shape of the Code}
 
 \begin{itemize}
 \item one class that holds one input data (here: the class \texttt{Transaction})
@@ -69,11 +69,16 @@ The code produces a sequence of data objects, each of which may hold several dat
 \item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has written to the sequence of output data
 \end{itemize}
 
+\subsection{Inspection of the Code}
+The code doesn't look too bad. It has some issues. The algorithm is not easy to understand. Testing is only possible on an integration base. There is no isolation or abstraction levels.
+
 \section{The Overall Goal}
+
+Let's make the code crisper. That means: easy to read, understand, test and extend.
 
 The overall goal is to extract the calculations of the individual values into separate methods.
 
-This can be broken up into two major parts:
+This can be broken up into three major parts:
 
 \begin{enumerate}
 \item Disentangle the for loops, isolate the loop body and extract it
@@ -105,18 +110,18 @@ Change one thing at a time.
 
 \textbf{Note:} The workspace with the step number contains the \textbf{solution} to the step!
 
-\section{Part 1: Disentangle the For Loops and Extract the Loop Body}
+\part{Disentangle the For Loops and Extract the Loop Body}
 
 Overall Goal:
 
 Extract most of the outer for loop body into a separate method.
 
-\section{Pre-Arrangements (Workspace: Push)}
+\section*{Pre-Arrangements (Workspace: Push)}
 
 Tidy up the code, rename local variables to make their names more descriptive.
 Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
 
-\section{Step 00: Decoupling from the outside world (From Local Variables To A Data Object)}
+\section*{Step 00: Decoupling from the outside world (From Local Variables To A Data Object)}
 
 Observations:
 \begin{itemize}
@@ -133,11 +138,11 @@ In this step, the intermediate object will only hold the values, it will not con
 
 In the logic class, we will create an intermediate data object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read it again from the intermediate object and write it to the output data structure. We reuse the same intermediate object for each run through the loop.
 
-\section{Step 00a: Prepare for method extraction Part I: Resolving ambiguous return values}
+\section*{Step 00a: Prepare for method extraction Part I: Resolving ambiguous return values}
 
 Observations:
 \begin{itemize}
-\item If we try to extract the body of the outer loop into a method, we are told that this method manipulates two variables which cannot both be returned, namely balance and latestBalance.
+\item If we tried to extract the body of the outer loop into a method, we would be told that this method manipulates two variables which cannot both be returned, namely balance and latestBalance.
 \end{itemize}
 
 Solution:
@@ -152,13 +157,13 @@ Regarding lastBalance:
 
 At the end of the loop, lastBalance equals balance, so it is no problem if we set lastBalance to balance at the beginning of the loop.
 
-\section{Step 01: Prepare for method extraction Part II: Purifying the dependencies}
+\section*{Step 01: Prepare for method extraction Part II: Purifying the dependencies}
 
 Observations:
 \begin{itemize}
-\item If we extract the body of the outer loop into a method, this method will depend on our outer world, i.e. \texttt{BalancesOfMonth}.
+\item If we extracted the body of the outer loop into a method, this method would depend on our outer world, i.e. \texttt{BalancesOfMonth}.
 \item We only need the date from the \texttt{BalancesOfMonth} object, namely for calculating the current ultimo.
-\item If we extract the body of the outer loop into a method, this method will depend on state of our object, namely \texttt{transactions} (inside \texttt{transactionsOfMonth}).
+\item If we extracted the body of the outer loop into a method, this method would depend on state of our object, namely \texttt{transactions} (inside \texttt{transactionsOfMonth}).
 \end{itemize}
 
 Both is undesirable.
@@ -170,7 +175,7 @@ Move the transaction filtering to the top of the loop.
 Extract the date from the \texttt{BalancesOfMonth} object, move it to the top of the loop and use it in the rest of the method body.
 
 
-\section{Step 02: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
+\section*{Step 02: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
 
 Observations:
 \begin{itemize}
@@ -181,26 +186,26 @@ Solution:
 
 Let's do it!
 
-\section{Part 2: One object for each loop iteration}
+\part{One object for each loop iteration}
 
 Overall goal:
 
 Build one data object for each loop iteration (instead of reusing the same object over and over again).
 
 
-\section{Step 3: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
+\section*{Step 03: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
 
 Observations:
 \begin{itemize}
 \item The extracted method uses the intermediate data object as in-out-parameter, so it can read values from the previous iteration (if required) and write the calculation results into the data object.
-\item The extracted method only operates on this parameter but not on the state of the class it is in. (Code smell: Feature Envy)
+\item The extracted method only operates on this parameter but not on the state of the class it is in. {\em (Code smell: Feature Envy)}
 \end{itemize}
 
 Solution:
 
-The extracted calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring, the invocation site of the method needs to be adapted as well.)
+The extracted calculation method can be moved to the class of the intermediate object. (If this is not done via an automated refactoring. This changes the invocation site of the method as well.)
 
-And don't forget to move the method calculateProportionalBalance as well!
+And don't forget to manually move the method calculateProportionalBalance as well! - After that you can (automatically) change the signature of the extracted method to remove the PushingBalancesCalculator parameter.
 
 Modified objects:
 
@@ -209,15 +214,17 @@ PushingBalancesCalculator
 BalanceAndAverage
 
 
-\section{Step 4: Use one Intermediate Object for Each Execution of the Inner Loop Body}
+\section*{Step 04: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
 
 Observations:
 \begin{itemize}
 \item The for loop reuses the same BalanceAndAverage object in each loop iteration.
-\item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration.
+\item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration, which is already retrieved anyway.
 \end{itemize}
 
 Solution:
+
+We explicitly pass the preceding balance to the calculation. We have to fetch it from the previous result before creating a new instance.
 
 In this step, we want each execution of the loop body to create its own intermediate object. If the value calculation uses values from a previous calculation, we need to take care of this and pass on the required values from the previous intermediate object to the calculation method, possibly widening its signature.
 
@@ -227,14 +234,14 @@ PushingBalancesCalculator.fillData()
 
 BalanceAndAverage.calculateValues()
 
-\section{Part X: From Calculating the values up-front to calculating the values on-demand}
+\part{From Calculating the values up-front to calculating the values on-demand}
 
 Overall Goal:
 
 Currently, all values are calculated up-front with an explicit command from the outside, no matter whether they are needed or not. It would be much nicer if our object could calculate the values on-demand when they are needed.
 
 
-\section{Step 5: Move the Required Inputs for the Calculation to the Constructor of the Intermediate Object}
+\section*{Step 5: Remove the Parameters from the Value Calculation Method}
 
 Observations:
 \begin{itemize}
@@ -246,7 +253,7 @@ Solution:
 
 In order to get rid of the explicit calculation method, the first step would be to pass the input values into the constructor of the result object, thus turning these inputs into state for the calculating object.
 
-\section{Step 6: Split up the Value Calculation}
+\section*{Step 6: Split up the Value Calculation}
 
 Observations:
 \begin{itemize}
@@ -266,18 +273,28 @@ Modified:
 
 BalanceAndAverage
 
-\section{Step 7: Turn the Value Calculation Methods into Getters}
+\section*{Step 6a: Introduce Return Values into Calculation Methods}
+Observations:
+\begin{itemize}
+\item The two calculation methods do calculation and setting fields. 
+\end{itemize}
+
+We let the calculation methods return values and set the fields inside the calling method.
+
+Modified:
+
+BalanceAndAverage
+
+\section*{Step 7: Turn the Value Calculation Methods into Getters}
 
 Observations:
 \begin{itemize}
-\item We have calculate methods that write their results into fields.
+\item In the value calculation methods, we do not write to fields any more. Instead, we just return the calculated values.
 \item These methods are still invoked from the outside (via the invocation method that invokes all of the single calculation methods).
 \item We have getters that read the values from the fields and return them.
 \end{itemize}
 
 Solution:
-
-In the value calculation methods, we do not write to fields any more. Instead, we just return the calculated values.
 
 In the getters of the intermediate object, we do not return the field values but instead the results of the value calculation methods.
 
@@ -291,7 +308,7 @@ BalanceAndAverage
 
 PushingBalancesCalculator (calculation method invocation is removed).
 
-\section{Step 8: Simplification}
+\section*{Step 8: Simplification}
 
 Observations:
 \begin{itemize}
@@ -303,9 +320,9 @@ Now that we can see each value calculation in isolation, we often notice that we
 
 Solution:
 
-We can simplify the algorithm or even rewrite it (with TDD if we like). It is now easy to clarify the business aspects of this logic and to develop a new algorithm.
+We can simplify the algorithm or even rewrite it (with TDD if we like). It is now easy to clarify the business aspects of this logic and to develop a new algorithm. The average is transformed from vertical slicing to horizontal slicing. The old algorithm adds each transaction based on how many days it lasts into the future. This is the reason why we need to memorize the old date, the new date, the old amount. Also this requires special handling for the last transaction in the month. The new algorithm calculates for each transaction the resulting transaction value on the base of remaining days until ultimo and adds the transactions's amount to the aggregate.
 
-\section{Final Step: Achieving the ``Pull'' Structure}
+\section*{Final Step: Achieving the ``Pull'' Structure}
 
 Observations:
 
