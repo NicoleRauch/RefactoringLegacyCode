@@ -1,123 +1,31 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Legacy -- Vermächtnis}
-\begin{minipage}{.8 \paperwidth}
-\includegraphics[width=\textwidth]{OldStateHouse.png} \newline
-{\tiny \url{http://www.flickr.com/photos/bostonlandmarkscommission/} \hfill \url{http://www.flickr.com/photos/josepha/}}
-\end{minipage}
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Legacy -- Vermächtnis}
-\begin{minipage}{.8 \paperwidth}
-\includegraphics[width=\textwidth]{AlteVilla.png} \newline
-{\tiny \hspace*{\fill} \url{http://www.flickr.com/photos/venana/}}
-\end{minipage}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Legacy -- Vermächtnis}
-\begin{minipage}{.8 \paperwidth}
-\includegraphics[width=\textwidth]{VerfallenesHaus.png} \newline
-{\tiny \hspace*{\fill} \url{http://www.flickr.com/photos/theo_reth/}}
-\end{minipage}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Legacy Code -- Was ist das eigentlich?}
+\begin{frame}[fragile]{Our Starting Point}
 \begin{itemize}
-\item Michael Feathers: \glqq Code without tests\grqq
-\begin{itemize}
-\item \glqq With tests, we can change the behavior of our code quickly and verifiably.\grqq
-\item \glqq Without them, we really don't know if our code is getting better or worse.\grqq
-\end{itemize}
-
-\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Legacy Code -- Was ist das eigentlich?}
-\begin{itemize}
-\item Legacy Code ist
-\begin{itemize}
-\item von anderen
-\item alt
-\item unübersichtlich
-\item buggy
-\item mühsam zu erweitern
-\item …
-\end{itemize}
-\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Unser Ausgangspunkt}
-\begin{itemize}
-\item Betriebswirtschaftliche Software
-\item Extrem schlechte Codequalität
-\item Anstehende Veränderungen für ein Modul:
+\item Business Software
+\item Very poor code quality
+\item Planned changes for a module:
 \begin{itemize}
 \item Bugfixing
-\item neue Features
-\item bessere Tests
+\item new features
+\item better tests
 \end{itemize}
 \end{itemize}
 
-$\Rightarrow$ Ein Umbau war notwendig
+$\Rightarrow$ A restructuring was required
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Die Domäne}
+\begin{frame}[fragile]{The Domain}
 \begin{itemize}
-\item Finanzmathematische Software
+\item Financial mathematical software
 \end{itemize}
 
 \begin{itemize}
-\item Für ein Konto monatsweise ausgeben:
+\item Calculate for a bank account for each month:
 \begin{itemize}
-\item Kontostand am Monatsletzten
-\item Durchschnittlicher Kontostand im Monat
-\end{itemize}
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Vorhandene Codestruktur}
-\includegraphics[width=.8 \paperwidth]{Codestruktur.png}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Probleme der vorhandenen Codestruktur}
-\begin{itemize}
-\item Code schreibt Werte in separate Datenobjekte (\glqq Push\grqq{})
-\item Mehrfache Schreibzugriffe auf denselben Wert
-\item Codeteile greifen auf vorher geschriebene Werte zu
-\item Code ist getrieben vom Blick von innen: Was muss ich alles in Summe tun, um eine Menge von Ergebnissen abliefern zu können?
-\end{itemize}
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Unser Ansatz}
-\begin{itemize}
-\item Annahmen:
-\begin{itemize}
-\item Der alte Code ist großteils inkorrekt und lückenhaft
-\item Es existiert umfassendes Wissen über die gewünschte Fachlogik
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Entschluss:
-\begin{itemize}
-\item Neuimplementierung auf der grünen Wiese (mit Feature-Toggle)
-\item Erstellung neuer Tests anhand der parallel zu definierenden Fachlichkeit
-\item Kontinuierliche Anpassung der vorhandenen Tests
+\item Balance at the last day of the month (ultimo)
+\item Average balance of the month
 \end{itemize}
 \end{itemize}
 
@@ -125,47 +33,84 @@ $\Rightarrow$ Ein Umbau war notwendig
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Unsere Erfahrungen}
+\begin{frame}[fragile]{Problems of the Existing Code Structure}
 \begin{itemize}
-\item Probleme:
+\item Code writes values into separate data objects (\glqq Push\grqq{})
+\item Multiple writing operations for one value
+\item Parts of  the code access previously written values
+\item Code is driven by the view from the inside: What do I need to do in summary to be able to deliver a set of result values?
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Problems of the Existing Code Structure}
+\includegraphics[width=.85 \paperwidth]{Codestruktur.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Our Approach}
 \begin{itemize}
-\item Die Ausarbeitung der fachlichen Spezifikation ist viel komplizierter und aufwändiger als gedacht
-\item Abweichungen zum alten Code sind schwer zu analysieren
-\item Die Testabdeckung ist zu gering \newline $\Rightarrow$ Wir übersehen relevante Fälle 
+\item Assumptions:
+\begin{itemize}
+\item The old code is mostly incorrect and incomplete
+\item There is plenty of knowledge regarding the business logic
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Ursachen:
+\item Decision:
 \begin{itemize}
-\item Falsche Annahmen
-\item Vermischung von Umbau und Änderung
-\item Arroganz (\glqq Wir wissen es besser als unsere Vorgänger\grqq{})
+\item A greenfield reimplementation (with feature-toggle)
+\item Creation of new tests in parallel with the new definition of the business logic
+\item Continuous adaption of the existing tests
 \end{itemize}
 \end{itemize}
-
-$\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Wie geht es besser?}
+\begin{frame}[fragile]{Our Experience}
 \begin{itemize}
-\item Vor dem Umbau Fakten sammeln, Annahmen allein genügen nicht
+\item Problems:
 \begin{itemize}
-\item Wie hoch ist die Testabdeckung? (Coverage)
-\item Welche fachlichen Fälle sind abgedeckt?
-\item Existiert eine zum Code passende Spezifikation?
+\item It was much more complicated and long-winding to specify the business logic than we had expected
+\item Differences compared to the old code are hard to analyze
+\item The test coverage is too low \newline $\Rightarrow$ We miss relevant cases 
+\end{itemize}
 \end{itemize}
 
-\item Grundsätzlich gilt: Im Zweifel hat der vorhandene Code Recht!
-
-\item Keine Änderungen an der Logik während des strukturellen Umbaus!
-
-\item Explizite Abnahme des Umbaus
 \begin{itemize}
-\item Das Verhalten muss exakt gleich sein (Tests, Bugs, Features)
+\item Causes:
+\begin{itemize}
+\item False assumptions
+\item We mixed restructuring and change
+\item Arrogance (\glqq We know things better than our predecessors\grqq{})
+\end{itemize}
+\end{itemize}
+
+$\Rightarrow$ Our restructuring approach was much too na\"ive
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{How can this be improved?}
+\begin{itemize}
+\item Gather facts in advance (assumptions are not sufficient)
+\begin{itemize}
+\item How much code coverage do we have?
+\item Which business cases are covered?
+\item Is there any specification that matches the code?
+\end{itemize}
+
+\item Bottom-line: If in doubt, the existing code shows the correct behaviour!
+
+\item Do not change the logic while restructuring!
+
+\item Explicit approval of the restructuring
+\begin{itemize}
+\item It must show identical behaviour (tests, bugs, features)
 \end{itemize}
 
 \end{itemize}
@@ -174,133 +119,72 @@ $\Rightarrow$ Wir sind den Umbau viel zu naiv angegangen
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Ziel}
+\begin{frame}[fragile]{Goal}
 \begin{itemize}
-\item Struktur:
+\item Structure:
 \begin{itemize}
-\item Spiegelbild der Fachlichkeit
+\item Code mirrors the business logic
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Blick von außen aus Sicht der Ergebnisse:
+\item View from the outside, driven by the expected results:
 \begin{itemize}
-\item Welche Werte will ich haben?
-\item Wie berechnet sich welcher Wert?
-\item Welche Kategorien von Ergebniswerten gibt es? Gemeinsamkeiten, Unterschiede?
+\item Which values do I need?
+\item How is each value calculated?
+\item Which categories of results exist? Similarities, differences?
 \end{itemize}
 \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Goal}
+\includegraphics[width=.85 \paperwidth]{DynamischFein.jpg}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Ideale Vorgehensweise}
+\begin{frame}[fragile]{Ideal Approach}
 \begin{itemize}
-\item Feature-Toggle zum Vergleichen von alter und neuer Version
+\item Feature-toggle to compare the old and the new version
 \begin{itemize}
-\item Identifikation bzw. Schaffen eines minimalen Eingriffspunkts
-\item Beibehalten der externen API an diesem Eingriffspunkt
+\item Identification or creation of a minimal entry point to the restructured area
+\item The API of this entry point must remain unchanged
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Wichtige Aspekte des Umbaus:
+\item Important aspects of the restructuring:
 \begin{itemize}
-\item Fachlich motiviert
-\item Rein strukturell
+\item Driven by business logic
+\item Purely structural
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Technisches Ziel:
+\item Technical goal:
 \begin{itemize}
 \item Separation of Concerns
-\item On-Demand-Ermittlung aller Werte (\glqq Pull\grqq{})
-\item Werte-Caching mittels Lazy-Initialization
+\item On-demand-calculation of all values (\glqq Pull\grqq{})
+\item Value caching via lazy initialization
 \end{itemize}
 
 \end{itemize}
 \end{frame}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Umbau: Vorbereitung}
-\begin{itemize}
-\item Existierenden Code duplizieren
-\item Feature Toggle an den Aufrufstellen einbauen
-\end{itemize}
-\end{frame}
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Vorarbeiten}
-\begin{itemize}
-\item Java-Datumsarithmetik kapseln, z.~B.
-\begin{itemize}
-\item Joda Time
-\item Eigene Klassen
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Namensgebung von Variablen verbessern
-\end{itemize}
+\begin{frame}[fragile]{Workshop Step 1}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Strukturellen Code isolieren}
-\begin{itemize}
-\item Schleifen aufräumen, vereinheitlichen und zusammenfassen
-\item Dazu bei Bedarf Methoden inlinen
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Aspekte isolieren}
-\begin{itemize}
-\item Werteobjekt einführen, das alle relevanten Ergebnisse des Schleifenrumpfs zusammenfasst
-\item Schleifenrumpf in Methode extrahieren
-\item Methode in das Werteobjekt verschieben
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Push in Pull umwandeln}
-\begin{itemize}
-\item Pro Ergebniswert ein Duplikat dieser Methode
-\item Jeweils Irrelevantes aus den Methoden entfernen
-\item Die Methoden zum Berechnen der Ergebniswerte in Getter umwandeln
-\item Parallel dazu Unit-Tests aufbauen
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Vervollständigung}
-
-\begin{itemize}
-\item Refactoring: 
-\begin{itemize}
-\item Extrahieren von Methoden
-\item Zusammenfassen gleicher Funktionalität
-\item Generelle Aufräumarbeiten
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Danach: 
-\begin{itemize}
-\item Technische Bereinigung von Algorithmen, fachliche Korrektur der Berechnungslogik
-\end{itemize}
-\end{itemize}
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {
 \usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-slide.png}}
-\begin{frame}{Vielen Dank!}
+\begin{frame}{Thank you!}
 
-        Code \& Folien auf GitHub:
+        Code \& slides at GitHub:
         \begin{center}
                 \url{https://github.com/NicoleRauch/RefactoringLegacyCode}
         \end{center}
