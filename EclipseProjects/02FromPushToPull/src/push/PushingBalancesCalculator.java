@@ -27,44 +27,33 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
-			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth); // this method works on all items and stays in
-																																				// this place
+			int balance = balanceAndAverage.getBalance();
+			int latestBalance = balance;
 
-			calculateValuesForMonth(dateOfMonth, transactionsOfMonth, balanceAndAverage);
+			int ultimo = balancesOfMonth.getDate().getDayOfMonth();
+
+			double averageBalance = 0;
+			int dayOfLatestBalance = 1;
+			List<Transaction> transactionsOfMonth = transactionsOfMonth(balancesOfMonth.getDate());
+			for (Transaction transaction : transactionsOfMonth)
+			{
+				balance += transaction.getAmount();
+				int day = transaction.getDate().getDayOfMonth();
+				averageBalance += calculateProportionalBalance(dayOfLatestBalance, latestBalance, day, ultimo);
+				latestBalance = balance;
+				dayOfLatestBalance = day;
+			}
+
+			if (dayOfLatestBalance != ultimo)
+			{
+				averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
+			}
+
+			balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
 
 			balancesOfMonth.setBalance(balanceAndAverage.getBalance());
 			balancesOfMonth.setAverageBalance(balanceAndAverage.getAverageBalance());
 		}
-	}
-
-	/**
-	 * extracted body of for loop in {@link #fillData(List)}
-	 */
-	private void calculateValuesForMonth(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth,
-			BalanceAndAverage balanceAndAverage)
-	{
-		int balance = balanceAndAverage.getBalance();
-		int latestBalance = balance;
-		int ultimo = dateOfMonth.getDayOfMonth();
-
-		double averageBalance = 0;
-		int dayOfLatestBalance = 1;
-		for (Transaction transaction : transactionsOfMonth)
-		{
-			balance += transaction.getAmount();
-			int day = transaction.getDate().getDayOfMonth();
-			averageBalance += calculateProportionalBalance(dayOfLatestBalance, latestBalance, day, ultimo);
-			latestBalance = balance;
-			dayOfLatestBalance = day;
-		}
-
-		if (dayOfLatestBalance != ultimo)
-		{
-			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
-		}
-
-		balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
 	}
 
 	private double calculateProportionalBalance(int dayOfLatestBalance, int balance, int day, int daysInMonth)

@@ -33,6 +33,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 			int precedingBalance = balanceAndAverage.getBalance();
 
 			balanceAndAverage = new BalanceAndAverage(dateOfMonth, transactionsOfMonth, precedingBalance);
+			balanceAndAverage.calculateValues();
 
 			balancesOfMonth.setBalance(balanceAndAverage.getBalance());
 			balancesOfMonth.setAverageBalance(balanceAndAverage.getAverageBalance());
