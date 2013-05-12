@@ -1,5 +1,6 @@
 package push;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -10,10 +11,21 @@ public class BalanceAndAverage
 {
 	private int balance;
 	private double averageBalance;
+	private final LocalDate dateOfMonth;
+	private final List<Transaction> transactionsOfMonth;
+	private final int precedingBalance;
 
 	public BalanceAndAverage()
 	{
+		this(new LocalDate(), new ArrayList<Transaction>(), 0);
+	}
+
+	public BalanceAndAverage(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
+	{
 		super();
+		this.dateOfMonth = dateOfMonth;
+		this.transactionsOfMonth = transactionsOfMonth;
+		this.precedingBalance = precedingBalance;
 	}
 
 	public int getBalance()
@@ -26,13 +38,23 @@ public class BalanceAndAverage
 		return (int) averageBalance;
 	}
 
-	public void setBalanceAndAverage(int balance, double averageBalance)
+	void calculateValues()
 	{
-		this.balance = balance;
-		this.averageBalance = averageBalance;
+		calculateBalance();
+		calculateAverageBalance();
 	}
 
-	void calculateValues(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
+	private void calculateBalance()
+	{
+		int balance = precedingBalance;
+		for (Transaction inputData : transactionsOfMonth)
+		{
+			balance += inputData.getAmount();
+		}
+		this.balance = balance;
+	}
+
+	private void calculateAverageBalance()
 	{
 		int balance = precedingBalance;
 		int latestBalance = balance;
@@ -54,7 +76,7 @@ public class BalanceAndAverage
 			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 		}
 
-		setBalanceAndAverage(balance, averageBalance);
+		this.averageBalance = averageBalance;
 	}
 
 	private double calculateProportionalBalance(int dayOfLatestBalance, int balance, int day, int daysInMonth)

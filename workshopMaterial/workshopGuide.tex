@@ -121,7 +121,7 @@ Extract most of the outer for loop body into a separate method.
 Tidy up the code, rename local variables to make their names more descriptive.
 Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
 
-\section*{Step 00: Decoupling from the outside world (From Local Variables To A Data Object)}
+\section*{Step 01: Decoupling from the outside world (From Local Variables To A Data Object)}
 
 Observations:
 \begin{itemize}
@@ -138,7 +138,7 @@ In this step, the intermediate object will only hold the values, it will not con
 
 In the logic class, we will create an intermediate data object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read it again from the intermediate object and write it to the output data structure. We reuse the same intermediate object for each run through the loop.
 
-\section*{Step 00a: Prepare for method extraction Part I: Resolving ambiguous return values}
+\section*{Step 02: Prepare for method extraction Part I: Resolving ambiguous return values}
 
 Observations:
 \begin{itemize}
@@ -157,7 +157,7 @@ Regarding lastBalance:
 
 At the end of the loop, lastBalance equals balance, so it is no problem if we set lastBalance to balance at the beginning of the loop.
 
-\section*{Step 01: Prepare for method extraction Part II: Purifying the dependencies}
+\section*{Step 03: Prepare for method extraction Part II: Purifying the dependencies}
 
 Observations:
 \begin{itemize}
@@ -175,7 +175,7 @@ Move the transaction filtering to the top of the loop.
 Extract the date from the \texttt{BalancesOfMonth} object, move it to the top of the loop and use it in the rest of the method body.
 
 
-\section*{Step 02: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
+\section*{Step 04: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
 
 Observations:
 \begin{itemize}
@@ -193,7 +193,7 @@ Overall goal:
 Build one data object for each loop iteration (instead of reusing the same object over and over again).
 
 
-\section*{Step 03: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
+\section*{Step 05: Separation of concerns (Move the Calculation Method to the Intermediate Class)}
 
 Observations:
 \begin{itemize}
@@ -214,7 +214,7 @@ PushingBalancesCalculator
 BalanceAndAverage
 
 
-\section*{Step 04: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
+\section*{Step 06: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
 
 Observations:
 \begin{itemize}
@@ -241,7 +241,7 @@ Overall Goal:
 Currently, all values are calculated up-front with an explicit command from the outside, no matter whether they are needed or not. It would be much nicer if our object could calculate the values on-demand when they are needed.
 
 
-\section*{Step 5: Remove the Parameters from the Value Calculation Method}
+\section*{Step 07: Remove the Parameters from the Value Calculation Method}
 
 Observations:
 \begin{itemize}
@@ -253,7 +253,7 @@ Solution:
 
 In order to get rid of the explicit calculation method, the first step would be to pass the input values into the constructor of the result object, thus turning these inputs into state for the calculating object.
 
-\section*{Step 6: Split up the Value Calculation}
+\section*{Step 08: Split up the Value Calculation}
 
 Observations:
 \begin{itemize}
@@ -273,7 +273,7 @@ Modified:
 
 BalanceAndAverage
 
-\section*{Step 6a: Introduce Return Values into Calculation Methods}
+\section*{Step 09: Introduce Return Values into Calculation Methods}
 Observations:
 \begin{itemize}
 \item The two calculation methods do calculation and setting fields. 
@@ -285,7 +285,7 @@ Modified:
 
 BalanceAndAverage
 
-\section*{Step 7: Turn the Value Calculation Methods into Getters}
+\section*{Step 10: Turn the Value Calculation Methods into Getters}
 
 Observations:
 \begin{itemize}
@@ -308,7 +308,7 @@ BalanceAndAverage
 
 PushingBalancesCalculator (calculation method invocation is removed).
 
-\section*{Step 8: Simplification}
+\section*{Step 11: Simplification}
 
 Observations:
 \begin{itemize}

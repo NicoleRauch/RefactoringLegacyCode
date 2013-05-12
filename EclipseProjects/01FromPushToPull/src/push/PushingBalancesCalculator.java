@@ -24,18 +24,16 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
 		BalanceAndAverage balanceAndAverage = new BalanceAndAverage();
+		int balance = balanceAndAverage.getBalance();
+		int latestBalance = 0;
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
-			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
-
-			int balance = balanceAndAverage.getBalance();
-			int latestBalance = balance;
-			int ultimo = dateOfMonth.getDayOfMonth();
+			int ultimo = balancesOfMonth.getDate().getDayOfMonth();
 
 			double averageBalance = 0;
 			int dayOfLatestBalance = 1;
+			List<Transaction> transactionsOfMonth = transactionsOfMonth(balancesOfMonth.getDate());
 			for (Transaction transaction : transactionsOfMonth)
 			{
 				balance += transaction.getAmount();
