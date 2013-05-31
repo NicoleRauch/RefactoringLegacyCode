@@ -41,36 +41,44 @@ Restructuring Code: From ``Push''  To ``Pull''
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\part{Overview}
 
 \section{The Initial Situation}
 
 This describes the general situation in which the restructuring pattern is applicable.
 
-\subsection{Aim of the Code}
+\subsection{Goal of the Code}
 
 The code produces a sequence of data objects, each of which may hold several data (e.g.~several numbers).
 
-\subsection{Initial Shape of the Code}
+\subsection{Shape of the Code}
+
+The general structure of the code is similar to this:
 
 \begin{itemize}
-\item one class that holds one input data (here: the class \texttt{Transaction})
+\item one class for a single input data (here: the class \texttt{Transaction})
 \item a sequence of these input data elements (here: \texttt{List<Transaction>})
 \item very few classes with logic (here: the class \texttt{PushingBalancesCalculator})
-\item one class that holds one of the output data entries in the sequence (here: \texttt{BalancesOfMonth})
+\item one class for a single output data entry (here: \texttt{BalancesOfMonth})
 \item a sequence of these output data elements (here: \texttt{List<BalancesOfMonth>}) which is constructed early in the program run
-\item in the logic class(es), there are two interlaced loops: 
-\begin{itemize}
-\item initially, the sequence of output data is not filled
-\item the outer loop iterates over the sequence of data objects (here: the months for which the output data is to be determined)
-\item the inner loop calculates the data for each data object (here: the sum of the transactions for each month)
-\item at the end of the inner loop, the calculated data is written to the data object (``push'')
-\item finally, the sequence of output data is filled
-\end{itemize}
-\item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has written to the sequence of output data
 \end{itemize}
 
-\subsection{Inspection of the Code}
-The code doesn't look too bad. It has some issues. The algorithm is not easy to understand. Testing is only possible on an integration base. There is no isolation or abstraction levels.
+The basic mechanics of the logic class(es) is as follows:
+
+\begin{itemize}
+\item initially, the sequence of output data is not filled
+\item the main logic part consists of two interlaced loops: 
+\begin{itemize}
+\item the outer loop iterates over the sequence of output data objects (here: the months for which the output data is to be determined)
+\item the inner loop iterates over the sequence of input data objects and calculates the data for one output data object (here: the sum of the transactions for each month)
+\item at the end of the inner loop, the calculated data is written to that output data object (``push'')
+\end{itemize}
+\item finally, the sequence of output data is filled
+\item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has calculated and pushed to the sequence of output data
+\end{itemize}
+
+\subsection{First Impressions of the Code}
+The code doesn't look too bad. It has some issues. The algorithm is not easy to understand. Testing is only possible on an integration base. There is no isolation or abstraction.
 
 \section{The Overall Goal}
 
