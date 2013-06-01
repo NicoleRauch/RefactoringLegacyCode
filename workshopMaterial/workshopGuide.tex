@@ -20,7 +20,7 @@
 %%\setlength{\footheight}{0cm}		% H�he des Footers
 \setlength{\footskip}{1cm}		% Abst. Unterk. Text - Unterk. Footer
 
-
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -333,7 +333,33 @@ Now that we can see each value calculation in isolation, we often notice that we
 
 \subsubsection*{Solution:}
 
-We can simplify the algorithm or even rewrite it (with TDD if we like). It is now easy to clarify the business aspects of this logic and to develop a new algorithm. The average is transformed from vertical slicing to horizontal slicing. The old algorithm adds each transaction based on how many days it lasts into the future. This is the reason why we need to memorize the old date, the new date, the old amount. Also this requires special handling for the last transaction in the month. The new algorithm calculates for each transaction the resulting transaction value on the base of remaining days until ultimo and adds the transactions's amount to the aggregate.
+We can simplify the algorithm or even rewrite it (with TDD if we like). It is now easy to clarify the business aspects of this logic and to develop a new algorithm. 
+\\~
+
+We demonstrate the change of algorithms with an example.
+Suppose we have a balance like this:
+
+\includegraphics[width=.5\textwidth]{balance.jpg}
+
+i.e.~there is a transaction of 100 on the 10th and a transaction of 200 on the 20th to an initially empty account.
+We want to determine the average, which is the area under the graph divided by the number of days in the month.
+\\~
+
+The existing algorithm determines the average like this:
+
+\includegraphics[width=.5\textwidth]{initialAverage.jpg}
+
+Whenever a transaction occurs, the algorithm calculates the area under the graph for the number of days between the previous transaction (or the start of the month) and the current transaction and divides it by the number of days that are between these two dates. The disadvantage is that we have many special cases (beginning and end of month) and that we need to keep track of the current balance and of when the previous transaction happened.
+\\~
+
+We prefer to implement the average like this:
+
+\includegraphics[width=.5\textwidth]{finalAverage.jpg}
+
+Whenever a transaction occurs, this algorithm calculates its average up to the end of the month. This algorithm is much easier to implement because each transaction can be regarded in isolation.
+\\~
+
+The proof that this algorithm works correctly for transactions with negative amounts is left as an exercise for the reader.
 
 \subsection*{Final Step: Achieving the ``Pull'' Structure (Workspace: Pull)}
 
