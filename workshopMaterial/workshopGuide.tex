@@ -135,7 +135,7 @@ Push the loops as far to the outside of the method as possible (move as much cod
 \subsubsection*{Observations:}
 \begin{itemize}
 \item The outer loop iterates over the list of result objects that need to be filled with the calculated data.
-\item The method calculates two values for each result object: balance and averageBalance. 
+\item The method calculates two values for each result object: \texttt{balance} and \texttt{averageBalance}. 
 \item These two values cannot both be returned from a single method.
 \end{itemize}
 
@@ -146,12 +146,18 @@ This intermediate object will only hold the values, it will not contain any logi
 
 In the main logic part, we will create one such intermediate object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read them again from the intermediate object in order to write them to the output data structure. We reuse the same intermediate object for each run through the loop.
 
+\subsubsection*{Modified:}
+
+\texttt{BalanceAndAverage} is created
+
+\texttt{PushingBalancesCalculator.fillData()}
+
 
 \subsection*{Step 02: Preparing for method extraction: Resolving ambiguous return values}
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item If we tried to extract the body of the outer loop into a method, we would be told that this method manipulates two variables which cannot both be returned, namely balance and latestBalance.
+\item If we tried to extract the body of the outer loop into a method, we would be told that this method manipulates two variables which cannot both be returned, namely \texttt{balance} and \texttt{latestBalance}.
 \end{itemize}
 
 \subsubsection*{Solution:}
@@ -163,6 +169,10 @@ If we write \texttt{balance} to \texttt{balanceAndAverage} at the end of the loo
 \item Regarding \texttt{lastBalance}: \\
 At the end of the loop, \texttt{lastBalance} equals \texttt{balance}, so we can set \texttt{lastBalance} to \texttt{balance} at the beginning of the loop.
 \end{itemize}
+
+\subsubsection*{Modified:}
+
+\texttt{PushingBalancesCalculator.fillData()}
 
 \subsection*{Step 03: Preparing for method extraction: Purifying the dependencies}
 
@@ -182,6 +192,9 @@ Both dependencies are undesirable.
 \item Extract the date from the \texttt{BalancesOfMonth} object, move it to the top of the loop and use it in the rest of the method body.
 \end{itemize}
 
+\subsubsection*{Modified:}
+
+\texttt{PushingBalancesCalculator.fillData()}
 
 \subsection*{Step 04: Separation of Calculation and Iteration}
 
@@ -193,6 +206,12 @@ Both dependencies are undesirable.
 \subsubsection*{Solution:}
 
 Let's do it!
+
+\subsubsection*{Modified:}
+
+\texttt{PushingBalancesCalculator.fillData()}
+
+\texttt{PushingBalancesCalculator.calculateValuesForMonth()} is created
 
 \section*{Part II: One object for each loop iteration}
 
@@ -215,18 +234,20 @@ The extracted calculation method can be moved to the class of the intermediate o
 
 And don't forget to manually move the method calculateProportionalBalance as well! - After that you can (automatically) change the signature of the extracted method to remove the PushingBalancesCalculator parameter.
 
-\subsubsection*{Modified objects:}
+\subsubsection*{Modified:}
 
-PushingBalancesCalculator
+\texttt{PushingBalancesCalculator.calculateValuesForMonth()} is moved to\\ \texttt{BalanceAndAverage.calculateValues()}
 
-BalanceAndAverage
+\texttt{PushingBalancesCalculator.calculateProportionalBalance()} is moved to\\ \texttt{BalanceAndAverage.calculateProportionalBalance()}
+
+\texttt{PushingBalancesCalculator.fillData()} (method invocation is adapted to moved method)
 
 
 \subsection*{Step 06: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item The for loop reuses the same BalanceAndAverage object in each loop iteration.
+\item The for loop reuses the same \texttt{BalanceAndAverage} object in each loop iteration.
 \item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration, which is already retrieved anyway.
 \end{itemize}
 
@@ -237,11 +258,11 @@ In this step, we want each execution of the loop body to create its own intermed
 
 In our example, we explicitly pass the preceding balance to the calculation. We have to fetch it from the previous result before creating a new instance.
 
-\subsubsection*{Modified methods:}
+\subsubsection*{Modified:}
 
-PushingBalancesCalculator.fillData()
+\texttt{PushingBalancesCalculator.fillData()}
 
-BalanceAndAverage.calculateValues()
+\texttt{BalanceAndAverage.calculateValues()}
 
 \section*{Part III: From Calculating the Values Up-Front to Calculating the Values On-Demand}
 
@@ -263,6 +284,12 @@ In order to achieve this, we transform the overall calculation method into indiv
 
 The first step to removing the calculation method is to pass the input values into the constructor of the result object, thus turning these inputs into state for the calculating object.
 
+\subsubsection*{Modified:}
+
+\texttt{BalanceAndAverage} (fields, constructor, method signature)
+
+\texttt{PushingBalancesCalculator} (method and constructor invocation)
+
 \subsection*{Step 08: Split up the Value Calculation}
 
 \subsubsection*{Observations:}
@@ -282,19 +309,29 @@ Finally, we can remove the setter that sets all values simultaneously.
 
 \subsubsection*{Modified:}
 
-BalanceAndAverage
+\texttt{BalanceAndAverage.calculateBalance()} is created
+
+\texttt{BalanceAndAverage.calculateAverageBalance()} is created 
+
+\texttt{BalanceAndAverage.setBalanceAndAverage()} is removed
+
+\texttt{BalanceAndAverage.calculateValues()} is modified
 
 \subsection*{Step 09: Return Values from Calculation Methods}
 \subsubsection*{Observations:}
 \begin{itemize}
-\item The two calculation methods do calculation and setting fields. 
+\item The two calculation methods do calculation and setting of the fields. 
 \end{itemize}
 
 We let the calculation methods return values and set the fields inside the calling method.
 
 \subsubsection*{Modified:}
 
-BalanceAndAverage
+\texttt{BalanceAndAverage.calculateBalance()} 
+
+\texttt{BalanceAndAverage.calculateAverageBalance()} 
+
+\texttt{BalanceAndAverage.calculateValues()} 
 
 \subsection*{Step 10: Turn the Value Calculation Methods into Getters}
 
@@ -317,9 +354,9 @@ As a result, we have getters for the individual values of the intermediate objec
 
 \subsubsection*{Modified:}
 
-BalanceAndAverage
+\texttt{BalanceAndAverage} (fields and \texttt{calculate...} methods are removed)
 
-PushingBalancesCalculator (calculation method invocation is removed).
+\texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
 \subsection*{Step 11: Simplification}
 
@@ -356,10 +393,18 @@ We prefer to implement the average like this:
 
 \includegraphics[width=.5\textwidth]{finalAverage.jpg}
 
-Whenever a transaction occurs, this algorithm calculates its average up to the end of the month. This algorithm is much easier to implement because each transaction can be regarded in isolation.
+Whenever a transaction occurs, this algorithm calculates its average up to the end of the month. This algorithm is much easier to implement because the average of each transaction can be determined in isolation.
 \\~
 
 The proof that this algorithm works correctly for transactions with negative amounts is left as an exercise for the reader.
+
+\subsubsection*{Modified:}
+
+\texttt{BalanceAndAverage.getAverageBalance()}
+
+\texttt{BalanceAndAverage.calculateProportionalBalance()} is removed
+
+\texttt{BalanceAndAverage.rateOf()} is created
 
 \subsection*{Final Step: Achieving the ``Pull'' Structure (Workspace: Pull)}
 
@@ -373,14 +418,19 @@ The proof that this algorithm works correctly for transactions with negative amo
 
 \subsubsection*{Solution:}
 
-Transform the calculation objects into a chained structure of calculation objects (called Month) where each month can access its predecessor's values.
+Transform the calculation objects into a chained structure of calculation objects (called \texttt{Month}) where each month can access its predecessor's values.
 
-Create this chained structure up-front (using a Months-object). Fill it with all relevant input data.
+Create this chained structure up-front (using a \texttt{Months}-object). Fill it with all relevant input data.
 
-In the for loop, simply access the calculated results of the months.
+In the for-loop, simply access the calculated results of the months.
 
 Introduce caching of the calculated results in order to avoid performance issues.
 
+\subsubsection*{Modified:}
+
+\texttt{BalanceAndAverage} is converted to \texttt{Month} (with variants)
+
+\texttt{Months} is extracted from \texttt{PullingBalancesCalculator}
 
 \subsection*{The Final Situation}
 
