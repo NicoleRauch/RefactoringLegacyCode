@@ -91,8 +91,7 @@ This can be broken up into three major parts:
 \begin{enumerate}
 \item Disentangle the for loops, isolate the loop body and extract it
 \item Build one data object for each loop iteration (instead of reusing the same object over and over again)
-
-\item Move the extracted loop body to its own class, isolate the calculations of the distinct values into separate methods
+\item Isolate the calculations of the distinct values into separate methods and calculate them on demand
 \end{enumerate}
 
 In the following, we will split up these two parts into fine-grained steps that can be applied to the code.
@@ -100,18 +99,20 @@ In the following, we will split up these two parts into fine-grained steps that 
 We do this by:
 \begin{itemize}
 	\item Defining one interaction point with outside objects (Step 1)
-	\item Separating value calculation from iteration (Steps 2-3)
-	\item Encapsulating the calculation object (Steps 4-5)
-	\item Separating calculation for each value (Step 6)
-	\item Eliminating unwanted state (Step 7)
-	\item Tidying up (Step 8)
+	\item Separating value calculation from iteration (Steps 2-4)
+	\item Encapsulating the calculation object (Steps 5-6)
+	\item Separating calculation for each value (Step 7-8)
+	\item Eliminating unwanted state (Step 9-10)
+	\item Tidying up (Step 11)
+	\item Achieving the ``Pull'' Structure (Final Step)
 \end{itemize}
 
 \subsubsection*{Restrictions / Rules:}
 
-Change one thing at a time.
 
 \begin{itemize}
+\item Change one thing at a time.
+
 \item Right now, we neither want to change the outside world nor our calculator class API, only the internals of our calculator class. The result objects (\texttt{BalancesOfMonth}) represent the outside world in our example. Therefore, we will leave the result objects and the \texttt{fillData} method signature untouched. 
 \end{itemize}
 
@@ -146,7 +147,7 @@ This intermediate object will only hold the values, it will not contain any logi
 In the main logic part, we will create one such intermediate object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read them again from the intermediate object in order to write them to the output data structure. We reuse the same intermediate object for each run through the loop.
 
 
-\subsection*{Step 02: Prepare for method extraction Part I: Resolving ambiguous return values}
+\subsection*{Step 02: Preparing for method extraction: Resolving ambiguous return values}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -158,12 +159,12 @@ In the main logic part, we will create one such intermediate object at the begin
 \begin{itemize}
 \item Move the two local variables into the loop body.
 \item Regarding \texttt{balance}: \\
-If we write \texttt{balance} to \texttt{balanceAndAverage} at the end of the loop, it is no problem if we read \texttt{balance} from \texttt{balanceAndAverage} at the beginning of the loop.
+If we write \texttt{balance} to \texttt{balanceAndAverage} at the end of the loop, we can read \texttt{balance} from \texttt{balanceAndAverage} at the beginning of the loop.
 \item Regarding \texttt{lastBalance}: \\
-At the end of the loop, \texttt{lastBalance} equals \texttt{balance}, so it is no problem if we set \texttt{lastBalance} to \texttt{balance} at the beginning of the loop.
+At the end of the loop, \texttt{lastBalance} equals \texttt{balance}, so we can set \texttt{lastBalance} to \texttt{balance} at the beginning of the loop.
 \end{itemize}
 
-\subsection*{Step 03: Prepare for method extraction Part II: Purifying the dependencies}
+\subsection*{Step 03: Preparing for method extraction: Purifying the dependencies}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -182,7 +183,7 @@ Both dependencies are undesirable.
 \end{itemize}
 
 
-\subsection*{Step 04: Isolation of calculation from iteration (Extract the Value Calculation into a Separate Method)}
+\subsection*{Step 04: Separation of Calculation and Iteration}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -283,7 +284,7 @@ Finally, we can remove the setter that sets all values simultaneously.
 
 BalanceAndAverage
 
-\subsection*{Step 09: Introduce Return Values into Calculation Methods}
+\subsection*{Step 09: Return Values from Calculation Methods}
 \subsubsection*{Observations:}
 \begin{itemize}
 \item The two calculation methods do calculation and setting fields. 
@@ -362,6 +363,7 @@ Introduce caching of the calculated results in order to avoid performance issues
 \begin{itemize}
 \item Calculation logic and result structure are now identical
 \item We now have intelligent objects instead of stupid data records
+\item The algorithms for each value are isolated and clearly visible
 \end{itemize}
 
 
