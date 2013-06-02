@@ -1,5 +1,5 @@
 # EclipseProjects
-This is the accompanying code to the talk. Most of the code is in German.
+This is the accompanying code to the talk.
 
 ## Structure
 The project "Common" is a neccessary prerequisite for all other projects. It contains the shared classes as well as a single regression test. This test is used in every other project to prove that the overall implementation is still running.
@@ -22,6 +22,7 @@ We start with project "Push". Next we have the numbered projects:
 1. we separate the calculations of each value
 1. we move the logic to the getters, thereby getting rid of their fields
 1. we change the logic of the complicated calculation and add a test for it
+1. ...
 
 The final code can be seen in project "Pull". Here we added a few more extras. Look around and don't be shy to ask us or comment.
 
