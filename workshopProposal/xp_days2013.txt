@@ -1,0 +1,16 @@
+OO-Design-Workshop: Restrukturierung von Code "From Push  To Pull"
+
+
+
+Entwickler finden oft Code vor, der sowohl schwer zu lesen als auch schwer nachzuvollziehen ist. Gleichzeitig bemühen sie sich darum, "Clean Code" zu schreiben, der gewissen Prinzipien folgt, wie z. B. Single Responsibility, Kapselung und Kohärenz. Die meisten Entwickler kennen diese Prinzipien zumindest vom Namen her, trotzdem finden sie es oft schwer, sie im Code umzusetzen, besonders wenn es sich um Legacy Code handelt. Sie wollen Teile der Applikation umzustrukturieren, aber sie haben keine Idee, wie sie eine solche großangelegte Restrukturierung durchführen könnten, und manchmal fehlt ihnen vielleicht sogar die Vision, wie der resultierende Code aussehen soll. Es gibt viele Informationen darüber, wie man kleine Refactorings in Legacy Code durchführen kann, aber es gibt nur sehr wenige Anleitungen, die große Restrukturierungen und Redesigns beschreiben.
+
+
+Unsere Restrukturierungs-Strategie richtet sich auf ein Codierungsmuster, das wir in vielen Applikationen vorgefunden haben: Ein Attribut in einem Objekt wird an vielen Stellen im Code befüllt (und normalerweise gibt es mehrere solche Attribute). Das hat diverse Effekte: Es ist nicht klar, welchen Wert das Attribut zu einem gegebenen Zeitpunkt enthält, und es ist schwierig, alle Codestellen zu finden, die das Attribut befüllen. Es ist auch unklar, wie und wann der Ergebniswert ermittelt wurde, da es keine isolierte Codestelle gibt, die für die Transformation der Eingabewerte in den Ergebniswert zuständig ist. Wir nennen dieses Codierungsmuster "Push", da der Code sein Ergebnis aktiv in das Attribut hineinschiebt. Dieses Ergebnis wird prozedural und sequentiell ermittelt. Der resultierende Code ist oft fragil und enthält gern Fehler. Es ist schwierig, den Code zu verändern und zu erweitern, und der Versuch endet oft in einer "Shotgun Surgery", bei der die Änderungen über den gesamten Code verstreut sind.
+
+Anstatt den "Push"-Stil zu verwenden, können die Ergebniswerte bei Bedarf ermittelt werden, wenn sie benötigt werden. Auf diese Weise sind die Algorithmen für jeden Wert klar erkennbar und sehr deskriptiv. Wir nennen diesen Stil "Pull", weil die Werte von anderen Codeteilen "gezogen" werden. Der resultierende Code hat sich als lesbar, verstehbar, testbar, änderbar und erweiterbar erwiesen.
+
+Dieser Workshop will anhand eines konkreten Beispiels zeigen, wie eine große Restrukturierung auf systematische, strukturierte und reproduzierbare Art und Weise durchgeführt werden kann, basierend auf kleinen und sicheren Schritten. Die Teilnehmer können die Vorteile direkt spüren, indem sie selbst Code im "Pull"-Stil erzeugen. Wenn die vorgestellte Strategie konsequent durchgeführt wird, folgt der resultierende Code den oben beschriebenen Prinzipien und wird objektorientiert, mit kleinen Methoden in miteinander kommunizierenden Objekten, in einem Wort: Der Code wurde zu "Clean Code".
+
+Voraussetzungen für die Teilnehmer: Java, Git und eine Java IDE. Pro Paar muss ein Laptop vorhanden sein, idealerweise mit externer Tastatur und Maus. 
+
+

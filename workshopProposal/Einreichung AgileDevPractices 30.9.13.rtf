@@ -1,0 +1,33 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15920\viewh12060\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 Restructuring Code: "From Push to Pull"\
+\
+This workshop is intended to introduce the participants to a systematic and structured way of performing large restructurings in object-oriented code.\
+\
+Object-Oriented Design, Refactoring, Restructuring\
+\
+Nicole Rauch, Andreas Leidig\
+\
+------------------------\
+\
+OO-Design-Workshop: Restructuring Code "From Push to Pull"\
+\
+\pard\pardeftab720\sa240
+
+\f1\fs30 \cf0 The restructuring strategy "From Push to Pull" addresses a common coding pattern: Fields in objects are written from multiple locations. The effects: The value of a field at a given time is not clear, and tracking back all the methods that write the field is difficult. We call this way of coding \'93Push\'94 because the code actively pushes its results into some object\'92s fields. The resulting code is rather fragile
+\fs24  
+\fs30 and tends to be buggy.
+\fs24 \
+
+\fs30 Instead, the output values can be calculated on-demand. This way, the algorithms for each value are clearly visible and very descriptional. We call this style \'93Pull\'94 because the values are pulled by other parts of the code. The resulting code has proven to be readable, understandable, testable, changeable and extensible. \
+This workshop shows how a large restructuring can be performed in a systematic way. The code becomes object-oriented, with small methods in objects communicating with each other, in one word: the code has become \'93clean code\'94.\
+--------------------\
+Nicole Rauch is a software developer with a solid background in compiler construction and formal methods. Over the last two years, she worked on the restructuring of large legacy code applications with different technologies. Alongside her occupation as developer, she took part in organizing some self-organized conferences related to agile coaching.\
+Andreas Leidig has broad experience in object oriented software development and agile practices. He started programming years ago with Smalltalk and worked as an agile coach for a few years. Nowadays he is developing enterprise software products.\
+--------------------\
+\
+}
