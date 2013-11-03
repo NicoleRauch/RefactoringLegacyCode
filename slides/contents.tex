@@ -48,77 +48,6 @@ $\Rightarrow$ A restructuring was required
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Our Approach}
-\begin{itemize}
-\item Assumptions:
-\begin{itemize}
-\item The old code is mostly incorrect and incomplete
-\item There is plenty of knowledge regarding the business logic
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Decision:
-\begin{itemize}
-\item Greenfield reimplementation (with feature-toggle)
-\item Creation of new tests in parallel with the new definition of the business logic
-\item Continuous adaption of the existing tests
-\end{itemize}
-\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Our Experience}
-\begin{itemize}
-\item Problems:
-\begin{itemize}
-\item It was much more complicated and long-winding to specify the business logic than we had expected
-\item Differences compared to the old code are hard to analyze
-\item The test coverage is too low \newline $\Rightarrow$ We miss relevant cases 
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Causes:
-\begin{itemize}
-\item False assumptions
-\item We mixed restructuring and change
-\item Arrogance (\glqq We know things better than our predecessors\grqq{})
-\end{itemize}
-\end{itemize}
-
-$\Rightarrow$ Our restructuring approach was much too na\"ive
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{How can this be improved?}
-\begin{itemize}
-\item Gather facts in advance (assumptions are not sufficient)
-\begin{itemize}
-\item How much code coverage do we have?
-\item Which business cases are covered?
-\item Is there any specification that matches the code?
-\end{itemize}
-
-\item If in doubt, the existing code shows the correct behaviour!
-
-\item Do not change the logic while restructuring!
-
-\item Explicit approval of the restructuring
-\begin{itemize}
-\item It must show identical behaviour (tests, bugs, features)
-\end{itemize}
-
-\end{itemize}
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Goal}
 \begin{itemize}
 \item Structure:
@@ -144,7 +73,7 @@ $\Rightarrow$ Our restructuring approach was much too na\"ive
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Ideal Approach}
+\begin{frame}[fragile]{Good Approach}
 \begin{itemize}
 \item Feature-toggle to compare the old and the new version
 \begin{itemize}
@@ -166,11 +95,28 @@ $\Rightarrow$ Our restructuring approach was much too na\"ive
 \begin{itemize}
 \item Separation of Concerns
 \item On-demand-calculation of all values (\glqq Pull\grqq{})
-\item Value caching via lazy initialization
+\item Bonus: Value caching via lazy initialization
 \end{itemize}
 
 \end{itemize}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Important!}
+\begin{itemize}
+\item If in doubt, the existing code shows the correct behaviour!
+
+\item Do not change the logic while restructuring!
+
+\item Explicit approval of the restructuring
+\begin{itemize}
+\item It must show identical behaviour (tests, bugs, features)
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
