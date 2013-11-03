@@ -57,17 +57,15 @@ public class BalanceAndAverage
 	private void calculateAverageBalance()
 	{
 		int balance = precedingBalance;
-		int latestBalance = balance;
 		int ultimo = dateOfMonth.getDayOfMonth();
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
 		for (Transaction transaction : transactionsOfMonth)
 		{
-			balance += transaction.getAmount();
 			int day = transaction.getDate().getDayOfMonth();
-			averageBalance += calculateProportionalBalance(dayOfLatestBalance, latestBalance, day, ultimo);
-			latestBalance = balance;
+			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, day, ultimo);
+			balance += transaction.getAmount();
 			dayOfLatestBalance = day;
 		}
 
