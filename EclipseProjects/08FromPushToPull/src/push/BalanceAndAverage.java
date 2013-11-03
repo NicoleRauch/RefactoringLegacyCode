@@ -71,10 +71,7 @@ public class BalanceAndAverage
 			dayOfLatestBalance = day;
 		}
 
-		if (dayOfLatestBalance != ultimo)
-		{
-			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
-		}
+		averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
 		this.averageBalance = averageBalance;
 	}

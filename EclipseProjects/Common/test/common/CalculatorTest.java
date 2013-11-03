@@ -40,6 +40,19 @@ public abstract class CalculatorTest
 	}
 
 	@Test
+	public void oneTransactionAtUltimoOfMonthSetsBalanceAndAverage()
+	{
+		transactions.add(new Transaction(new LocalDate(2010, 4, 30), 300));
+		balances.add(new BalancesOfMonth(APRIL_ULTIMO));
+
+		calculator.fillData(balances);
+
+		BalancesOfMonth aprilData = balances.get(0);
+		assertEquals(300, aprilData.getBalance());
+		assertEquals(10, aprilData.getAverageBalance());
+	}
+
+	@Test
 	public void twoTransactionAtFirstAndSixteenthOfMonthLeadToHalfAverageOfBalance()
 	{
 		transactions.add(new Transaction(new LocalDate(2010, 4, 1), 100));

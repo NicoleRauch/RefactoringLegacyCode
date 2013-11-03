@@ -45,10 +45,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 				dayOfLatestBalance = day;
 			}
 
-			if (dayOfLatestBalance != ultimo)
-			{
-				averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
-			}
+			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
 			balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
 

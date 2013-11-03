@@ -28,8 +28,9 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth); // this method works on all items and stays in
-																																				// this place
+			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth); // this method works on all items and
+																																								// stays in
+			// this place
 
 			calculateValuesForMonth(dateOfMonth, transactionsOfMonth, balanceAndAverage);
 
@@ -59,10 +60,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 			dayOfLatestBalance = day;
 		}
 
-		if (dayOfLatestBalance != ultimo)
-		{
-			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
-		}
+		averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
 		balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
 	}
