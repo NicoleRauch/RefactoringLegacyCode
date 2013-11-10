@@ -153,21 +153,19 @@ In the main logic part, we will create one such intermediate object at the begin
 \texttt{PushingBalancesCalculator.fillData()}
 
 
-\subsection*{Step 02: Preparing for method extraction: Resolving ambiguous return values}
+\subsection*{Step 02: Preparing for method extraction: Narrowing contexts}
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item If we tried to extract the body of the outer loop into a method, we would be told that this method manipulates two variables which cannot both be returned, namely \texttt{balance} and \texttt{latestBalance}.
+\item If we tried to extract the body of the outer loop into a method, we would end up changing a parameter inside the extracted method, namely \texttt{balance}.
 \end{itemize}
 
 \subsubsection*{Solution:}
 
 \begin{itemize}
-\item Move the two local variables into the loop body.
+\item Move the local variable into the loop body.
 \item Regarding \texttt{balance}: \\
 If we write \texttt{balance} to \texttt{balanceAndAverage} at the end of the loop, we can read \texttt{balance} from \texttt{balanceAndAverage} at the beginning of the loop.
-\item Regarding \texttt{lastBalance}: \\
-At the end of the loop, \texttt{lastBalance} equals \texttt{balance}, so we can set \texttt{lastBalance} to \texttt{balance} at the beginning of the loop.
 \end{itemize}
 
 \subsubsection*{Modified:}
