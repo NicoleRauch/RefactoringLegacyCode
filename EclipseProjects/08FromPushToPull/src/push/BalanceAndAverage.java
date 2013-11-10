@@ -47,9 +47,9 @@ public class BalanceAndAverage
 	private void calculateBalance()
 	{
 		int balance = precedingBalance;
-		for (Transaction inputData : transactionsOfMonth)
+		for (Transaction transaction : transactionsOfMonth)
 		{
-			balance += inputData.getAmount();
+			balance += transaction.getAmount();
 		}
 		this.balance = balance;
 	}
