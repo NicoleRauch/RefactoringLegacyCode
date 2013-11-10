@@ -28,9 +28,8 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth); // this method works on all items and
-																																								// stays in
-			// this place
+			// the following method works on all items and stays in this class
+			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
 			calculateValuesForMonth(dateOfMonth, transactionsOfMonth, balanceAndAverage);
 
