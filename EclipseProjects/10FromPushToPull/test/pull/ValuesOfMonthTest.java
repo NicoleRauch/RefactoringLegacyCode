@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import common.Transaction;
 
-public class BalanceAndAverageTest
+public class ValuesOfMonthTest
 {
 	private static final LocalDate APRIL_ULTIMO = new LocalDate(2010, 4, 30);
 	private static final LocalDate MAY_ULTIMO = new LocalDate(2010, 5, 31);
@@ -17,9 +17,9 @@ public class BalanceAndAverageTest
 	@Test
 	public void monthWithoutTransactionsHasZeroBalance()
 	{
-		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, new ArrayList<Transaction>(), 0);
-		Assert.assertEquals(0, balanceAndAverage.getBalance());
-		Assert.assertEquals(0, balanceAndAverage.getAverageBalance());
+		ValuesOfMonth valuesOfMonth = new ValuesOfMonth(APRIL_ULTIMO, new ArrayList<Transaction>(), 0);
+		Assert.assertEquals(0, valuesOfMonth.getBalance());
+		Assert.assertEquals(0, valuesOfMonth.getAverageBalance());
 	}
 
 	@Test
@@ -28,9 +28,9 @@ public class BalanceAndAverageTest
 		ArrayList<Transaction> transactionsOfMonth = new ArrayList<Transaction>();
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 1), 100));
 
-		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
-		Assert.assertEquals(100, balanceAndAverage.getBalance());
-		Assert.assertEquals(100, balanceAndAverage.getAverageBalance());
+		ValuesOfMonth valuesOfMonth = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
+		Assert.assertEquals(100, valuesOfMonth.getBalance());
+		Assert.assertEquals(100, valuesOfMonth.getAverageBalance());
 	}
 
 	@Test
@@ -40,9 +40,9 @@ public class BalanceAndAverageTest
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 1), 100));
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 16), 100));
 
-		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
-		Assert.assertEquals(200, balanceAndAverage.getBalance());
-		Assert.assertEquals(150, balanceAndAverage.getAverageBalance());
+		ValuesOfMonth valuesOfMonth = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
+		Assert.assertEquals(200, valuesOfMonth.getBalance());
+		Assert.assertEquals(150, valuesOfMonth.getAverageBalance());
 	}
 
 	@Test

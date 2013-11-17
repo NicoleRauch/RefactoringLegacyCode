@@ -148,7 +148,7 @@ In the main logic part, we will create one such intermediate object at the begin
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage} is created
+\texttt{ValuesOfMonth} is created
 
 \texttt{PushingBalancesCalculator.fillData()}
 
@@ -165,7 +165,7 @@ In the main logic part, we will create one such intermediate object at the begin
 \begin{itemize}
 \item Move the local variable into the loop body.
 \item Regarding \texttt{balance}: \\
-If we write \texttt{balance} to \texttt{balanceAndAverage} at the end of the loop, we can read \texttt{balance} from \texttt{balanceAndAverage} at the beginning of the loop.
+If we write \texttt{balance} to \texttt{valuesOfMonth} at the end of the loop, we can read \texttt{balance} from \texttt{valuesOfMonth} at the beginning of the loop.
 \end{itemize}
 
 \subsubsection*{Modified:}
@@ -234,9 +234,9 @@ And don't forget to manually move the method calculateProportionalBalance as wel
 
 \subsubsection*{Modified:}
 
-\texttt{PushingBalancesCalculator.calculateValuesForMonth()} is moved to\\ \texttt{BalanceAndAverage.calculateValues()}
+\texttt{PushingBalancesCalculator.calculateValuesForMonth()} is moved to\\ \texttt{ValuesOfMonth.calculateValues()}
 
-\texttt{PushingBalancesCalculator.calculateProportionalBalance()} is moved to\\ \texttt{BalanceAndAverage.calculateProportionalBalance()}
+\texttt{PushingBalancesCalculator.calculateProportionalBalance()} is moved to\\ \texttt{ValuesOfMonth.calculateProportionalBalance()}
 
 \texttt{PushingBalancesCalculator.fillData()} (method invocation is adapted to moved method)
 
@@ -245,7 +245,7 @@ And don't forget to manually move the method calculateProportionalBalance as wel
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item The for loop reuses the same \texttt{BalanceAndAverage} object in each loop iteration.
+\item The for loop reuses the same \texttt{ValuesOfMonth} object in each loop iteration.
 \item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration, which is already retrieved anyway.
 \end{itemize}
 
@@ -260,7 +260,7 @@ In our example, we explicitly pass the preceding balance to the calculation. We 
 
 \texttt{PushingBalancesCalculator.fillData()}
 
-\texttt{BalanceAndAverage.calculateValues()}
+\texttt{ValuesOfMonth.calculateValues()}
 
 \section*{Part III: From Calculating the Values Up-Front to Calculating the Values On-Demand}
 
@@ -284,7 +284,7 @@ The first step to removing the calculation method is to pass the input values in
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage} (fields, constructor, method signature)
+\texttt{ValuesOfMonth} (fields, constructor, method signature)
 
 \texttt{PushingBalancesCalculator} (method and constructor invocation)
 
@@ -306,9 +306,9 @@ Caution: This is only possible with reentrant (i.~e.~side-effect-free) methods.
 
 \texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
-\texttt{BalanceAndAverage.getBalance()} is modified
+\texttt{ValuesOfMonth.getBalance()} is modified
 
-\texttt{BalanceAndAverage.getAverageBalance()} is modified
+\texttt{ValuesOfMonth.getAverageBalance()} is modified
 
 
 \subsection*{Step 9: Inline the Value Calculation Method}
@@ -330,7 +330,7 @@ As a result, we have getters for the individual values of the intermediate objec
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage} (fields, setter and \texttt{calculate...} methods are removed)
+\texttt{ValuesOfMonth} (fields, setter and \texttt{calculate...} methods are removed)
 
 
 \subsection*{Step 10: Simplification}
@@ -375,11 +375,11 @@ The proof that this algorithm works correctly for transactions with negative amo
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage.getAverageBalance()}
+\texttt{ValuesOfMonth.getAverageBalance()}
 
-\texttt{BalanceAndAverage.calculateProportionalBalance()} is removed
+\texttt{ValuesOfMonth.calculateProportionalBalance()} is removed
 
-\texttt{BalanceAndAverage.rateOf()} is created
+\texttt{ValuesOfMonth.rateOf()} is created
 
 \subsection*{Final Step: Achieving the ``Pull'' Structure (Workspace: Pull)}
 
@@ -403,7 +403,7 @@ Introduce caching of the calculated results in order to avoid performance issues
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage} is converted to \texttt{Month} (with variants)
+\texttt{ValuesOfMonth} gets extended by an interface and variants
 
 \texttt{Months} is extracted from \texttt{PullingBalancesCalculator}
 

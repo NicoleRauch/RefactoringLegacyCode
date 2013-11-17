@@ -23,11 +23,11 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	@Override
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
-		ValuesOfMonth balanceAndAverage = new ValuesOfMonth();
+		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
-			int balance = balanceAndAverage.getBalance();
+			int balance = valuesOfMonth.getBalance();
 
 			int ultimo = balancesOfMonth.getDate().getDayOfMonth();
 
@@ -44,10 +44,10 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 
 			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
-			balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
+			valuesOfMonth.setBalanceAndAverage(balance, averageBalance);
 
-			balancesOfMonth.setBalance(balanceAndAverage.getBalance());
-			balancesOfMonth.setAverageBalance(balanceAndAverage.getAverageBalance());
+			balancesOfMonth.setBalance(valuesOfMonth.getBalance());
+			balancesOfMonth.setAverageBalance(valuesOfMonth.getAverageBalance());
 		}
 	}
 
