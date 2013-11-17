@@ -288,7 +288,8 @@ The first step to removing the calculation method is to pass the input values in
 
 \texttt{PushingBalancesCalculator} (method and constructor invocation)
 
-\subsection*{Step 08: Split up the Value Calculation}
+
+\subsection*{Step 08: Make the Value Calculation Implicit}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -297,66 +298,42 @@ The first step to removing the calculation method is to pass the input values in
 \end{itemize}
 
 \subsubsection*{Solution:}
-In this step, we split up the value calculations. In order to do so, we duplicate the calculation method \texttt{calculateValues} such that we get one method for each of the values that we want to calculate. We name these methods accordingly. For our examples, appropriate names would be \texttt{calculateBalance} and \texttt{calculateAverageBalance}.
+In this step, we move the value calculations to the setters. As a result, \texttt{calculateValues} can be private.
 
-In the body of the overall calculation method \texttt{calculateValues}, we now only invoke the two individual value calculation methods.
-
-Now we can remove all code from each of the methods that is not related to calculating the value for which the method is responsible. Each of these methods only sets the value it is responsible for, and it directly sets the value into the corresponding field.
-
-Finally, we can remove the setter that sets all values simultaneously.
+Caution: This is only possible with reentrant (i.~e.~side-effect-free) methods.
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage.calculateBalance()} is created
+\texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
-\texttt{BalanceAndAverage.calculateAverageBalance()} is created 
+\texttt{BalanceAndAverage.getBalance()} is modified
 
-\texttt{BalanceAndAverage.setBalanceAndAverage()} is removed
+\texttt{BalanceAndAverage.getAverageBalance()} is modified
 
-\texttt{BalanceAndAverage.calculateValues()} is modified
 
-\subsection*{Step 09: Return Values from Calculation Methods}
-\subsubsection*{Observations:}
-\begin{itemize}
-\item The two calculation methods do calculation and setting of the fields. 
-\end{itemize}
-
-We let the calculation methods return values and set the fields inside the calling method.
-
-\subsubsection*{Modified:}
-
-\texttt{BalanceAndAverage.calculateBalance()} 
-
-\texttt{BalanceAndAverage.calculateAverageBalance()} 
-
-\texttt{BalanceAndAverage.calculateValues()} 
-
-\subsection*{Step 10: Turn the Value Calculation Methods into Getters}
+\subsection*{Step 9: Inline the Value Calculation Method}
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item In the value calculation methods, we do not write to fields any more. Instead, we just return the calculated values.
-\item These methods are still invoked from the outside (via the invocation method that invokes all of the single calculation methods). The return values are assigned to fields.
-\item We have getters that read the values from the fields and return them.
+\item The two getters do the calculations, set the fields and return the values. 
 \end{itemize}
 
 \subsubsection*{Solution:}
 
-In the getters of the intermediate object, we do not return the field values but instead we directly invoke the value calculation methods and return their results.
+We can now inline and remove the value calculation method and also the \texttt{setBalanceAndAverage} setter.
 
-Now we can remove the overall calculation method and its invocation from the outside.
+Now we can remove all code from each of the getters that is not related to calculating the value for which the getter is responsible. Each of these getters immediately returns the calculated value, without writing it into a field.
 
-Finally, we can inline the value calculation methods and remove the fields.
+Finally, we can remove the fields for balance and averageBalance.
 
 As a result, we have getters for the individual values of the intermediate object which describe exactly how each value is being calculated.
 
 \subsubsection*{Modified:}
 
-\texttt{BalanceAndAverage} (fields and \texttt{calculate...} methods are removed)
+\texttt{BalanceAndAverage} (fields, setter and \texttt{calculate...} methods are removed)
 
-\texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
-\subsection*{Step 11: Simplification}
+\subsection*{Step 10: Simplification}
 
 \subsubsection*{Observations:}
 \begin{itemize}
