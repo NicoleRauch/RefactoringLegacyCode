@@ -1,19 +1,31 @@
 package push;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 
 import common.Transaction;
 
-public class BalanceAndAverage
+public class ValuesOfMonth
 {
 	private int balance;
 	private double averageBalance;
+	private final LocalDate dateOfMonth;
+	private final List<Transaction> transactionsOfMonth;
+	private final int precedingBalance;
 
-	public BalanceAndAverage()
+	public ValuesOfMonth()
+	{
+		this(new LocalDate(), new ArrayList<Transaction>(), 0);
+	}
+
+	public ValuesOfMonth(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
 	{
 		super();
+		this.dateOfMonth = dateOfMonth;
+		this.transactionsOfMonth = transactionsOfMonth;
+		this.precedingBalance = precedingBalance;
 	}
 
 	public int getBalance()
@@ -32,7 +44,7 @@ public class BalanceAndAverage
 		this.averageBalance = averageBalance;
 	}
 
-	void calculateValues(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
+	void calculateValues()
 	{
 		int balance = precedingBalance;
 		int ultimo = dateOfMonth.getDayOfMonth();

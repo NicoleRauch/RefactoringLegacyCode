@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 
 import common.Transaction;
 
-public class BalanceAndAverage
+public class ValuesOfMonth
 {
 	private int balance;
 	private double averageBalance;
@@ -15,12 +15,12 @@ public class BalanceAndAverage
 	private final List<Transaction> transactionsOfMonth;
 	private final int precedingBalance;
 
-	public BalanceAndAverage()
+	public ValuesOfMonth()
 	{
 		this(new LocalDate(), new ArrayList<Transaction>(), 0);
 	}
 
-	public BalanceAndAverage(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
+	public ValuesOfMonth(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
 	{
 		super();
 		this.dateOfMonth = dateOfMonth;
@@ -30,11 +30,13 @@ public class BalanceAndAverage
 
 	public int getBalance()
 	{
+		calculateValues();
 		return balance;
 	}
 
 	public int getAverageBalance()
 	{
+		calculateValues();
 		return (int) averageBalance;
 	}
 
@@ -44,7 +46,7 @@ public class BalanceAndAverage
 		this.averageBalance = averageBalance;
 	}
 
-	void calculateValues()
+	private void calculateValues()
 	{
 		int balance = precedingBalance;
 		int ultimo = dateOfMonth.getDayOfMonth();

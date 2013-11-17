@@ -17,7 +17,7 @@ public class BalanceAndAverageTest
 	@Test
 	public void monthWithoutTransactionsHasZeroBalance()
 	{
-		BalanceAndAverage balanceAndAverage = new BalanceAndAverage(APRIL_ULTIMO, new ArrayList<Transaction>(), 0);
+		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, new ArrayList<Transaction>(), 0);
 		Assert.assertEquals(0, balanceAndAverage.getBalance());
 		Assert.assertEquals(0, balanceAndAverage.getAverageBalance());
 	}
@@ -28,7 +28,7 @@ public class BalanceAndAverageTest
 		ArrayList<Transaction> transactionsOfMonth = new ArrayList<Transaction>();
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 1), 100));
 
-		BalanceAndAverage balanceAndAverage = new BalanceAndAverage(APRIL_ULTIMO, transactionsOfMonth, 0);
+		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
 		Assert.assertEquals(100, balanceAndAverage.getBalance());
 		Assert.assertEquals(100, balanceAndAverage.getAverageBalance());
 	}
@@ -40,7 +40,7 @@ public class BalanceAndAverageTest
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 1), 100));
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 16), 100));
 
-		BalanceAndAverage balanceAndAverage = new BalanceAndAverage(APRIL_ULTIMO, transactionsOfMonth, 0);
+		ValuesOfMonth balanceAndAverage = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
 		Assert.assertEquals(200, balanceAndAverage.getBalance());
 		Assert.assertEquals(150, balanceAndAverage.getAverageBalance());
 	}
@@ -50,11 +50,11 @@ public class BalanceAndAverageTest
 	{
 		ArrayList<Transaction> transactionsOfMonth = new ArrayList<Transaction>();
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 4, 16), 100));
-		BalanceAndAverage april = new BalanceAndAverage(APRIL_ULTIMO, transactionsOfMonth, 0);
+		ValuesOfMonth april = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);
 
 		transactionsOfMonth = new ArrayList<Transaction>();
 		transactionsOfMonth.add(new Transaction(new LocalDate(2010, 5, 16), 200));
-		BalanceAndAverage may = new BalanceAndAverage(MAY_ULTIMO, transactionsOfMonth, april.getBalance());
+		ValuesOfMonth may = new ValuesOfMonth(MAY_ULTIMO, transactionsOfMonth, april.getBalance());
 
 		Assert.assertEquals(300, may.getBalance());
 		Assert.assertEquals(203, may.getAverageBalance());

@@ -9,14 +9,14 @@ import org.joda.time.chrono.ISOChronology;
 
 import common.Transaction;
 
-public class Month implements IMonth
+public class ValuesOfMonth implements IValuesOfMonth
 {
 
 	protected final YearMonth yearMonth;
-	protected final IMonth precedingMonth;
+	protected final IValuesOfMonth precedingMonth;
 	protected final List<Transaction> transactions = new ArrayList<Transaction>();
 
-	public Month(LocalDate date, IMonth month)
+	public ValuesOfMonth(LocalDate date, IValuesOfMonth month)
 	{
 		super();
 		this.precedingMonth = month;

@@ -2,7 +2,7 @@ package pull;
 
 import java.util.List;
 
-import pull.months.Month;
+import pull.months.ValuesOfMonth;
 import pull.months.Months;
 
 import common.BalancesOfMonth;
@@ -27,7 +27,7 @@ public class PullingBalancesCalculator implements BalancesOfMonthCalculator
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
-			Month accordingMonth = months.forDate(balancesOfMonth.getDate());
+			ValuesOfMonth accordingMonth = months.forDate(balancesOfMonth.getDate());
 			balancesOfMonth.setBalance(accordingMonth.getBalance());
 			balancesOfMonth.setAverageBalance(accordingMonth.getAverageBalance());
 		}

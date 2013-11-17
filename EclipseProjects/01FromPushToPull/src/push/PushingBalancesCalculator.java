@@ -23,7 +23,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	@Override
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
-		BalanceAndAverage balanceAndAverage = new BalanceAndAverage();
+		ValuesOfMonth balanceAndAverage = new ValuesOfMonth();
 		int balance = balanceAndAverage.getBalance();
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)

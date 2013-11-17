@@ -1,7 +1,7 @@
 package pull.months;
 
 
-public interface IMonth
+public interface IValuesOfMonth
 {
 
 	int getBalance();

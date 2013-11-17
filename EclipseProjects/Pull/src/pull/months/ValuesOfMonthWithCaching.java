@@ -2,13 +2,13 @@ package pull.months;
 
 import org.joda.time.LocalDate;
 
-public class MonthWithCaching extends Month
+public class ValuesOfMonthWithCaching extends ValuesOfMonth
 {
 
 	private Integer balanceLazy = null;
 	private Integer averageBalanceLazy = null;
 
-	public MonthWithCaching(LocalDate date, IMonth month)
+	public ValuesOfMonthWithCaching(LocalDate date, IValuesOfMonth month)
 	{
 		super(date, month);
 	}

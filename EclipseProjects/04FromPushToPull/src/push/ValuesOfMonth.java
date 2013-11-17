@@ -1,11 +1,11 @@
 package push;
 
-public class BalanceAndAverage
+public class ValuesOfMonth
 {
 	private int balance;
 	private double averageBalance;
 
-	public BalanceAndAverage()
+	public ValuesOfMonth()
 	{
 		super();
 	}

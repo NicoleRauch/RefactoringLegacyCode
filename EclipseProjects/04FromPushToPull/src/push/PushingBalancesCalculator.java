@@ -23,7 +23,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	@Override
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
-		BalanceAndAverage balanceAndAverage = new BalanceAndAverage();
+		ValuesOfMonth balanceAndAverage = new ValuesOfMonth();
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
@@ -42,7 +42,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	 * extracted body of for loop in {@link #fillData(List)}
 	 */
 	private void calculateValuesForMonth(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth,
-			BalanceAndAverage balanceAndAverage)
+			ValuesOfMonth balanceAndAverage)
 	{
 		int balance = balanceAndAverage.getBalance();
 		int ultimo = dateOfMonth.getDayOfMonth();

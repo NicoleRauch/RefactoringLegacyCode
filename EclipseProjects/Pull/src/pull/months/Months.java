@@ -14,8 +14,8 @@ import common.Transaction;
 public class Months
 {
 
-	private final List<Month> months = new ArrayList<Month>();
-	private final Map<YearMonth, Month> monthsInMap = new HashMap<YearMonth, Month>();
+	private final List<ValuesOfMonth> months = new ArrayList<ValuesOfMonth>();
+	private final Map<YearMonth, ValuesOfMonth> monthsInMap = new HashMap<YearMonth, ValuesOfMonth>();
 
 	public Months(List<BalancesOfMonth> balancesOfOneAccount, List<Transaction> transactions)
 	{
@@ -25,10 +25,10 @@ public class Months
 
 	private void init(List<BalancesOfMonth> balancesOfOneAccount, List<Transaction> transactions)
 	{
-		Month month = null;
+		ValuesOfMonth month = null;
 		for (BalancesOfMonth balancesOfMonth : balancesOfOneAccount)
 		{
-			month = new MonthWithCaching(balancesOfMonth.getDate(), month != null ? month : new DummyMonth());
+			month = new ValuesOfMonthWithCaching(balancesOfMonth.getDate(), month != null ? month : new DummyValuesOfMonth());
 			getMonths().add(month);
 			monthsInMap.put(month.getYearMonth(), month);
 		}
@@ -36,12 +36,12 @@ public class Months
 		allocateTransactionsToMonths(transactions);
 	}
 
-	public List<Month> getMonths()
+	public List<ValuesOfMonth> getMonths()
 	{
 		return months;
 	}
 
-	public Month forDate(LocalDate date)
+	public ValuesOfMonth forDate(LocalDate date)
 	{
 		return monthsInMap.get(new YearMonth(date));
 	}

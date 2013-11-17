@@ -1,6 +1,6 @@
 package pull.months;
 
-public class DummyMonth implements IMonth
+public class DummyValuesOfMonth implements IValuesOfMonth
 {
 
 	@Override
