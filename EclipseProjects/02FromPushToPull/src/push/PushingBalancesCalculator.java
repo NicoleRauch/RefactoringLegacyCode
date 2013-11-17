@@ -24,13 +24,13 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
+		int balance = 0;
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
 			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
-			int balance = valuesOfMonth.getBalance();
 			int ultimo = dateOfMonth.getDayOfMonth();
 
 			double averageBalance = 0;
