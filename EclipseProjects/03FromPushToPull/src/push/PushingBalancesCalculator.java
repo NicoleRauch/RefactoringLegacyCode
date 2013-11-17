@@ -40,8 +40,8 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 
 	private int calculateValuesForMonth(ValuesOfMonth valuesOfMonth, int precedingBalance, LocalDate dateOfMonth, List<Transaction> transactionsOfMonth)
 	{
-		int ultimo = dateOfMonth.getDayOfMonth();
 		int balance = precedingBalance;
+		int ultimo = dateOfMonth.getDayOfMonth();
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
