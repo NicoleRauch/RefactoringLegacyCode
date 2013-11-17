@@ -24,7 +24,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
-		int balance = valuesOfMonth.getBalance();
+		int balance = 0;
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
