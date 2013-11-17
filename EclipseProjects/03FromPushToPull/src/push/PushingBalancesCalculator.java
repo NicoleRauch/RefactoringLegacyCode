@@ -31,17 +31,17 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
 			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
-			balance = calculateValues(valuesOfMonth, balance, dateOfMonth, transactionsOfMonth);
+			balance = calculateValuesForMonth(valuesOfMonth, balance, dateOfMonth, transactionsOfMonth);
 
 			balancesOfMonth.setBalance(valuesOfMonth.getBalance());
 			balancesOfMonth.setAverageBalance(valuesOfMonth.getAverageBalance());
 		}
 	}
 
-	private int calculateValues(ValuesOfMonth valuesOfMonth, int previousBalance, LocalDate dateOfMonth, List<Transaction> transactionsOfMonth)
+	private int calculateValuesForMonth(ValuesOfMonth valuesOfMonth, int precedingBalance, LocalDate dateOfMonth, List<Transaction> transactionsOfMonth)
 	{
 		int ultimo = dateOfMonth.getDayOfMonth();
-		int balance = previousBalance;
+		int balance = precedingBalance;
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
