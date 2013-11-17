@@ -24,28 +24,27 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
+		int balance = 0;
 
 		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			// the following method works on all items and stays in this class
 			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
-			calculateValuesForMonth(dateOfMonth, transactionsOfMonth, valuesOfMonth);
+			valuesOfMonth = calculateValuesForMonth(balance, dateOfMonth, transactionsOfMonth);
+			balance = valuesOfMonth.getBalance();
 
 			balancesOfMonth.setBalance(valuesOfMonth.getBalance());
 			balancesOfMonth.setAverageBalance(valuesOfMonth.getAverageBalance());
 		}
 	}
 
-	/**
-	 * extracted body of for loop in {@link #fillData(List)}
-	 */
-	private void calculateValuesForMonth(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth,
-			ValuesOfMonth balanceAndAverage)
+	private ValuesOfMonth calculateValuesForMonth(int precedingBalance, LocalDate dateOfMonth, List<Transaction> transactionsOfMonth)
 	{
-		int balance = balanceAndAverage.getBalance();
+		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
+
 		int ultimo = dateOfMonth.getDayOfMonth();
+		int balance = precedingBalance;
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
@@ -59,7 +58,8 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 
 		averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
-		balanceAndAverage.setBalanceAndAverage(balance, averageBalance);
+		valuesOfMonth.setBalanceAndAverage(balance, averageBalance);
+		return valuesOfMonth;
 	}
 
 	private double calculateProportionalBalance(int dayOfLatestBalance, int balance, int day, int daysInMonth)
