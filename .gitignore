@@ -1,6 +1,5 @@
 .DS_Store
 *.gz
-*.pdf
 *.log
 *.aux
 .gitignore~
