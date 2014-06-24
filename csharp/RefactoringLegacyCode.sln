@@ -34,6 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_FromPushToPull", "03_Fro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_FromPushToPull.Test", "03_FromPushToPull.Test\03_FromPushToPull.Test.csproj", "{100CBEDC-F295-473A-ACFC-D67C9C6CCA76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_FromPushToPull", "04_FromPushToPull\04_FromPushToPull.csproj", "{9DB4297F-A539-45B7-9996-091B93EA421E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_FromPushToPull.Test", "04_FromPushToPull.Test\04_FromPushToPull.Test.csproj", "{FBD29926-95D4-4722-A508-2A0A7B3F1C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,14 @@ Global
 		{100CBEDC-F295-473A-ACFC-D67C9C6CCA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{100CBEDC-F295-473A-ACFC-D67C9C6CCA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{100CBEDC-F295-473A-ACFC-D67C9C6CCA76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB4297F-A539-45B7-9996-091B93EA421E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB4297F-A539-45B7-9996-091B93EA421E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB4297F-A539-45B7-9996-091B93EA421E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB4297F-A539-45B7-9996-091B93EA421E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBD29926-95D4-4722-A508-2A0A7B3F1C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD29926-95D4-4722-A508-2A0A7B3F1C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD29926-95D4-4722-A508-2A0A7B3F1C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD29926-95D4-4722-A508-2A0A7B3F1C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
