@@ -36,7 +36,7 @@ class PushingBalancesCalculator
   def calculate_proportional_balance(day_of_latest_balance, balance, day, days_in_month)
     counting_days = day - day_of_latest_balance
     return 0 if counting_days == 0
-    rate = counting_days / days_in_month
+    rate = counting_days.to_f / days_in_month.to_f
     balance * rate
   end
 
