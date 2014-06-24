@@ -13,11 +13,12 @@ class PushingBalancesCalculator
 
     balances_of_month_list.each do |balances_of_month|
       date_of_month = balances_of_month.date
+      transactions_of_month = transactions_of_month(date_of_month)
+
       ultimo = date_of_month.day
 
       average_balance = 0.0
       day_of_latest_balance = 1
-      transactions_of_month = transactions_of_month(date_of_month)
       transactions_of_month.each do |transaction|
         day = transaction.date.day
         average_balance += calculate_proportional_balance(day_of_latest_balance, balance, day, ultimo)
@@ -26,6 +27,7 @@ class PushingBalancesCalculator
       end
 
       average_balance += calculate_proportional_balance(day_of_latest_balance, balance, ultimo + 1, ultimo)
+
       values_of_month.set_balance_and_average(balance, average_balance)
 
       balances_of_month.balance = values_of_month.balance
