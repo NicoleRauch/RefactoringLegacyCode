@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_FromPushToPull", "06_Fro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_FromPushToPull.Test", "06_FromPushToPull.Test\06_FromPushToPull.Test.csproj", "{94E389B5-8F10-49FC-8F7F-1F649A827B42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07_FromPushToPull", "07_FromPushToPull\07_FromPushToPull.csproj", "{8FC505C7-ABCB-4A1E-A766-1EC3E44E77B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07_FromPushToPull.Test", "07_FromPushToPull.Test\07_FromPushToPull.Test.csproj", "{7C8CBCC6-CA9D-41A9-8A22-F88914B51220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +120,14 @@ Global
 		{94E389B5-8F10-49FC-8F7F-1F649A827B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94E389B5-8F10-49FC-8F7F-1F649A827B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94E389B5-8F10-49FC-8F7F-1F649A827B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC505C7-ABCB-4A1E-A766-1EC3E44E77B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC505C7-ABCB-4A1E-A766-1EC3E44E77B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC505C7-ABCB-4A1E-A766-1EC3E44E77B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC505C7-ABCB-4A1E-A766-1EC3E44E77B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8CBCC6-CA9D-41A9-8A22-F88914B51220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8CBCC6-CA9D-41A9-8A22-F88914B51220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8CBCC6-CA9D-41A9-8A22-F88914B51220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8CBCC6-CA9D-41A9-8A22-F88914B51220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
