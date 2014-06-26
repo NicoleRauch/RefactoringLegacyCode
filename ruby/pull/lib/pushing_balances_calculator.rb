@@ -1,5 +1,3 @@
-require_relative 'values_of_month'
-
 class PushingBalancesCalculator
   attr_reader :transactions
   private :transactions
