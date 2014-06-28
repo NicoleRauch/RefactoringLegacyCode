@@ -116,6 +116,65 @@ $\Rightarrow$ A restructuring was required
 \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pattern Application - Code Structure}
+
+The pattern is applicable if the code structure is similar to this:
+
+\begin{itemize}
+\item a sequence of input data elements
+\item very few classes with logic
+\item a sequence of output data elements 
+\item output sequence is constructed early in the program run
+\item output sequence is filled during program run
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pattern Application - Code Workflow}
+
+The basic mechanics of the logic class(es) is as follows:
+
+\begin{itemize}
+\item initially, the sequence of output data is not filled
+\item the main logic part consists of two interlaced loops: 
+\begin{itemize}
+\item the outer loop iterates over the sequence of output data objects
+\item the inner loop iterates over the sequence of input data objects and calculates the data for one output data object
+\item at the end of the inner loop, the calculated data is written to that output data object (``push'')
+\end{itemize}
+\item finally, the sequence of output data is filled
+\item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has calculated and pushed to the sequence of output data
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pattern Application}
+
+The pattern can be broken up into three major parts:
+
+\begin{enumerate}
+\item Disentangle the for loops, isolate the loop body and extract it
+\item Build one data object for each loop iteration (instead of reusing the same object over and over again)
+\item Isolate the calculations of the distinct values into separate methods and calculate them on demand
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Workshop Restrictions \& Rules}
+
+\begin{itemize}
+\item Change one thing at a time.
+
+\item While applying this pattern, we neither want to change the outside world nor our calculator class API, only the internals of our calculator class.
+\item The result objects represent the outside world in our example. Therefore, we will leave the result objects and the signature of the calculator class API untouched. 
+\end{itemize}
+
+\end{frame}
+
 
 
 
