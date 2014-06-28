@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15260\viewh14660\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\b\fs32 \cf0 OO-Design-Workshop: Restrukturierung von Code "From Push To Pull"
+\b0\fs26 \
+\
+\pard\pardeftab720
+
+\b \cf0 Rauch, Nicole; Leidig, Andreas
+\b0  \
+\pard\pardeftab720
+
+\i \cf0 Organisation(en):
+\i0  msgGillardon AG, Deutschland \
+\
+
+\i Themen:
+\i0  Advanced (f\'fcr erfahrene agile Praktiker)\
+
+\i Stichworte:
+\i0  Restrukturierung, OO-Design, Refactoring\
+
+\i L\'e4nge der Session in Minuten:
+\i0  150 - 240 (mit mehr oder weniger Workshop-Anteil)\
+\pard\pardeftab720
+
+\fs10 \cf0 \'a0\
+\pard\pardeftab720
+
+\i\b\fs26 \cf0 Zusammenfassung
+\i0\b0 \
+\pard\pardeftab720
+
+\fs2 \cf0 \
+\pard\pardeftab720\li20\ri400\sa40\qj
+
+\fs22 \cf0 Der Alltag vieler Entwickler wird h\'e4ufig von schwer lesbarem, schlecht nachvollziehbarem Code dominiert. Sie bem\'fchen sich, "Clean Code" zu schreiben, der Prinzipien wie z.B. Single Responsibility, Kapselung und Koh\'e4renz folgt, finden es aber insbesondere bei Legacy Code oft schwer, diese Prinzipien im Code umzusetzen. Sie sp\'fcren das Bed\'fcrfnis, Teile der Anwendung massiv umzubauen, haben aber keine Idee, wie sie das umsetzen k\'f6nnen. Eventuell fehlt ihnen sogar die Vision, wie der resultierende Code aussehen soll. W\'e4hrend es gen\'fcgend Informationen f\'fcr die Durchf\'fchrung kleiner Refactorings gibt, existiert so gut wie keine Hilfestellung f\'fcr den Umbau bestehender Designs in Anwendungen.\
+Die vorgestellte Restrukturierung behandelt ein von uns h\'e4ufig vorgefundenes Muster: Attribute eines Objektes werden von au\'dfen berechnet und gesetzt, und oft finden diese Berechnungen an mehreren Stellen im Code statt. Dadurch ist es unklar, welchen Wert ein Attribut zu einem spezifischen Zeitpunkt enth\'e4lt; die Algorithmik ist \'fcber diverse unzusammenh\'e4ngende Codestellen verteilt und dadurch schwer zu verstehen, da es keine isolierte gekapselte Stelle im Code gibt, die f\'fcr einen Wert verantwortlich ist. Wir nennen dieses Muster "Push", da der Attributwert in das Attribut gedr\'fcckt wird. Die Ermittlung des Wertes erfolgt prozedural und sequentiell; der Code ist fragil und fehleranf\'e4llig. Erweiterungen und \'c4nderungen sind schwer und enden \'fcblicherweise in sogenannten "Shotgun Surgeries" mit \'fcber viele Codestellen verteilten \'c4nderungen.\
+Anstelle dieses "Push"-Stils kann man die Ergebniswerte auch bei Bedarf ermitteln, n\'e4mlich genau dann, wenn sie be\'f6tigt werden. Dadurch entstehen klar erkennbare, sehr deskriptive Algorithmen. Wir nennen einen solchen Stil "Pull", weil der Ergebniswert quasi aus dem Objekt "gezogen" wird. Der so entstehende Code hat sich als lesbar, verstehbar, testbar, \'e4nderbar und erweiterbar erwiesen.\
+Dieser Workshop zeigt anhand eines konkreten Beispiels, wie eine gro\'dfe Restrukturierung auf systematische, strukturierte und reproduzierbare Art und Weise durchgef\'fchrt werden kann. Wir zeigen kleine und sichere Schritte. Die Teilnehmer sp\'fcren direkt die Vorteile, indem sie selbst Code im "Pull"-Stil erzeugen. Wenn die vorgestellte Strategie konsequent durchgef\'fchrt wird, folgt der resultierende Code den oben beschriebenen Prinzipien und wird objektorientiert, mit kleinen Methoden in miteinander kommunizierenden Objekten, in einem Wort: Der Code wird zu "Clean Code". Die Teilnehmer arbeiten in Paaren an eigenen Laptops.\
+Voraussetzungen f\'fcr die Teilnehmer:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa20\qj
+\ls1\ilvl0\cf0 {\listtext	\'95	}Grundkenntnise in Java\
+{\listtext	\'95	}Java (>=1.6)\
+{\listtext	\'95	}Java IDE wie Eclipse o.\'e4.\
+{\listtext	\'95	}Git ist hilfreich\
+{\listtext	\'95	}Pro 2 Teilnehmer ein Laptop, idealerweise mit externer Tastatur und Maus.}
