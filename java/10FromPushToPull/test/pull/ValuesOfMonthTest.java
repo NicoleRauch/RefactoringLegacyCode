@@ -2,9 +2,8 @@ package pull;
 
 import java.util.ArrayList;
 
-import junit.framework.Assert;
-
 import org.joda.time.LocalDate;
+import org.junit.Assert;
 import org.junit.Test;
 
 import common.Transaction;
