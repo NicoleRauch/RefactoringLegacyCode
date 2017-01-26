@@ -5,3 +5,4 @@
 .gitignore~
 EclipseProjects/.metadata/*
 .metadata
+.idea
