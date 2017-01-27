@@ -2,12 +2,12 @@
 This is the accompanying code to the talk.
 
 ## Structure
-The project "Common" is a neccessary prerequisite for all other projects. It contains the shared classes as well as a single regression test. This test is used in every other project to prove that the overall implementation is still running.
+The project "Common" is a neccessary prerequisite for all other projects. It contains the shared classes as well as a single regression test. This test is used in all other projects to prove that the overall implementation is still running.
 
 ## What is it about?
-The code gives a simple example of an account. The entries are called "Umsatz". The code does not have a relation to an account. It assumes that all entries belong to the same account.
+The code gives a simple example of an account. The entries are called "Transaction" (German: Umsatz). The code does not have a relation to an account. It assumes that all entries belong to the same account.
 
-The code will cluster the entries by month and calculate the balance at the end of the month ("bestand") and the avarage balance in each month ("durchschnittsBestand").
+The code will cluster the entries by month and calculate the balance at the end of the month ("Bestand") and the avarage balance in each month ("Durchschnittsbestand").
 
 ### How to use the code
 The projects show the transformation steps from a typical procedural "push"-style implementation to an object-oriented "pull"-style.
