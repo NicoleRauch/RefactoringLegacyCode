@@ -34,43 +34,45 @@ $\Rightarrow$ A restructuring was required
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Problems of the Existing Code Structure}
+\begin{minipage}{.45\paperwidth}
 \begin{itemize}
 \item Code writes values into separate data objects (\glqq Push\grqq{})
 \item Multiple writing operations for one value
 \item Parts of  the code access previously written values
-\item Code is driven by the view from the inside: What do I need to do in summary to be able to deliver a set of result values?
+\item Code is driven by the view \textbf{from the inside}: What do I need to do in summary to be able to deliver a set of result values?
 \end{itemize}
-\end{frame}
+\end{minipage} \hfill
+\begin{minipage}{.45\paperwidth}
+\includegraphics[width=\textwidth]{Codestruktur.png}
+\end{minipage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Problems of the Existing Code Structure}
-\includegraphics[width=.85 \paperwidth]{Codestruktur.png}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Goal}
+
+\begin{minipage}{.45\paperwidth}
 \begin{itemize}
 \item Structure:
 \begin{itemize}
-\item Code mirrors the business logic
+\item Code reflects the business logic
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item View from the outside, driven by the expected results:
+\item View \textbf{from the outside}, driven by the expected results:
 \begin{itemize}
 \item Which values do I need?
 \item How is each value calculated?
 \item Which categories of results exist? Similarities, differences?
 \end{itemize}
 \end{itemize}
-\end{frame}
+\end{minipage} \hfill
+\begin{minipage}{.45\paperwidth}
+\includegraphics[width=\textwidth]{DynamischFein.jpg}
+\end{minipage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Goal}
-\includegraphics[width=.85 \paperwidth]{DynamischFein.jpg}
 \end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Good Approach}
@@ -86,7 +88,7 @@ $\Rightarrow$ A restructuring was required
 \item Important aspects of the restructuring:
 \begin{itemize}
 \item Driven by business logic
-\item Purely structural
+\item Purely structural (NO changes in behaviour)
 \end{itemize}
 \end{itemize}
 
@@ -189,21 +191,6 @@ The basic mechanics of the logic class(es) is as follows:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pattern Application}
-
-Workshop:
-
-\begin{enumerate}
-\item Disentangle the for loops, isolate the loop body and extract it
-\item Build one data object for each loop iteration (instead of reusing the same object over and over again)
-\item Isolate the calculations of the distinct values into separate methods and calculate them on demand
-\end{enumerate}
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Workshop Restrictions \& Rules}
 
 \begin{itemize}
@@ -214,6 +201,20 @@ Workshop:
 
 \end{frame}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Workshop Structure}
+
+
+\begin{enumerate}
+\item Disentangle the for loops, isolate the loop body and extract it
+\item Build one data object for each loop iteration (instead of reusing the same object over and over again)
+\item Isolate the calculations of the distinct values into separate methods and calculate them on demand
+\end{enumerate}
+
+\end{frame}
 
 
 
