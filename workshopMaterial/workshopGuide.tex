@@ -235,28 +235,30 @@ And don't forget to manually move the method calculateProportionalBalance as wel
 \includegraphics[width=1\textwidth]{CompareViews/03-04-2.png}
 
 
-\subsection*{Step 06: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
+\subsection*{Step 05: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
 
 \subsubsection*{Observations:}
 \begin{itemize}
 \item The for loop reuses the same \texttt{ValuesOfMonth} object in each loop iteration.
-\item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration, which is already retrieved anyway.
+\item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration.
 \end{itemize}
 
 \subsubsection*{Solution:}
 
 
-In this step, we want each execution of the loop body to create its own intermediate object. If the value calculation uses values from a previous calculation, we need to take care of this and pass on the required values from the previous intermediate object to the calculation method, possibly widening its signature.
+In this step, we first explicitly pass the preceding balance to the calculation. We have to fetch it from the previous result in order to pass it in.
 
-In our example, we explicitly pass the preceding balance to the calculation. We have to fetch it from the previous result before creating a new instance.
+Secondly, we want each execution of the loop body to create its own intermediate object. Because no values are read from the previous result any more, we can simply create a new object before calling the calculation function.
 
 \subsubsection*{Modified:}
 
 \texttt{PushingBalancesCalculator.fillData()}
 
+\includegraphics[width=1\textwidth]{CompareViews/04-05-1.png}
+
 \texttt{ValuesOfMonth.calculateValues()}
 
-\includegraphics[width=1\textwidth]{CompareViews/05-06.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/04-05-2.png}
 
 
 \section*{Part III: From Calculating the Values Up-Front to Calculating the Values On-Demand}

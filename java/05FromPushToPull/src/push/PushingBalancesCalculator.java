@@ -20,26 +20,19 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator_API 
 	@Override
 	public void fillData(List<BalancesOfMonth_API> balancesOfMonthList) {
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
-		int balance = 0;
 
 		for (BalancesOfMonth_API balancesOfMonth : balancesOfMonthList) {
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
 			List<Transaction_API> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
-			valuesOfMonth = calculateValuesForMonth(balance, dateOfMonth, transactionsOfMonth);
-			balance = valuesOfMonth.getBalance();
+			int precedingBalance = valuesOfMonth.getBalance();
+
+			valuesOfMonth = new ValuesOfMonth();
+			valuesOfMonth.calculateValues(dateOfMonth, transactionsOfMonth, precedingBalance);
 
 			balancesOfMonth.setBalance(valuesOfMonth.getBalance());
 			balancesOfMonth.setAverageBalance(valuesOfMonth.getAverageBalance());
 		}
-	}
-
-	private ValuesOfMonth calculateValuesForMonth(int precedingBalance, LocalDate dateOfMonth,
-			List<Transaction_API> transactionsOfMonth) {
-		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
-
-		valuesOfMonth.calculateValues(dateOfMonth, transactionsOfMonth, precedingBalance);
-		return valuesOfMonth;
 	}
 
 	private List<Transaction_API> transactionsOfMonth(LocalDate date) {
