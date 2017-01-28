@@ -117,9 +117,46 @@ $\Rightarrow$ A restructuring was required
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pattern Application - Code Structure}
+\begin{frame}[fragile]{First Glimpse at the Code}
 
-The pattern is applicable if the code structure is similar to this:
+\begin{center}
+{\large \url{00Push/src/push/PushingBalancesCalculator.java}}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Quick Poll}
+
+\begin{itemize}
+\onslide+<1>
+\item Can we improve the code?
+\onslide+<2>
+\item Is the code readable and understandable?
+\onslide+<3>
+\item Can you explain how it works?
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Local Optimum}
+
+{
+\begin{center}
+\includegraphics[width=\textwidth]{LocalOptimum.jpg}
+\end{center}
+\vspace{-1.7em}
+\hfill \tiny{\url{https://www.flickr.com/photos/jurgenappelo/5201851938}}
+}
+
+\onslide+<2->
+\vspace{2em}
+Make it worse to be able to improve!
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pattern Application - Code Structure}
 
 \begin{itemize}
 \item a sequence of input data elements
@@ -150,10 +187,11 @@ The basic mechanics of the logic class(es) is as follows:
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Pattern Application}
 
-The pattern can be broken up into three major parts:
+Workshop:
 
 \begin{enumerate}
 \item Disentangle the for loops, isolate the loop body and extract it
@@ -163,14 +201,15 @@ The pattern can be broken up into three major parts:
 
 \end{frame}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Workshop Restrictions \& Rules}
 
 \begin{itemize}
 \item Change one thing at a time.
-
-\item While applying this pattern, we neither want to change the outside world nor our calculator class API, only the internals of our calculator class.
-\item The result objects represent the outside world in our example. Therefore, we will leave the result objects and the signature of the calculator class API untouched. 
+\item Do not change the outside world (i.e.~\texttt{...\_API} classes), only the internals of our calculator class.
+\item The code has tests. Run them frequently!
 \end{itemize}
 
 \end{frame}
