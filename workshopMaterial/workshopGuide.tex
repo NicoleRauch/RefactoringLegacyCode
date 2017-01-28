@@ -208,25 +208,7 @@ Let's do it!
 Build one data object for each loop iteration (instead of reusing the same object over and over again).
 
 
-\subsection*{Step 04: Turn out-parameter into returned value}
-
-\subsubsection*{Observations:}
-\begin{itemize}
-\item The first parameter in \texttt{calculateValuesForMonth()} acts as in/out parameter.
-\end{itemize}
-
-\subsubsection*{Solution:}
-Create an explicit return object and delete this parameter.
-
-\subsubsection*{Modified:}
-
-\texttt{PushingBalancesCalculator.calculateValuesForMonth()}
-
-\includegraphics[width=1\textwidth]{CompareViews/03-04.jpg}
-
-
-
-\subsection*{Step 05: Separation of concerns (Putting the Code Where it Belongs)}
+\subsection*{Step 04: Separation of concerns (Putting the Code Where it Belongs)}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -246,11 +228,12 @@ And don't forget to manually move the method calculateProportionalBalance as wel
 
 \texttt{PushingBalancesCalculator.calculateProportionalBalance()} is moved to\\ \texttt{ValuesOfMonth.calculateProportionalBalance()}
 
-\includegraphics[width=1\textwidth]{CompareViews/04-05-1.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/03-04-1.png}
 
 \texttt{PushingBalancesCalculator.fillData()} (method invocation is adapted to moved method)
 
-\includegraphics[width=1\textwidth]{CompareViews/04-05-2.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/03-04-2.png}
+
 
 \subsection*{Step 06: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
 
