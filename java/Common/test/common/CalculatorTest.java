@@ -16,8 +16,7 @@ import org.junit.Test;
  * This is done to avoid code duplication as well as to insure that all the tests are testing the same.
  * </p>
  */
-public abstract class CalculatorTest
-{
+public abstract class CalculatorTest {
 	private static final LocalDate APRIL_ULTIMO = new LocalDate(2010, 4, 30);
 	private static final LocalDate MAY_ULTIMO = new LocalDate(2010, 5, 31);
 	private static final LocalDate JUNE_ULTIMO = new LocalDate(2010, 6, 30);
@@ -27,8 +26,7 @@ public abstract class CalculatorTest
 	protected BalancesOfMonthCalculator_API calculator;
 
 	@Test
-	public void oneTransactionAtFirstOfMonthSetsBalanceAndAverage()
-	{
+	public void oneTransactionAtFirstOfMonthSetsBalanceAndAverage() {
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 1), 100));
 		balances.add(new BalancesOfMonth_API(APRIL_ULTIMO));
 
@@ -40,8 +38,7 @@ public abstract class CalculatorTest
 	}
 
 	@Test
-	public void oneTransactionAtUltimoOfMonthSetsBalanceAndAverage()
-	{
+	public void oneTransactionAtUltimoOfMonthSetsBalanceAndAverage() {
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 30), 300));
 		balances.add(new BalancesOfMonth_API(APRIL_ULTIMO));
 
@@ -53,8 +50,7 @@ public abstract class CalculatorTest
 	}
 
 	@Test
-	public void twoTransactionAtFirstAndSixteenthOfMonthLeadToHalfAverageOfBalance()
-	{
+	public void twoTransactionAtFirstAndSixteenthOfMonthLeadToHalfAverageOfBalance() {
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 1), 100));
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 16), 200));
 		balances.add(new BalancesOfMonth_API(APRIL_ULTIMO));
@@ -67,8 +63,7 @@ public abstract class CalculatorTest
 	}
 
 	@Test
-	public void balanceOfPreviousMonthIsFactoredIn()
-	{
+	public void balanceOfPreviousMonthIsFactoredIn() {
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 16), 100));
 		transactions.add(new Transaction_API(new LocalDate(2010, 5, 16), 200));
 		balances.add(new BalancesOfMonth_API(APRIL_ULTIMO));
@@ -85,8 +80,7 @@ public abstract class CalculatorTest
 	}
 
 	@Test
-	public void balanceOfPreviousMonthIsFactoredInOverTwoMonths()
-	{
+	public void balanceOfPreviousMonthIsFactoredInOverTwoMonths() {
 		transactions.add(new Transaction_API(new LocalDate(2010, 4, 16), 100));
 		transactions.add(new Transaction_API(new LocalDate(2010, 5, 16), 200));
 		balances.add(new BalancesOfMonth_API(APRIL_ULTIMO));

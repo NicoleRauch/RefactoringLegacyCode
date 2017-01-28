@@ -4,12 +4,10 @@ import org.junit.Before;
 
 import common.CalculatorTest;
 
-public class PushTest extends CalculatorTest
-{
+public class PushTest extends CalculatorTest {
 
 	@Before
-	public void setup()
-	{
+	public void setup() {
 		calculator = new PushingBalancesCalculator(transactions);
 	}
 

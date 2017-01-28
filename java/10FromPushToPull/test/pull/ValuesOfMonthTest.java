@@ -9,22 +9,19 @@ import org.junit.Test;
 
 import common.Transaction_API;
 
-public class ValuesOfMonthTest
-{
+public class ValuesOfMonthTest {
 	private static final LocalDate APRIL_ULTIMO = new LocalDate(2010, 4, 30);
 	private static final LocalDate MAY_ULTIMO = new LocalDate(2010, 5, 31);
 
 	@Test
-	public void monthWithoutTransactionsHasZeroBalance()
-	{
+	public void monthWithoutTransactionsHasZeroBalance() {
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth(APRIL_ULTIMO, new ArrayList<Transaction_API>(), 0);
 		Assert.assertEquals(0, valuesOfMonth.getBalance());
 		Assert.assertEquals(0, valuesOfMonth.getAverageBalance());
 	}
 
 	@Test
-	public void monthWithOneTransactionHasBalanceOfThat()
-	{
+	public void monthWithOneTransactionHasBalanceOfThat() {
 		ArrayList<Transaction_API> transactionsOfMonth = new ArrayList<Transaction_API>();
 		transactionsOfMonth.add(new Transaction_API(new LocalDate(2010, 4, 1), 100));
 
@@ -34,8 +31,7 @@ public class ValuesOfMonthTest
 	}
 
 	@Test
-	public void monthWithTwoTransactionsHasSumOfThoseAsBalance()
-	{
+	public void monthWithTwoTransactionsHasSumOfThoseAsBalance() {
 		ArrayList<Transaction_API> transactionsOfMonth = new ArrayList<Transaction_API>();
 		transactionsOfMonth.add(new Transaction_API(new LocalDate(2010, 4, 1), 100));
 		transactionsOfMonth.add(new Transaction_API(new LocalDate(2010, 4, 16), 100));
@@ -46,8 +42,7 @@ public class ValuesOfMonthTest
 	}
 
 	@Test
-	public void twoMonthsWithTwoTransactionsHasSumOfThoseAsBalance()
-	{
+	public void twoMonthsWithTwoTransactionsHasSumOfThoseAsBalance() {
 		ArrayList<Transaction_API> transactionsOfMonth = new ArrayList<Transaction_API>();
 		transactionsOfMonth.add(new Transaction_API(new LocalDate(2010, 4, 16), 100));
 		ValuesOfMonth april = new ValuesOfMonth(APRIL_ULTIMO, transactionsOfMonth, 0);

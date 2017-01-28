@@ -1,11 +1,9 @@
 package pull.months;
 
-public class InitialValuesOfMonth implements IValuesOfMonth
-{
+public class InitialValuesOfMonth implements IValuesOfMonth {
 
 	@Override
-	public int getBalance()
-	{
+	public int getBalance() {
 		return 0;
 	}
 

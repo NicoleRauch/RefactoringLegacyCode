@@ -8,7 +8,6 @@ public class Transaction_API {
 	private final int amount;
 
 	public Transaction_API(LocalDate date, int amount) {
-		super();
 		this.date = date;
 		this.amount = amount;
 	}

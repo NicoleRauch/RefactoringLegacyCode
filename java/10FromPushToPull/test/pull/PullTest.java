@@ -6,12 +6,10 @@ import pull.PullingBalancesCalculator;
 
 import common.CalculatorTest;
 
-public class PullTest extends CalculatorTest
-{
+public class PullTest extends CalculatorTest {
 
 	@Before
-	public void setup()
-	{
+	public void setup() {
 		calculator = new PullingBalancesCalculator(transactions);
 	}
 

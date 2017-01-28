@@ -10,7 +10,6 @@ public class BalancesOfMonth_API {
 	private int averageBalance;
 
 	public BalancesOfMonth_API(LocalDate date) {
-		super();
 		this.date = date;
 	}
 
