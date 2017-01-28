@@ -1,18 +1,18 @@
 \documentclass[utf8]{beamer}
 \usecolortheme{seagull}
-\usecolortheme{msggillardon}
-\useinnertheme{msggillardon}
-\useoutertheme{split}
+\usecolortheme{nicole}
+\useinnertheme{nicole}
+\useoutertheme{nicole}
 \setbeamertemplate{navigation symbols}{}
 \setbeamercovered{dynamic}
 
 \AtBeginPart{\frame{\partpage}}
 
-\author{Andreas Leidig, Nicole Rauch}
-\title{Restructuring Code:\\ From ``Push''  To ``Pull''}
+\author{~}
+\title{Restructuring Legacy Code:\\ From ``Big Ball of Mud''\\ To Domain-Driven Design}
 \subtitle{~}
-\institute{msgGillardon AG}
-\date{June 3, 2013}
+\institute{}
+\date{}
 
 \usepackage{ngerman}
 %\usepackage[utf8x,utf8]{inputenc}
@@ -22,6 +22,17 @@
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,backgrounds,mindmap}
+
+\usepackage{eso-pic}
+\makeatletter
+\AddToShipoutPicture{%
+\begin{tikzpicture}%
+% put: x (from left) , y (from bottom)
+\put(240,10){\includegraphics[width=4cm]{../../logos/German.png}}%
+\end{tikzpicture}%
+}
+\makeatother
+
 
 \definecolor[named]{keywords}{HTML}{005D35}
 \definecolor[named]{comments}{HTML}{808080}
@@ -54,7 +65,7 @@
 
 \begin{document}
 {
-	\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background-title.png}}
+	\usebackgroundtemplate{}
 	\begin{frame}[t,plain]
 		\titlepage
 	\end{frame}
