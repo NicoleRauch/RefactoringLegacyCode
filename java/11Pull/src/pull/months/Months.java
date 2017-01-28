@@ -8,8 +8,8 @@ import java.util.Map;
 import org.joda.time.LocalDate;
 import org.joda.time.YearMonth;
 
-import common.BalancesOfMonth;
-import common.Transaction;
+import common.BalancesOfMonth_API;
+import common.Transaction_API;
 
 public class Months
 {
@@ -17,16 +17,16 @@ public class Months
 	private final List<ValuesOfMonth> months = new ArrayList<ValuesOfMonth>();
 	private final Map<YearMonth, ValuesOfMonth> monthsInMap = new HashMap<YearMonth, ValuesOfMonth>();
 
-	public Months(List<BalancesOfMonth> balancesOfOneAccount, List<Transaction> transactions)
+	public Months(List<BalancesOfMonth_API> balancesOfOneAccount, List<Transaction_API> transactions)
 	{
 		super();
 		init(balancesOfOneAccount, transactions);
 	}
 
-	private void init(List<BalancesOfMonth> balancesOfOneAccount, List<Transaction> transactions)
+	private void init(List<BalancesOfMonth_API> balancesOfOneAccount, List<Transaction_API> transactions)
 	{
 		ValuesOfMonth month = null;
-		for (BalancesOfMonth balancesOfMonth : balancesOfOneAccount)
+		for (BalancesOfMonth_API balancesOfMonth : balancesOfOneAccount)
 		{
 			month = new ValuesOfMonthWithCaching(balancesOfMonth.getDate(), month != null ? month : new InitialValuesOfMonth());
 			getMonths().add(month);
@@ -46,9 +46,9 @@ public class Months
 		return monthsInMap.get(new YearMonth(date));
 	}
 
-	private void allocateTransactionsToMonths(List<Transaction> transactions)
+	private void allocateTransactionsToMonths(List<Transaction_API> transactions)
 	{
-		for (Transaction transaction : transactions)
+		for (Transaction_API transaction : transactions)
 		{
 			forDate(transaction.getDate()).addTransaction(transaction);
 		}

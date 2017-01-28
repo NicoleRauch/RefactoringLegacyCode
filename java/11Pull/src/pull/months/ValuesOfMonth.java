@@ -7,14 +7,14 @@ import org.joda.time.LocalDate;
 import org.joda.time.YearMonth;
 import org.joda.time.chrono.ISOChronology;
 
-import common.Transaction;
+import common.Transaction_API;
 
 public class ValuesOfMonth implements IValuesOfMonth
 {
 
 	protected final YearMonth yearMonth;
 	protected final IValuesOfMonth precedingMonth;
-	protected final List<Transaction> transactions = new ArrayList<Transaction>();
+	protected final List<Transaction_API> transactions = new ArrayList<Transaction_API>();
 
 	public ValuesOfMonth(LocalDate date, IValuesOfMonth month)
 	{
@@ -28,7 +28,7 @@ public class ValuesOfMonth implements IValuesOfMonth
 		return yearMonth;
 	}
 
-	public void addTransaction(Transaction transaction)
+	public void addTransaction(Transaction_API transaction)
 	{
 		transactions.add(transaction);
 	}
@@ -37,7 +37,7 @@ public class ValuesOfMonth implements IValuesOfMonth
 	public int getBalance()
 	{
 		int result = precedingMonth.getBalance();
-		for (Transaction transaction : transactions)
+		for (Transaction_API transaction : transactions)
 		{
 			result += transaction.getAmount();
 		}
@@ -47,7 +47,7 @@ public class ValuesOfMonth implements IValuesOfMonth
 	public int getAverageBalance()
 	{
 		int result = precedingMonth.getBalance();
-		for (Transaction transaction : transactions)
+		for (Transaction_API transaction : transactions)
 		{
 			result += calculateProportion(transaction);
 		}
@@ -55,7 +55,7 @@ public class ValuesOfMonth implements IValuesOfMonth
 		return result;
 	}
 
-	private double calculateProportion(Transaction transaction)
+	private double calculateProportion(Transaction_API transaction)
 	{
 		int countingDays = daysInMonth() - transaction.getDate().getDayOfMonth() + 1;
 		double rate = (double) countingDays / daysInMonth();

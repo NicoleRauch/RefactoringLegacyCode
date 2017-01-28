@@ -5,27 +5,27 @@ import java.util.List;
 import pull.months.ValuesOfMonth;
 import pull.months.Months;
 
-import common.BalancesOfMonth;
-import common.BalancesOfMonthCalculator;
-import common.Transaction;
+import common.BalancesOfMonth_API;
+import common.BalancesOfMonthCalculator_API;
+import common.Transaction_API;
 
-public class PullingBalancesCalculator implements BalancesOfMonthCalculator
+public class PullingBalancesCalculator implements BalancesOfMonthCalculator_API
 {
 
-	private final List<Transaction> transactions;
+	private final List<Transaction_API> transactions;
 
-	public PullingBalancesCalculator(List<Transaction> transactions)
+	public PullingBalancesCalculator(List<Transaction_API> transactions)
 	{
 		super();
 		this.transactions = transactions;
 	}
 
 	@Override
-	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
+	public void fillData(List<BalancesOfMonth_API> balancesOfMonthList)
 	{
 		Months months = new Months(balancesOfMonthList, transactions);
 
-		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
+		for (BalancesOfMonth_API balancesOfMonth : balancesOfMonthList)
 		{
 			ValuesOfMonth accordingMonth = months.forDate(balancesOfMonth.getDate());
 			balancesOfMonth.setBalance(accordingMonth.getBalance());

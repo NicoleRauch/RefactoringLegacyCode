@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
-import common.Transaction;
+import common.Transaction_API;
 
 public class ValuesOfMonth
 {
@@ -32,14 +32,14 @@ public class ValuesOfMonth
 		this.averageBalance = averageBalance;
 	}
 
-	void calculateValues(LocalDate dateOfMonth, List<Transaction> transactionsOfMonth, int precedingBalance)
+	void calculateValues(LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth, int precedingBalance)
 	{
 		int balance = precedingBalance;
 		int ultimo = dateOfMonth.getDayOfMonth();
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
-		for (Transaction transaction : transactionsOfMonth)
+		for (Transaction_API transaction : transactionsOfMonth)
 		{
 			int day = transaction.getDate().getDayOfMonth();
 			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, day, ultimo);

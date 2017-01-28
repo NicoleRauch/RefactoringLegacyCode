@@ -2,14 +2,14 @@ package common;
 
 import org.joda.time.LocalDate;
 
-public class BalancesOfMonth {
+public class BalancesOfMonth_API {
 
 	private final LocalDate date;
 
 	private int balance;
 	private int averageBalance;
 
-	public BalancesOfMonth(LocalDate date) {
+	public BalancesOfMonth_API(LocalDate date) {
 		super();
 		this.date = date;
 	}

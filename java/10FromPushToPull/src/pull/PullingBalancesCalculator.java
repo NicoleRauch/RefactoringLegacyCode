@@ -5,30 +5,30 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
-import common.BalancesOfMonth;
-import common.BalancesOfMonthCalculator;
-import common.Transaction;
+import common.BalancesOfMonth_API;
+import common.BalancesOfMonthCalculator_API;
+import common.Transaction_API;
 
-public class PullingBalancesCalculator implements BalancesOfMonthCalculator
+public class PullingBalancesCalculator implements BalancesOfMonthCalculator_API
 {
 
-	private final List<Transaction> transactions;
+	private final List<Transaction_API> transactions;
 
-	public PullingBalancesCalculator(List<Transaction> transactions)
+	public PullingBalancesCalculator(List<Transaction_API> transactions)
 	{
 		super();
 		this.transactions = transactions;
 	}
 
 	@Override
-	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
+	public void fillData(List<BalancesOfMonth_API> balancesOfMonthList)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
 
-		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
+		for (BalancesOfMonth_API balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
+			List<Transaction_API> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
 			int precedingBalance = valuesOfMonth.getBalance();
 
@@ -39,10 +39,10 @@ public class PullingBalancesCalculator implements BalancesOfMonthCalculator
 		}
 	}
 
-	private List<Transaction> transactionsOfMonth(LocalDate date)
+	private List<Transaction_API> transactionsOfMonth(LocalDate date)
 	{
-		List<Transaction> results = new ArrayList<Transaction>();
-		for (Transaction transaction : transactions)
+		List<Transaction_API> results = new ArrayList<Transaction_API>();
+		for (Transaction_API transaction : transactions)
 		{
 			LocalDate dateOfTransaction = transaction.getDate();
 			if (areSameMonthAndYear(date, dateOfTransaction))

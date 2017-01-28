@@ -5,31 +5,31 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
-import common.BalancesOfMonth;
-import common.BalancesOfMonthCalculator;
-import common.Transaction;
+import common.BalancesOfMonth_API;
+import common.BalancesOfMonthCalculator_API;
+import common.Transaction_API;
 
-public class PushingBalancesCalculator implements BalancesOfMonthCalculator
+public class PushingBalancesCalculator implements BalancesOfMonthCalculator_API
 {
 
-	private final List<Transaction> transactions;
+	private final List<Transaction_API> transactions;
 
-	public PushingBalancesCalculator(List<Transaction> transactions)
+	public PushingBalancesCalculator(List<Transaction_API> transactions)
 	{
 		super();
 		this.transactions = transactions;
 	}
 
 	@Override
-	public void fillData(List<BalancesOfMonth> balancesOfMonthList)
+	public void fillData(List<BalancesOfMonth_API> balancesOfMonthList)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
 		int balance = 0;
 
-		for (BalancesOfMonth balancesOfMonth : balancesOfMonthList)
+		for (BalancesOfMonth_API balancesOfMonth : balancesOfMonthList)
 		{
 			LocalDate dateOfMonth = balancesOfMonth.getDate();
-			List<Transaction> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
+			List<Transaction_API> transactionsOfMonth = transactionsOfMonth(dateOfMonth);
 
 			valuesOfMonth = calculateValuesForMonth(balance, dateOfMonth, transactionsOfMonth);
 			balance = valuesOfMonth.getBalance();
@@ -39,7 +39,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 		}
 	}
 
-	private ValuesOfMonth calculateValuesForMonth(int precedingBalance, LocalDate dateOfMonth, List<Transaction> transactionsOfMonth)
+	private ValuesOfMonth calculateValuesForMonth(int precedingBalance, LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth)
 	{
 		ValuesOfMonth valuesOfMonth = new ValuesOfMonth();
 
@@ -48,7 +48,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 
 		double averageBalance = 0;
 		int dayOfLatestBalance = 1;
-		for (Transaction transaction : transactionsOfMonth)
+		for (Transaction_API transaction : transactionsOfMonth)
 		{
 			int day = transaction.getDate().getDayOfMonth();
 			averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, day, ultimo);
@@ -73,10 +73,10 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator
 		return (balance * rate);
 	}
 
-	private List<Transaction> transactionsOfMonth(LocalDate date)
+	private List<Transaction_API> transactionsOfMonth(LocalDate date)
 	{
-		List<Transaction> results = new ArrayList<Transaction>();
-		for (Transaction transaction : transactions)
+		List<Transaction_API> results = new ArrayList<Transaction_API>();
+		for (Transaction_API transaction : transactions)
 		{
 			LocalDate dateOfTransaction = transaction.getDate();
 			if (areSameMonthAndYear(date, dateOfTransaction))
