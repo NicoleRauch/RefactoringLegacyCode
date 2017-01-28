@@ -28,7 +28,7 @@ public class Months
 		ValuesOfMonth month = null;
 		for (BalancesOfMonth balancesOfMonth : balancesOfOneAccount)
 		{
-			month = new ValuesOfMonthWithCaching(balancesOfMonth.getDate(), month != null ? month : new DummyValuesOfMonth());
+			month = new ValuesOfMonthWithCaching(balancesOfMonth.getDate(), month != null ? month : new InitialValuesOfMonth());
 			getMonths().add(month);
 			monthsInMap.put(month.getYearMonth(), month);
 		}
