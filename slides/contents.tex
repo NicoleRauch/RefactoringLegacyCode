@@ -1,5 +1,21 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{}
+
+\begin{center}
+\Huge
+Find a pair
+\vspace{2em}
+
+Check out \\
+\vspace{1em}
+\large
+\url{https://github.com/NicoleRauch/RefactoringLegacyCode}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Our Starting Point}
 \begin{itemize}
 \item Business Software
@@ -75,7 +91,7 @@ $\Rightarrow$ A restructuring was required
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Good Approach}
+\begin{frame}[fragile]{Overall Approach}
 \begin{itemize}
 \item Feature-toggle to compare the old and the new version
 \begin{itemize}
@@ -119,6 +135,13 @@ $\Rightarrow$ A restructuring was required
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Code Structure}
+
+\includegraphics[width=\textwidth]{CodeMechanics.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{First Glimpse at the Code}
 
 \begin{center}
@@ -159,38 +182,6 @@ Make it worse to be able to improve!
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pattern Application - Code Structure}
-
-\begin{itemize}
-\item a sequence of input data elements
-\item very few classes with logic
-\item a sequence of output data elements 
-\item output sequence is constructed early in the program run
-\item output sequence is filled during program run
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pattern Application - Code Workflow}
-
-The basic mechanics of the logic class(es) is as follows:
-
-\begin{itemize}
-\item initially, the sequence of output data is not filled
-\item the main logic part consists of two interlaced loops: 
-\begin{itemize}
-\item the outer loop iterates over the sequence of output data objects
-\item the inner loop iterates over the sequence of input data objects and calculates the data for one output data object
-\item at the end of the inner loop, the calculated data is written to that output data object (``push'')
-\end{itemize}
-\item finally, the sequence of output data is filled
-\item the logic class(es) may contain multiple of these interlaced loops in sequence, where a subsequent loop may access and modify the output data that a previous loop has calculated and pushed to the sequence of output data
-\end{itemize}
-
-\end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Workshop Restrictions \& Rules}
@@ -211,9 +202,15 @@ The basic mechanics of the logic class(es) is as follows:
 
 
 \begin{enumerate}
-\item Disentangle the for loops, isolate the loop body and extract it
-\item Build one data object for each loop iteration (instead of reusing the same object over and over again)
-\item Isolate the calculations of the distinct values into separate methods and calculate them on demand
+\item Disentangle the for loops, isolate \& extract outer loop body
+\item One data object per loop iteration
+\begin{itemize}
+\item no reuse
+\end{itemize}
+\item Data object $\rightarrow$ Entity
+\begin{itemize}
+\item calculate data on demand
+\end{itemize}
 \end{enumerate}
 
 \end{frame}
