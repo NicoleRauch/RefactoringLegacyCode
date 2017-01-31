@@ -15,10 +15,10 @@ public class ValuesOfMonth {
 	private final int precedingBalance;
 
 	public ValuesOfMonth() {
-		this(new LocalDate(), new ArrayList<Transaction_API>(), 0);
+		this(0, new LocalDate(), new ArrayList<Transaction_API>());
 	}
 
-	public ValuesOfMonth(LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth, int precedingBalance) {
+	public ValuesOfMonth(int precedingBalance, LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth) {
 		this.dateOfMonth = dateOfMonth;
 		this.transactionsOfMonth = transactionsOfMonth;
 		this.precedingBalance = precedingBalance;

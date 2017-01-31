@@ -28,7 +28,7 @@ public class PushingBalancesCalculator implements BalancesOfMonthCalculator_API 
 			int precedingBalance = valuesOfMonth.getBalance();
 
 			valuesOfMonth = new ValuesOfMonth();
-			valuesOfMonth.calculateValues(dateOfMonth, transactionsOfMonth, precedingBalance);
+			valuesOfMonth.calculateValues(precedingBalance, dateOfMonth, transactionsOfMonth);
 
 			balancesOfMonth.setBalance(valuesOfMonth.getBalance());
 			balancesOfMonth.setAverageBalance(valuesOfMonth.getAverageBalance());

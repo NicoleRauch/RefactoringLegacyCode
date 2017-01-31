@@ -23,7 +23,7 @@ public class ValuesOfMonth {
 		this.averageBalance = averageBalance;
 	}
 
-	void calculateValues(LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth, int precedingBalance) {
+	void calculateValues(int precedingBalance, LocalDate dateOfMonth, List<Transaction_API> transactionsOfMonth) {
 		int balance = precedingBalance;
 		int ultimo = dateOfMonth.getDayOfMonth();
 
