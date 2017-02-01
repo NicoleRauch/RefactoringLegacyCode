@@ -8,7 +8,7 @@ public class PushTest extends CalculatorTest {
 
 	@Before
 	public void setup() {
-		calculator = new PushingBalancesCalculator(transactions);
+		calculator = new PullingBalancesCalculator(transactions);
 	}
 
 }

@@ -9,11 +9,11 @@ import common.BalancesOfMonthCalculator_API;
 import common.BalancesOfMonth_API;
 import common.Transaction_API;
 
-public class PushingBalancesCalculator implements BalancesOfMonthCalculator_API {
+public class PullingBalancesCalculator implements BalancesOfMonthCalculator_API {
 
 	private final List<Transaction_API> transactions;
 
-	public PushingBalancesCalculator(List<Transaction_API> transactions) {
+	public PullingBalancesCalculator(List<Transaction_API> transactions) {
 		this.transactions = transactions;
 	}
 
