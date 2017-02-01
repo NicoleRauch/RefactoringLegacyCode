@@ -1,9 +1,7 @@
 package push;
 
 import java.util.List;
-
 import org.joda.time.LocalDate;
-
 import common.Transaction_API;
 
 public class ValuesOfMonth {
@@ -35,7 +33,6 @@ public class ValuesOfMonth {
 			balance += transaction.getAmount();
 			dayOfLatestBalance = day;
 		}
-
 		averageBalance += calculateProportionalBalance(dayOfLatestBalance, balance, ultimo + 1, ultimo);
 
 		setBalanceAndAverage(balance, averageBalance);
@@ -49,5 +46,4 @@ public class ValuesOfMonth {
 		double rate = (double) countingDays / daysInMonth;
 		return (balance * rate);
 	}
-
 }
