@@ -39,7 +39,7 @@ public class ValuesOfMonth {
 		return balance;
 	}
 
-	double calculateProportionalBalance(int dayOfLatestBalance, int balance, int day, int daysInMonth) {
+	private double calculateProportionalBalance(int dayOfLatestBalance, int balance, int day, int daysInMonth) {
 		int countingDays = day - dayOfLatestBalance;
 		if (countingDays == 0) {
 			return 0;
