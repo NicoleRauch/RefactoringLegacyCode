@@ -1,6 +1,5 @@
 package pull.months;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -13,19 +12,16 @@ public class ValuesOfMonth implements IValuesOfMonth {
 
 	protected final YearMonth yearMonth;
 	protected final IValuesOfMonth precedingMonth;
-	protected final List<Transaction_API> transactions = new ArrayList<Transaction_API>();
+	protected final List<Transaction_API> transactions;
 
-	public ValuesOfMonth(LocalDate date, IValuesOfMonth month) {
+	public ValuesOfMonth(LocalDate date, IValuesOfMonth month, List<Transaction_API> filteredTransactions) {
 		this.precedingMonth = month;
 		this.yearMonth = new YearMonth(date);
+		transactions = filteredTransactions;
 	}
 
 	public YearMonth getYearMonth() {
 		return yearMonth;
-	}
-
-	public void addTransaction(Transaction_API transaction) {
-		transactions.add(transaction);
 	}
 
 	@Override
