@@ -2,9 +2,7 @@ package push;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.joda.time.LocalDate;
-
 import common.Transaction_API;
 
 public class ValuesOfMonth {
