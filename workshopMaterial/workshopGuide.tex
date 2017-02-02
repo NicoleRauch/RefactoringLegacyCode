@@ -99,11 +99,11 @@ In the following, we will split up these two parts into fine-grained steps that 
 We do this by:
 \begin{itemize}
 	\item Defining one interaction point with outside objects (Step 1)
-	\item Separating value calculation from iteration (Steps 2-4)
-	\item Encapsulating the calculation object (Steps 5-6)
-	\item Separating calculation for each value (Step 7-8)
-	\item Eliminating unwanted state (Step 9-10)
-	\item Tidying up (Step 11)
+	\item Separating value calculation from iteration (Steps 2-3)
+	\item Encapsulating the calculation object (Step 4)
+	\item Separating calculation for each value (Step 5)
+	\item Eliminating unwanted state (Step 6-8)
+	\item Tidying up (Step 9)
 	\item Achieving the ``Pull'' Structure (Final Step)
 \end{itemize}
 
@@ -119,6 +119,7 @@ We do this by:
 
 \textbf{Note:} The workspace with the step number contains the \textbf{solution} to the step!
 
+\clearpage
 \section*{Part I: Disentangle the For Loops and Extract the Loop Body}
 
 \subsubsection*{Overall Goal:}
@@ -144,7 +145,7 @@ Push the loops as far to the outside of the method as possible (move as much cod
 Create an object that will transport the calculated values. 
 This intermediate object will only hold the values, it will not contain any logic. It will have one setter that sets all calculated values simultaneously. It will also have getters, one for each of the calculated values.
 
-In the main logic part, we will create one such intermediate object at the beginning of the calculation. Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read them again from the intermediate object in order to write them to the output data structure. We reuse the same intermediate object for each run through the loop.
+In the main logic part, we will create one such intermediate object at the beginning of the calculation (can also go inside the outer loop). Instead of directly writing the calculated values to the output data structure, we write them to the intermediate object and then read them again from the intermediate object in order to write them to the output data structure. We reuse the same intermediate object for each run through the loop.
 
 \subsubsection*{Modified:}
 
@@ -201,6 +202,7 @@ Let's do it!
 
 
 
+\clearpage
 \section*{Part II: One object for each loop iteration}
 
 \subsubsection*{Overall Goal:}
@@ -222,6 +224,9 @@ The extracted calculation method can be moved to the class of the intermediate o
 
 And don't forget to manually move the method calculateProportionalBalance as well! - After that you can (automatically) change the signature of the extracted method to remove the PushingBalancesCalculator parameter.
 
+\textbf{Attention:} Isolate the balance in the method body from the parameter that gets passed in.
+
+
 \subsubsection*{Modified:}
 
 \texttt{PushingBalancesCalculator.calculateValuesForMonth()} is moved to\\ \texttt{ValuesOfMonth.calculateValues()}
@@ -235,12 +240,12 @@ And don't forget to manually move the method calculateProportionalBalance as wel
 \includegraphics[width=1\textwidth]{CompareViews/03-04-2.png}
 
 
-\subsection*{Step 05: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body}
+\subsection*{Step 05: Use New Instance of Intermediate Object for Each Execution of the Inner Loop Body (maximize object usage)}
 
 \subsubsection*{Observations:}
 \begin{itemize}
 \item The for loop reuses the same \texttt{ValuesOfMonth} object in each loop iteration.
-\item The only value that needs to be transported from one iteration to the next is the balance of the preceding iteration.
+\item We have a local variable that transports the balance from one iteration to the next.
 \end{itemize}
 
 \subsubsection*{Solution:}
@@ -261,6 +266,7 @@ Secondly, we want each execution of the loop body to create its own intermediate
 \includegraphics[width=1\textwidth]{CompareViews/04-05-2.png}
 
 
+\clearpage
 \section*{Part III: From Calculating the Values Up-Front to Calculating the Values On-Demand}
 
 \subsubsection*{Overall Goal:}
@@ -280,6 +286,8 @@ In order to achieve this, we transform the overall calculation method into indiv
 \subsubsection*{Solution:}
 
 The first step to removing the calculation method is to pass the input values into the constructor of the result object, thus turning these inputs into state for the calculating object.
+
+We also introduce a constructor with no arguments. Call the other constructor from it!
 
 \subsubsection*{Modified:}
 
@@ -303,7 +311,7 @@ The first step to removing the calculation method is to pass the input values in
 \end{itemize}
 
 \subsubsection*{Solution:}
-In this step, we move the value calculations to the setters. As a result, \texttt{calculateValues} can be private.
+In this step, we move the value calculations to the getters. As a result, \texttt{calculateValues} can be private.
 
 Caution: This is only possible with reentrant (i.~e.~side-effect-free) methods.
 
@@ -433,7 +441,6 @@ Introduce caching of the calculated results in order to avoid performance issues
 \item We now have intelligent objects instead of stupid data records
 \item The algorithms for each value are isolated and clearly visible
 \end{itemize}
-
 
 
 \end{document}
