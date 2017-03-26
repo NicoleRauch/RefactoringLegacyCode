@@ -397,6 +397,38 @@ Each ValuesOfMonth object should know its predecessor and ask it directly to obt
 
 
 
+\subsection*{Step 9\_2: Introducing an Initial Month Object}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item The preceding ValuesOfMonth object can be null in our code (error-prone, nasty code)
+\item We already have an initial ValuesOfMonth object that is constructed differently, but it still uses the same code.
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Introduce an InitialValuesOfMonth object to solve this problem.
+
+Delete the unnecessary ValuesOfMonth constructor.
+
+\subsubsection*{Modified:}
+
+Created \texttt{IValuesOfMonth} (provides the getBalance() method)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_2-3.png}
+
+Created \texttt{InitialValuesOfMonth} (provides the initial value for the balance)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_2-4.png}
+
+\texttt{ValuesOfMonth} (implements the interface, no need for conditionals any more)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_1-09_2-1.png}
+
+\texttt{PullingBalancesCalculator} (passes either the preceding ValuesOfMonth or an InitialValuesOfMonth object to the constructor)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_1-09_2-2.png}
+
 \subsection*{Step 9: Simplification}
 
 \subsubsection*{Observations:}
