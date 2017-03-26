@@ -429,6 +429,28 @@ Created \texttt{InitialValuesOfMonth} (provides the initial value for the balanc
 
 \includegraphics[width=1\textwidth]{CompareViews/09_1-09_2-2.png}
 
+
+\subsection*{Step 9\_3: Create a Transactions Object}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item Transactions\_API is directly used in the PullingBalancesCalculator
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Create a Transactions object that is wrapped around the list of transactions.
+
+\subsubsection*{Modified:}
+
+Created \texttt{Transactions} (provides the filtering)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_3-1.png}
+
+\texttt{PullingBalancesCalculator} (uses the Transactions object)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_2-09_3-2.png}
+
 \subsection*{Step 9: Simplification}
 
 \subsubsection*{Observations:}
