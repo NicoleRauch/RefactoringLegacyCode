@@ -181,7 +181,7 @@ Both dependencies are undesirable.
 \includegraphics[width=1\textwidth]{CompareViews/01-02.jpg}
 
 
-\subsection*{Step 03: Separation of Calculation and Iteration}
+\subsection*{Step 02Z: Separation of Calculation and Iteration}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -198,7 +198,27 @@ Let's do it!
 
 \texttt{PushingBalancesCalculator.calculateValuesForMonth()} is created
 
-\includegraphics[width=1\textwidth]{CompareViews/02-03.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/02-02Z.png}
+
+
+
+\subsection*{Step 03: Improve Naming and Clean Up Code}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item The extracted method writes to a parameter
+\item The parameter name is rather unspecific
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Rename the parameter and assign it to a local variable that will then get modified.
+
+\subsubsection*{Modified:}
+
+\texttt{PushingBalancesCalculator.calculateValuesForMonth()}
+
+\includegraphics[width=1\textwidth]{CompareViews/02Z-03.png}
 
 
 
