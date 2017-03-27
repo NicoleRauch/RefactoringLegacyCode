@@ -451,6 +451,17 @@ Created \texttt{Transactions} (provides the filtering)
 
 \includegraphics[width=1\textwidth]{CompareViews/09_2-09_3-2.png}
 
+\subsection*{Step 9\_4: Separate Month Creation and Balances Filling}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item We create the months at the same time as we fill the balances, so we cannot reuse the months.
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Pull out the month creation and store the months in a map for random access.
+
 \subsection*{Step 9: Simplification}
 
 \subsubsection*{Observations:}
