@@ -473,6 +473,30 @@ Pull out the month creation and store the months in a map for random access.
 
 Pull out the month map and wrap it into its own object
 
+\subsection*{Step 9\_6: Caching}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item For each value, the values of all preceding months have to be calculated
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Introduce caching.
+
+\subsubsection*{Modified:}
+
+Created \texttt{ValuesOfMonthWithCaching} (provides caching for each method)
+
+(hint: also possible with delegation)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_6-1.png}
+
+\texttt{Months} (uses the ValuesOfMonthWithCaching object)
+
+\includegraphics[width=1\textwidth]{CompareViews/09_5-09_6-2.png}
+
+
 \subsection*{Step 9: Simplification}
 
 \subsubsection*{Observations:}
