@@ -462,6 +462,17 @@ Created \texttt{Transactions} (provides the filtering)
 
 Pull out the month creation and store the months in a map for random access.
 
+\subsection*{Step 9\_5: Extract Months Map Into an Aggregate}
+
+\subsubsection*{Observations:}
+\begin{itemize}
+\item The months map and its code don't belong in the PullingBalancesCalculator but in their own object
+\end{itemize}
+
+\subsubsection*{Solution:}
+
+Pull out the month map and wrap it into its own object
+
 \subsection*{Step 9: Simplification}
 
 \subsubsection*{Observations:}
