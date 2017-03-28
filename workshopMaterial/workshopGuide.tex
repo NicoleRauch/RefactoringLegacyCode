@@ -468,7 +468,7 @@ Pull out the month creation and store the months in a map for random access.
 
 \includegraphics[width=1\textwidth]{CompareViews/09_3-09_4.png}
 
-\subsection*{Step 9\_5: Extract Months Map Into an Aggregate}
+\subsection*{Step 14: Extract Months Map Into an Aggregate}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -483,11 +483,11 @@ Pull out the month map and wrap it into its own object
 
 Created \texttt{Months} (builds up the chain of ValuesOfMonth objects)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_5-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/14-1.png}
 
 \texttt{PullingBalancesCalculator} (uses the Months object)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_4-09_5-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/09_4-14-2.png}
 
 \subsection*{Step 15: Caching}
 
@@ -510,7 +510,7 @@ Created \texttt{ValuesOfMonthWithCaching} (provides caching for each method)
 
 \texttt{Months} (uses the ValuesOfMonthWithCaching object)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_5-15-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/14-15-2.png}
 
 
 \subsection*{Step 16: Simplification}
