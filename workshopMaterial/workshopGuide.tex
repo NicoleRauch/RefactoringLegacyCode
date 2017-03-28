@@ -451,7 +451,7 @@ Created \texttt{Transactions} (provides the filtering)
 
 \includegraphics[width=1\textwidth]{CompareViews/09_2-09_3-2.png}
 
-\subsection*{Step 9\_4: Separate Month Creation and Balances Filling}
+\subsection*{Step 13: Separate Month Creation and Balances Filling}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -466,7 +466,7 @@ Pull out the month creation and store the months in a map for random access.
 
 \texttt{PullingBalancesCalculator} (separates the creation and the usage of the ValuesOfMonth objects)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_3-09_4.png}
+\includegraphics[width=1\textwidth]{CompareViews/09_3-13.png}
 
 \subsection*{Step 14: Extract Months Map Into an Aggregate}
 
@@ -487,7 +487,7 @@ Created \texttt{Months} (builds up the chain of ValuesOfMonth objects)
 
 \texttt{PullingBalancesCalculator} (uses the Months object)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_4-14-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/13-14-2.png}
 
 \subsection*{Step 15: Caching}
 
