@@ -295,7 +295,7 @@ Currently, all values are calculated up-front with an explicit command from the 
 
 In order to achieve this, we transform the overall calculation method into individual methods that return each value on demand.
 
-\subsection*{Step 06: Remove the Parameters from the Value Calculation Method}
+\subsection*{Step 7: Remove the Parameters from the Value Calculation Method}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -313,11 +313,11 @@ We also introduce a constructor with no arguments. Call the other constructor fr
 
 \texttt{ValuesOfMonth} (fields, constructor, method signature)
 
-\includegraphics[width=1\textwidth]{CompareViews/05-06-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/05-07-2.png}
 
 \texttt{PushingBalancesCalculator} (method and constructor invocation)
 
-\includegraphics[width=1\textwidth]{CompareViews/05-06-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/05-07-1.png}
 
 
 
@@ -339,14 +339,14 @@ Caution: This is only possible with reentrant (i.~e.~side-effect-free) methods.
 
 \texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
-\includegraphics[width=1\textwidth]{CompareViews/06-08-1.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/07-08-1.jpg}
 
 \texttt{ValuesOfMonth.getBalance()} is modified
 
 \texttt{ValuesOfMonth.getAverageBalance()} is modified
 
 
-\includegraphics[width=1\textwidth]{CompareViews/06-08-2.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/07-08-2.jpg}
 
 
 
