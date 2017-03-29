@@ -1,4 +1,4 @@
-package push;
+package pushpull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +10,13 @@ import common.BalancesOfMonthCalculator_API;
 import common.BalancesOfMonth_API;
 import common.Transaction_API;
 
-public class PullingBalancesCalculator implements BalancesOfMonthCalculator_API {
+public class BalancesCalculator implements BalancesOfMonthCalculator_API {
 
 	private final Transactions transactions;
 
 	private final Map<LocalDate, ValuesOfMonth> months = new HashMap<LocalDate, ValuesOfMonth>();
 
-	public PullingBalancesCalculator(List<Transaction_API> transactions) {
+	public BalancesCalculator(List<Transaction_API> transactions) {
 		this.transactions = new Transactions(transactions);
 	}
 
