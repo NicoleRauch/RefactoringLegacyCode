@@ -563,33 +563,6 @@ The proof that this algorithm works correctly for transactions with negative amo
 
 \includegraphics[width=1\textwidth]{CompareViews/15-16.png}
 
-
-\subsection*{Final Step: Achieving the ``Pull'' Structure (Workspace: Pull)}
-
-\subsubsection*{Observations:}
-
-\begin{itemize}
-\item The outer for loop from the beginning still uses the same variable for the calculation objects.
-\item After one loop iteration, the calculation object is gone. We cannot access the results later on.
-\item If we want to access the results again at a later time, we need to recalculate everything again and again.
-\end{itemize}
-
-\subsubsection*{Solution:}
-
-Transform the calculation objects into a chained structure of calculation objects (called \texttt{Month}) where each month can access its predecessor's values.
-
-Create this chained structure up-front (using a \texttt{Months}-object). Fill it with all relevant input data.
-
-In the for-loop, simply access the calculated results of the months.
-
-Introduce caching of the calculated results in order to avoid performance issues.
-
-\subsubsection*{Modified:}
-
-\texttt{ValuesOfMonth} gets extended by an interface and variants
-
-\texttt{Months} is extracted from \texttt{PullingBalancesCalculator}
-
 \subsection*{The Final Situation}
 
 \subsubsection*{Observations:}
@@ -598,6 +571,16 @@ Introduce caching of the calculated results in order to avoid performance issues
 \item Calculation logic and result structure are now identical
 \item We now have intelligent objects instead of stupid data records
 \item The algorithms for each value are isolated and clearly visible
+\end{itemize}
+
+\subsection*{What is Missing?}
+
+We could also
+
+\begin{itemize}
+\item replace the LocalDate by YearMonth to indicate that the day is irrelevant
+\item Wrap the list of Transaction\_API to further isolate it from our code (anticorruption layer)
+\item Wrap the list of BalancesOfMonth\_API to further isolate it from our code (anticorruption layer)
 \end{itemize}
 
 
