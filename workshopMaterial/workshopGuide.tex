@@ -131,7 +131,7 @@ Extract most of the outer for loop body into a separate method. This new method 
 Tidy up the code, rename local variables to make their names more descriptive.
 Push the loops as far to the outside of the method as possible (move as much code as possible inside the loop bodies).
 
-\subsection*{Step 01: Decoupling from the outside world}
+\subsection*{Step 1: Decoupling from the outside world}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -156,7 +156,7 @@ In the main logic part, we will create one such intermediate object at the begin
 \includegraphics[width=1\textwidth]{CompareViews/Push-01.png}
 
 
-\subsection*{Step 02: Preparing for method extraction: Purifying the dependencies}
+\subsection*{Step 2: Preparing for method extraction: Purifying the dependencies}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -181,7 +181,7 @@ Both dependencies are undesirable.
 \includegraphics[width=1\textwidth]{CompareViews/01-02.jpg}
 
 
-\subsection*{Step 02Z: Separation of Calculation and Iteration}
+\subsection*{Step 3: Separation of Calculation and Iteration}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -198,7 +198,7 @@ Let's do it!
 
 \texttt{PushingBalancesCalculator.calculateValuesForMonth()} is created
 
-\includegraphics[width=1\textwidth]{CompareViews/02-02Z.png}
+\includegraphics[width=1\textwidth]{CompareViews/02-03.png}
 
 
 
@@ -218,7 +218,7 @@ Rename the parameter and assign it to a local variable that will then get modifi
 
 \texttt{PushingBalancesCalculator.calculateValuesForMonth()}
 
-\includegraphics[width=1\textwidth]{CompareViews/02Z-04.png}
+\includegraphics[width=1\textwidth]{CompareViews/03-04.png}
 
 
 
