@@ -397,7 +397,7 @@ Each ValuesOfMonth object should know its predecessor and ask it directly to obt
 
 
 
-\subsection*{Step 9\_2: Introducing an Initial Month Object}
+\subsection*{Step 11: Introducing an Initial Month Object}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -415,19 +415,19 @@ Delete the unnecessary ValuesOfMonth constructor.
 
 Created \texttt{IValuesOfMonth} (provides the getBalance() method)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_2-3.png}
+\includegraphics[width=1\textwidth]{CompareViews/11-3.png}
 
 Created \texttt{InitialValuesOfMonth} (provides the initial value for the balance)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_2-4.png}
+\includegraphics[width=1\textwidth]{CompareViews/11-4.png}
 
 \texttt{ValuesOfMonth} (implements the interface, no need for conditionals any more)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_1-09_2-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/09_1-11-1.png}
 
 \texttt{PullingBalancesCalculator} (passes either the preceding ValuesOfMonth or an InitialValuesOfMonth object to the constructor)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_1-09_2-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/09_1-11-2.png}
 
 
 \subsection*{Step 12: Create a Transactions Object}
@@ -449,7 +449,7 @@ Created \texttt{Transactions} (provides the filtering)
 
 \texttt{PullingBalancesCalculator} (uses the Transactions object)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_2-12-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/11-12-2.png}
 
 \subsection*{Step 13: Separate Month Creation and Balances Filling}
 
