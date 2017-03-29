@@ -322,7 +322,7 @@ We also introduce a constructor with no arguments. Call the other constructor fr
 
 
 
-\subsection*{Step 07: Make the Value Calculation Implicit}
+\subsection*{Step 8: Make the Value Calculation Implicit}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -339,18 +339,18 @@ Caution: This is only possible with reentrant (i.~e.~side-effect-free) methods.
 
 \texttt{PushingBalancesCalculator.fillData()} (calculation method invocation is removed).
 
-\includegraphics[width=1\textwidth]{CompareViews/06-07-1.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/06-08-1.jpg}
 
 \texttt{ValuesOfMonth.getBalance()} is modified
 
 \texttt{ValuesOfMonth.getAverageBalance()} is modified
 
 
-\includegraphics[width=1\textwidth]{CompareViews/06-07-2.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/06-08-2.jpg}
 
 
 
-\subsection*{Step 8: Inline the Value Calculation Method}
+\subsection*{Step 9: Inline the Value Calculation Method}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -371,7 +371,7 @@ As a result, we have getters for the individual values of the intermediate objec
 
 \texttt{ValuesOfMonth} (fields, setter and \texttt{calculate...} methods are removed)
 
-\includegraphics[width=1\textwidth]{CompareViews/07-08.jpg}
+\includegraphics[width=1\textwidth]{CompareViews/08-09.jpg}
 
 \subsection*{Step 10: Build a chain of ValuesOfMonth objects}
 
@@ -389,11 +389,11 @@ Each ValuesOfMonth object should know its predecessor and ask it directly to obt
 
 \texttt{PullingBalancesCalculator} (directly passes the current ValuesOfMonth object to the ValuesOfMonth constructor that builds the next object)
 
-\includegraphics[width=1\textwidth]{CompareViews/08-10-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/09-10-1.png}
 
 \texttt{ValuesOfMonth} (now stores the preceding ValuesOfMonth object)
 
-\includegraphics[width=1\textwidth]{CompareViews/08-10-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/09-10-2.png}
 
 
 
