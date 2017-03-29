@@ -373,7 +373,7 @@ As a result, we have getters for the individual values of the intermediate objec
 
 \includegraphics[width=1\textwidth]{CompareViews/07-08.jpg}
 
-\subsection*{Step 9\_1: Build a chain of ValuesOfMonth objects}
+\subsection*{Step 10: Build a chain of ValuesOfMonth objects}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -389,11 +389,11 @@ Each ValuesOfMonth object should know its predecessor and ask it directly to obt
 
 \texttt{PullingBalancesCalculator} (directly passes the current ValuesOfMonth object to the ValuesOfMonth constructor that builds the next object)
 
-\includegraphics[width=1\textwidth]{CompareViews/08-09_1-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/08-10-1.png}
 
 \texttt{ValuesOfMonth} (now stores the preceding ValuesOfMonth object)
 
-\includegraphics[width=1\textwidth]{CompareViews/08-09_1-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/08-10-2.png}
 
 
 
@@ -423,11 +423,11 @@ Created \texttt{InitialValuesOfMonth} (provides the initial value for the balanc
 
 \texttt{ValuesOfMonth} (implements the interface, no need for conditionals any more)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_1-11-1.png}
+\includegraphics[width=1\textwidth]{CompareViews/10-11-1.png}
 
 \texttt{PullingBalancesCalculator} (passes either the preceding ValuesOfMonth or an InitialValuesOfMonth object to the constructor)
 
-\includegraphics[width=1\textwidth]{CompareViews/09_1-11-2.png}
+\includegraphics[width=1\textwidth]{CompareViews/10-11-2.png}
 
 
 \subsection*{Step 12: Create a Transactions Object}
