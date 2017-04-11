@@ -185,7 +185,7 @@ Both dependencies are undesirable.
 
 \subsubsection*{Observations:}
 \begin{itemize}
-\item We can now extract the major part of the method body into a separate method.
+\item We can now extract the major part of the loop body into a separate method.
 \end{itemize}
 
 \subsubsection*{Solution:}
@@ -397,7 +397,7 @@ Each ValuesOfMonth object should know its predecessor and ask it directly to obt
 
 
 
-\subsection*{Step 11: Introducing an Initial Month Object}
+\subsection*{Step 11: Introducing an Initial ValuesOfMonth Object}
 
 \subsubsection*{Observations:}
 \begin{itemize}
@@ -430,7 +430,7 @@ Created \texttt{InitialValuesOfMonth} (provides the initial value for the balanc
 \includegraphics[width=1\textwidth]{CompareViews/10-11-2.png}
 
 
-\subsection*{Step 12: Create a Transactions Object}
+\subsection*{Step 12: Wrap the Transactions}
 
 \subsubsection*{Observations:}
 \begin{itemize}
