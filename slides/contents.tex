@@ -1,19 +1,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{}
-
-\begin{center}
-\Huge
-Find a pair
-\vspace{2em}
-
-Check out \\
-\vspace{1em}
-\large
-\url{https://github.com/NicoleRauch/RefactoringLegacyCode}
-\end{center}
+\begin{frame}[fragile]{Workshop Outline}
+\begin{itemize}
+\item Presentation of the Problem Domain
+\item Event Storming of the Problem Domain
+\item Exploration of the existing codebase
+\item Presentation of the existing solution
+\item Presentation of the desired solution
+\item Guided refactoring towards the desired solution
+\end{itemize}
 
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Our Starting Point}
@@ -47,6 +45,85 @@ $\Rightarrow$ A restructuring was required
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{The Domain}
+
+\begin{itemize}
+\item Form small groups (4-6 people)
+\item Grab some modelling space and some post-its
+\item Capture Domain Events 
+\begin{itemize}
+\item what happened in the past that was relevant to the business
+\end{itemize}
+\onslide+<2->
+\item What data is needed to fully determine all aspects of each domain event?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{The Code}
+
+\begin{center}
+\Huge
+Find a pair
+\vspace{2em}
+
+Check out \\
+\vspace{1em}
+\large
+\url{https://github.com/NicoleRauch/RefactoringLegacyCode}
+
+\vspace{2em}
+Explore the Code \\
+{\large \url{00Push/src/push/PushingBalancesCalculator.java}}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Quick Poll}
+
+\begin{itemize}
+\onslide+<1>
+\item Are there quick and obvious improvements?
+\onslide+<2>
+\item Is the code readable and understandable?
+\onslide+<3>
+\item Can you explain how it works?
+\onslide+<4>
+\item Can we write tests for individual parts of the code?
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Local Optimum}
+
+{
+\begin{center}
+\includegraphics[width=\textwidth]{LocalOptimum.jpg}
+\end{center}
+\vspace{-1.7em}
+\hfill \tiny{\url{https://www.flickr.com/photos/jurgenappelo/5201851938}}
+}
+
+\onslide+<2->
+\vspace{2em}
+Make it worse to be able to improve!
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Code Structure}
+
+\includegraphics[width=\textwidth]{CodeMechanics.pdf}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Problems of the Existing Code Structure}
@@ -133,55 +210,6 @@ $\Rightarrow$ A restructuring was required
 
 \end{itemize}
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Code Structure}
-
-\includegraphics[width=\textwidth]{CodeMechanics.pdf}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{First Glimpse at the Code}
-
-\begin{center}
-{\large \url{00Push/src/push/PushingBalancesCalculator.java}}
-\end{center}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Quick Poll}
-
-\begin{itemize}
-\onslide+<1>
-\item Can we improve the code?
-\onslide+<2>
-\item Is the code readable and understandable?
-\onslide+<3>
-\item Can you explain how it works?
-\onslide+<4>
-\item Can we write tests for individual parts of the code?
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Local Optimum}
-
-{
-\begin{center}
-\includegraphics[width=\textwidth]{LocalOptimum.jpg}
-\end{center}
-\vspace{-1.7em}
-\hfill \tiny{\url{https://www.flickr.com/photos/jurgenappelo/5201851938}}
-}
-
-\onslide+<2->
-\vspace{2em}
-Make it worse to be able to improve!
-
-\end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Workshop Restrictions \& Rules}
