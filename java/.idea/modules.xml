@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/00FromPushToPull/00FromPushToPull.iml" filepath="$PROJECT_DIR$/00FromPushToPull/00FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01FromPushToPull/01FromPushToPull.iml" filepath="$PROJECT_DIR$/01FromPushToPull/01FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02FromPushToPull/02FromPushToPull.iml" filepath="$PROJECT_DIR$/02FromPushToPull/02FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03FromPushToPull/03FromPushToPull.iml" filepath="$PROJECT_DIR$/03FromPushToPull/03FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04FromPushToPull/04FromPushToPull.iml" filepath="$PROJECT_DIR$/04FromPushToPull/04FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05FromPushToPull/05FromPushToPull.iml" filepath="$PROJECT_DIR$/05FromPushToPull/05FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06FromPushToPull/06FromPushToPull.iml" filepath="$PROJECT_DIR$/06FromPushToPull/06FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07FromPushToPull/07FromPushToPull.iml" filepath="$PROJECT_DIR$/07FromPushToPull/07FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/08FromPushToPull/08FromPushToPull.iml" filepath="$PROJECT_DIR$/08FromPushToPull/08FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09FromPushToPull/09FromPushToPull.iml" filepath="$PROJECT_DIR$/09FromPushToPull/09FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/10FromPushToPull/10FromPushToPull.iml" filepath="$PROJECT_DIR$/10FromPushToPull/10FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/11FromPushToPull/11FromPushToPull.iml" filepath="$PROJECT_DIR$/11FromPushToPull/11FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/12FromPushToPull/12FromPushToPull.iml" filepath="$PROJECT_DIR$/12FromPushToPull/12FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/13FromPushToPull/13FromPushToPull.iml" filepath="$PROJECT_DIR$/13FromPushToPull/13FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/14FromPushToPull/14FromPushToPull.iml" filepath="$PROJECT_DIR$/14FromPushToPull/14FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/15FromPushToPull/15FromPushToPull.iml" filepath="$PROJECT_DIR$/15FromPushToPull/15FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/16FromPushToPull/16FromPushToPull.iml" filepath="$PROJECT_DIR$/16FromPushToPull/16FromPushToPull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
+    </modules>
+  </component>
+</project>

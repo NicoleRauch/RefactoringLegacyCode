@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="IDEA SDK" project-jdk-type="IDEA JDK">
+    <output url="file://java/bin" />
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$USER_HOME$/Developer/Workshops/fpinscala" value="1445240754000" />
+        <entry key="/Volumes/TIMGroup/workspaces/analyticsdaemon" value="1457082948000" />
+        <entry key="/Volumes/TIMGroup/workspaces/analyticsdaemon/brokerrankings-sbe" value="1456235835000" />
+        <entry key="/Volumes/TIMGroup/workspaces/indicator-performance" value="1457618714000" />
+      </map>
+    </option>
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+</project>

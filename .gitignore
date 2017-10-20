@@ -5,6 +5,6 @@
 .gitignore~
 EclipseProjects/.metadata/*
 .metadata
-.idea
 RemoteSystemsTempFiles
 .recommenders
+workspace.xml
